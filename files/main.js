@@ -852,79 +852,27 @@ function pdtNew(){
 
 // Функция слайдера для "Акции" на главной странице
 function pdtSales(){
-	var id = $('#pdt__sales');
-	var carousel = id.find('.owl-carousel');
-	var buttons = id.find('.products__buttons');
-	var dots = id.find('.owl-dots');
-	carousel.owlCarousel({
-		items: 2,
-		margin: 32,
-		loop: false,
-		rewind: true,
-		lazyLoad: true,
-		nav: false,
-		navContainer: '',
-		navText: [ , ],
-		dots: true,
-		dotsContainer: dots,
-		autoHeight: false,
-		autoHeightClass: 'owl-height',
-		autoplay: false,
-		autoplayHoverPause: true,
-		smartSpeed: 500,
-		mouseDrag: true,
-		touchDrag: true,
-		pullDrag: true,
-		responsiveClass: true,
-		responsiveRefreshRate: 100,
-		responsive: {
-			0:{items:1, autoHeight: true},
-			320:{items:1, autoHeight: true},
-			480:{items:1},
-			640:{items:1},
-			768:{items:1},
-			992:{items:2},
-			1200:{items:2}
-		},
-		onInitialized: number,
-		onChanged: number,
-		onResize: number,
-		onResized: number
-	});
-
-	// Нумерация страниц
-	function number() {
-		dots.find('.owl-dot').each(function(i){
-			$(this).find('span').text(i+1)
-		});
-		// Скрываем кнопки навигации
-		dots.hasClass('disabled') ? buttons.hide() : buttons.show();
-		// Скрываем не активные элементы навигации
-		var dotActiveIndex = dots.find('.owl-dot.active').index();
-		var dotVisibleStep = 2;
-		var dotPrevActiveIndex = dotActiveIndex - dotVisibleStep;
-		var dotNextActiveIndex = dotActiveIndex + dotVisibleStep;
-
-		dots.find('.owl-dot')
-			.hide()
-			.filter(function(index, item){
-				if(index >= dotPrevActiveIndex &&  index <= dotNextActiveIndex){
-					return true;
-				}
-				return false;
-			})
-			.show()
-			.addClass('show')
-	}
-
-	// Навигация при клике НАЗАД
-	buttons.find('.prev').on('click', function () {
-		carousel.trigger('prev.owl.carousel');
-	});
-
-	// Навигация при клике ВПЕРЕД
-	buttons.find('.next').on('click', function () {
-		carousel.trigger('next.owl.carousel');
+	var btn = $('#pdt__sales').find('.showAll');
+	btn.on('click', function (event){
+		event.preventDefault();
+		var t = $(this);
+		var parents = t.parents().find('#pdt__sales')
+		var btnText = t.find('span')
+		console.log('t', t)
+		console.log('parents', parents)
+		if(t.hasClass('active')){
+			t.removeClass('active')
+			parents.removeClass('active')
+			btnText.text('Показать все')
+			parents.find('.product__items-quad').removeClass('show')
+			parents.css({height: ''})
+		}else{
+			t.addClass('active')
+			parents.addClass('active')
+			btnText.text('Скрыть')
+			parents.find('.product__items-quad').addClass('show')
+			parents.css({height: '100%'})
+		}
 	});
 }
 
