@@ -599,7 +599,7 @@ function mainnav(id,rows){
       mainnav.find('.mainnav__replaced').each(function(){
         mainnav.find('.overflowMenu').append($(this));
       });
-      mainnav.find('.mainnav__list').append('<li class="mainnav__item mainnav__more"><a class="mainnav__list-link"><span>Ещё</span><i class="icon-arrow_right"></i></a></li>');
+      mainnav.find('.mainnav__list').append('<li class="mainnav__item mainnav__more"><a class="mainnav__list-link"><span>Ещё</span><i class="material-icons">expand_more</i></a></li>');
       mainnav.find('.mainnav__more').on('click',function(){
         mainnav.find('.overflowMenu').hasClass('opened') ? mainnav.find('.overflowMenu').removeClass('opened') : mainnav.find('.overflowMenu').addClass('opened');
         mainnav.hasClass('opened') ? mainnav.removeClass('opened') : mainnav.addClass('opened');
@@ -737,20 +737,20 @@ function pdtSale() {
 function pdtBest(){
 	var id = $('#pdt__best');
 	var carousel = id.find('.owl-carousel');
-	var buttons = id.find('.products__buttons');
+	var buttons = id.find('.owl-navs');
 	var dots = id.find('.owl-dots');
 	carousel.owlCarousel({
-		items: 4,
+		items: 3,
 		margin: 32,
 		loop: false,
 		rewind: true,
 		lazyLoad: true,
-		nav: false,
-		navContainer: '',
+		nav: true,
+		navContainer: buttons,
 		navText: [ , ],
 		dots: true,
 		dotsContainer: dots,
-		autoHeight: true,
+		autoHeight: false,
 		autoHeightClass: 'owl-height',
 		autoplay: false,
 		autoplayHoverPause: true,
@@ -767,47 +767,8 @@ function pdtBest(){
 			640:{items:2},
 			768:{items:3},
 			992:{items:3},
-			1200:{items:4}
-		},
-		onInitialized: number,
-		onChanged: number,
-		onResize: number,
-		onResized: number
-	});
-
-	// Нумерация страниц
-	function number() {
-		dots.find('.owl-dot').each(function(i){
-			$(this).find('span').text(i+1)
-		});
-		// Скрываем кнопки навигации
-		dots.hasClass('disabled') ? buttons.hide() : buttons.show();
-		// Скрываем не активные элементы навигации
-		var dotActiveIndex = dots.find('.owl-dot.active').index();
-		var dotVisibleStep = 2;
-		var dotPrevActiveIndex = dotActiveIndex - dotVisibleStep;
-		var dotNextActiveIndex = dotActiveIndex + dotVisibleStep;
-
-		dots.find('.owl-dot')
-			.hide()
-			.filter(function(index, item){
-				if(index >= dotPrevActiveIndex &&  index <= dotNextActiveIndex){
-					return true;
-				}
-				return false;
-			})
-			.show()
-			.addClass('show')
-	}
-
-	// Навигация при клике НАЗАД
-	buttons.find('.prev').on('click', function () {
-		carousel.trigger('prev.owl.carousel');
-	});
-
-	// Навигация при клике ВПЕРЕД
-	buttons.find('.next').on('click', function () {
-		carousel.trigger('next.owl.carousel');
+			1200:{items:3}
+		}
 	});
 }
 
@@ -1050,10 +1011,10 @@ function slideShow() {
 		loop: true,
 		rewind: true,
 		lazyLoad: true,
-		nav: false,
+		nav: true,
 		navText: [ , ],
 		navContainer: '',
-		dots: true,
+		dots: false,
 		dotsContainer: '',
 		dotsData: false,
 		dotsSpeed: 400,
@@ -1411,10 +1372,10 @@ function goodsModRest() {
 	$('.goodsModRestValue').each(function(){
 		var value = $(this).data('value');
 		if (value > 10) {
-			$(this).html('В наличии много');
+			$(this).html('На складе много');
 			$(this).css('opacity', '1');
 		}else{
-			$(this).html('В наличии мало');
+			$(this).html('На складе мало');
 			$(this).css('opacity', '1');
 			$(this).parent().addClass('few');
 		}
@@ -1925,36 +1886,6 @@ function addTo() {
 		}
 	});
 }
-
-// Загрузка основных функций шаблона Товаров
-$(document).ready(function(){
-	quickViewMod();
-	goodsModRest();
-	priceDiff();
-	addCart();
-	addTo();
-	// Добавление товара в корзину
-	$('.add-cart').on('click', function() {
-		var form = $(this).closest('form');
-		if ($(this).hasClass('quick')) {
-			form.attr('rel', 'quick');
-		} else {
-			var rel = form.attr('rel');
-			if (rel) {
-				form.attr('rel', rel.replace('quick', ''));
-			}
-		}
-		form.trigger('submit');
-		return (false);
-	});
-
-	// Уведомить при отсутствии товара
-	$('.add-notify').on('click', function(){
-		var formBlock = $(this).closest('.goodsListForm');
-    var goodsMod = formBlock.find('[name="form[goods_mod_id]"]').val();
-    $('#fancy-notify-goods-mod').val(goodsMod)
-	});
-});
 
 
 ///////////////////////////////////////
@@ -3344,6 +3275,7 @@ function footerLinksMore(){
 	});	
 }
 
+
 ///////////////////////////////////////
 // Загрузка основных функций шаблона
 ///////////////////////////////////////
@@ -3378,6 +3310,39 @@ $(document).ready(function(){
   $('.callbackredirect').val(document.location.href);
 });
 
+
+////////////////////////////////////////////
+// Загрузка основных функций шаблона Товаров
+////////////////////////////////////////////
+$(document).ready(function(){
+	quickViewMod();
+	goodsModRest();
+	priceDiff();
+	addCart();
+	addTo();
+	// Добавление товара в корзину
+	$('.add-cart').on('click', function() {
+		var form = $(this).closest('form');
+		if ($(this).hasClass('quick')) {
+			form.attr('rel', 'quick');
+		} else {
+			var rel = form.attr('rel');
+			if (rel) {
+				form.attr('rel', rel.replace('quick', ''));
+			}
+		}
+		form.trigger('submit');
+		return (false);
+	});
+
+	// Уведомить при отсутствии товара
+	$('.add-notify').on('click', function(){
+		var formBlock = $(this).closest('.goodsListForm');
+    var goodsMod = formBlock.find('[name="form[goods_mod_id]"]').val();
+    $('#fancy-notify-goods-mod').val(goodsMod)
+	});
+});
+
 // Запуск основных функций для разных разрешений экрана
 $(document).ready(function(){
   if(getClientWidth() > 481 && window.outerHeight < 630){
@@ -3406,40 +3371,6 @@ function addOpened(obj){obj.hasClass('opened') ? obj.removeClass('opened') : obj
 
 function addActive(obj){obj.hasClass('active') ? obj.removeClass('active') : obj.addClass('active')}
 
-
-$(document).ready(function(){
-
-
-	// console.log('t', t)
-	// console.log('text', text)
-	// console.log('tWidth', thisWidth)
-	// console.log('textWidth', textWidth)
-	// console.log('count', count)
-	// console.log(content)
-
-
-});
-
-// Функции клонирования текста в бегущей строке
-function clonePromoText() {
-	$('.promo__line').each(function(){
-		var t = $(this);
-		var text = t.find('.promo__text');
-		var count = parseInt(Math.ceil(t.width() / (text.width() + 64)));
-		// Дублируем текст на всю строку
-		for (var i = 0; i < count; i++) {
-			text.clone().appendTo(t);
-		}
-	});
-
-	$('.promo__line').marquee({
-			duration: 10000,
-			gap: 80,
-			//time in milliseconds before the marquee will start animating
-			delayBeforeStart: 0,
-			duplicated: true
-	});
-}
 
 // Функции боковой навигации
 function sideNav(){
