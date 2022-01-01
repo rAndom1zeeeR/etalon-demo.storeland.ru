@@ -25,6 +25,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/design/icomoon.css?design=THEMENAME" />
 	<!-- Основные Стили магазина для всех страниц -->
@@ -475,7 +476,171 @@
 							</div>
 						</div>
 						{% ENDIF index_page_new_goods_empty %}
+
+						<!-- Баннер -->
+						<div class="sidebar__block banner">
+							<div class="banner__inner flex">
+								<div class="banner__subtitle">
+									<span>Витамины</span>
+								</div>
+								<a href="{DISCOUNT_URL}" class="banner__title"><span>Скидки до</span><span class="tc">40%</span></a>
+								<div class="banner__label"><span>До конца акции осталось:</span></div>
+								<div class="banner__counter counter flex-center" end="03/30/2022 23:59:59" now="{CURRENT_TIME | date('m/d/Y H:i:s')}">
+									<div class="days flex-center">
+										<span>00</span>
+										<label>дн</label>
+									</div>
+									<div class="hours flex-center">
+										<span>00</span>
+										<label>час</label>
+									</div>
+									<div class="minutes flex-center">
+										<span>00</span>
+										<label>мин</label>
+									</div>
+									<div class="seconds flex-center">
+										<span>00</span>
+										<label>сек</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Новости -->
+						<div class="sidebar__block" id="news">
+							<div class="sidebar__title block__nav flex">
+								<span class="title">Новости магазина</span>
+								<div class="owl-nav"></div>
+							</div>
+							<div class="sidebar__content">
+								<!-- Список Новостей -->
+								{% IFNOT news_list_shop_empty %}
+								<div id="pdt__news_list_shop" class="news_list_shop" data-content="news_list_shop">
+									<div class="owl-carousel">
+										{% FOR news_list_shop %}
+										{% IF news_list_shop.first %}<div class="news__items">{% ENDIF %}
+										<div class="news__item">
+											<a class="news__image flex-center" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">
+												<noscript>
+												<img src="{% IF news_list_shop.IMG %}{news_list_shop.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}{news_list_shop.index | is_divided('2','banner4','banner4')}.jpg?design=THEMENAME{% ENDIF %}" alt="{news_list_shop.TITLE}" />
+												</noscript>
+												<img class="lozad script__on" data-src="{% IF news_list_shop.IMG %}{news_list_shop.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}{news_list_shop.index | is_divided('2','banner4','banner4')}.jpg?design=THEMENAME{% ENDIF %}" alt="{news_list_shop.TITLE}" />
+												{% IF news_list_shop.SHOW_TIME %}
+												<div class="news__date">
+													<span>{news_list_shop.TIME | date("d.m.Y")}</span>
+												</div>
+												{% ENDIF %}
+											</a>
+											<div class="news__content">
+												<a class="news__title" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">
+													<span>{news_list_shop.TITLE}</span>
+												</a>
+												{% IF news_list_shop.TEXT_SHORT %}
+												<div class="news__desciprion">
+													<span>{news_list_shop.TEXT_SHORT}</span>
+												</div>
+												{% ENDIF %}
+												<a class="news__button" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">
+													<span>Читать</span>
+													<i class="material-icons">arrow_right_alt</i>
+												</a>
+											</div>
+										</div>
+										{% IFNOT news_list_shop.last %}{news_list_shop.index | is_divided("3","</div><div class=news__items>","")}{% ENDIF %}
+										{% IF news_list_shop.last %}</div>{% ENDIF %}
+										{% ENDFOR %}
+									</div>
+								</div>
+								{% ENDIF %}
+								<!-- Список Всех Новостей -->
+								{% IFNOT news_list_all_empty %}
+								<div id="pdt__news_list_all" class="news_list_all" data-content="news_list_all">
+									<div class="owl-carousel">
+										{% FOR news_list_all %}
+										{% IF news_list_all.first %}<div class="news__items">{% ENDIF %}
+										<div class="news__item">
+											<a class="news__image flex-center" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;">
+												<noscript>
+												<img src="{% IF news_list_all.IMG %}{news_list_all.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}{news_list_all.index | is_divided('2','banner4','banner4')}.jpg?design=THEMENAME{% ENDIF %}" alt="{news_list_all.TITLE}" />
+												</noscript>
+												<img class="lozad script__on" data-src="{% IF news_list_all.IMG %}{news_list_all.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}{news_list_all.index | is_divided('2','banner4','banner4')}.jpg?design=THEMENAME{% ENDIF %}" alt="{news_list_all.TITLE}" />
+												{% IF news_list_all.SHOW_TIME %}
+												<div class="news__date">
+													<span>{news_list_all.TIME | date("d.m.Y")}</span>
+												</div>
+												{% ENDIF %}
+											</a>
+											<div class="news__content">
+												<a class="news__title" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;">
+													<span>{news_list_all.TITLE}</span>
+												</a>
+												{% IF news_list_all.TEXT_SHORT %}
+												<div class="news__desciprion">
+													<span>{news_list_all.TEXT_SHORT}</span>
+												</div>
+												{% ENDIF %}
+												<a class="news__button" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;">
+													<span>Читать</span>
+													<i class="material-icons">arrow_right_alt</i>
+												</a>
+											</div>
+										</div>
+										{% IFNOT news_list_all.last %}{news_list_all.index | is_divided("3","</div><div class=news__items>","")}{% ENDIF %}
+										{% IF news_list_all.last %}</div>{% ENDIF %}
+										{% ENDFOR %}
+									</div>
+								</div>
+								{% ENDIF %}
+							</div>
+						</div>
+
+						<!-- Мы предлагаем -->
+						<div class="sidebar__block" id="offers">
+							<div class="sidebar__title">
+								<span>Мы предлагаем</span>
+							</div>
+							<div class="sidebar__content">
+								<div class="offers__item flex">
+									<div class="offers__icon flex-center">
+										<i class="material-icons">local_shipping</i>
+									</div>
+									<div class="offers__content">
+										<div class="offers__title">Бесплатная доставка</div>
+										<div class="offers__subtitle">Для заказов от 2000 рублей</div>
+									</div>
+								</div>
+								<div class="offers__item flex">
+									<div class="offers__icon flex-center">
+										<i class="material-icons">security</i>
+									</div>
+									<div class="offers__content">
+										<div class="offers__title">Покупки под защитой</div>
+										<div class="offers__subtitle">Безопасная оплата заказа</div>
+									</div>
+								</div>
+								<div class="offers__item flex">
+									<div class="offers__icon flex-center">
+										<i class="material-icons">account_balance_wallet</i>
+									</div>
+									<div class="offers__content">
+										<div class="offers__title">Экономия от покупок</div>
+										<div class="offers__subtitle">Мы гарантируем низкие цены </div>
+									</div>
+								</div>
+								<div class="offers__item flex">
+									<div class="offers__icon flex-center">
+										<i class="material-icons">support_agent</i>
+									</div>
+									<div class="offers__content">
+										<div class="offers__title">Сопровождение заказа</div>
+										<div class="offers__subtitle">Консультация специалиста - бесплатно!</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+					
+					<!-- Правая часть -->
 					<div class="main__right">
 						<!-- Слайдшоу -->
 						<section id="slideshow">
@@ -1459,7 +1624,6 @@
 		pdtBest();
 		pdtNew();
 		pdtSales();
-		pdtCatalog();
 		offer();
 	});
 	</script>

@@ -709,23 +709,30 @@ function counterDate() {
 
 // Функция показать все для "Товары на главной"
 function pdtSale() {
-	var btn = $('#pdt__sale').find('.showAll');
+	var id = '#pdt__sale';
+	var btn = $(id).find('.showAll');
+	var item = $(id).find('.product__item');
+	var buttons = $(id).find('.products__buttons');
+	var max = '8';
+	// Скрываем кнопку показать все если меньше 5 товаров
+	item.length > max ? buttons.show() : buttons.hide();
+	// Функция открытия доп товаров
 	btn.on('click', function (event){
 		event.preventDefault();
 		var t = $(this);
-		var parents = t.parents().find('#pdt__sale')
+		var parents = t.parents().find(id)
 		var btnText = t.find('span')
 		if(t.hasClass('active')){
 			t.removeClass('active')
 			parents.removeClass('active')
 			btnText.text('Показать все')
-			parents.find('.product__item').removeClass('show')
+			item.removeClass('show')
 			parents.css({height: ''})
 		}else{
 			t.addClass('active')
 			parents.addClass('active')
 			btnText.text('Скрыть')
-			parents.find('.product__item').addClass('show')
+			item.addClass('show')
 			parents.css({height: '100%'})
 		}
 	});
@@ -800,16 +807,21 @@ function pdtNew(){
 	});
 }
 
-// Функция слайдера для "Акции" на главной странице
+// Функция Показать все для "Акции" на главной странице
 function pdtSales(){
-	var btn = $('#pdt__sales').find('.showAll');
+	var id = '#pdt__sales';
+	var btn = $(id).find('.showAll');
+	var item = $(id).find('.product__item');
+	var buttons = $(id).find('.products__buttons');
+	var max = '5';
+	// Скрываем кнопку показать все если меньше 5 товаров
+	item.length > max ? buttons.show() : buttons.hide()
+	// Функция открытия доп товаров
 	btn.on('click', function (event){
 		event.preventDefault();
 		var t = $(this);
-		var parents = t.parents().find('#pdt__sales')
+		var parents = t.parents().find(id)
 		var btnText = t.find('span')
-		console.log('t', t)
-		console.log('parents', parents)
 		if(t.hasClass('active')){
 			t.removeClass('active')
 			parents.removeClass('active')
@@ -823,80 +835,6 @@ function pdtSales(){
 			parents.find('.product__items-quad').addClass('show')
 			parents.css({height: '100%'})
 		}
-	});
-}
-
-// Функция Слайдер категорий Каталога на всех страницах.
-function pdtCatalog() {
-	var owlC = $('#catalog .owl-carousel');
-  owlC.owlCarousel({
-    items: 6,
-    margin: 60,
-    loop: true,
-    rewind: false,
-    lazyLoad: true,
-    nav: false,
-    navContainer: '',
-    navText: [ , ],
-    dots: false,
-		autoWidth:true,
-    autoHeight: false,
-    autoHeightClass: 'owl-height',
-    autoplay: true,
-    autoplayHoverPause: true,
-    smartSpeed: 500,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    responsiveClass: true,
-    responsiveRefreshRate: 100
-  });
-
-	// Навигация при клике НАЗАД
-	$('.catalog__nav-prev').on('click', function () {
-		owlC.trigger('prev.owl.carousel');
-	});
-
-	// Навигация при клике ВПЕРЕД
-	$('.catalog__nav-next').on('click', function () {
-		owlC.trigger('next.owl.carousel');
-	});
-}
-
-// Функция Слайдер категорий Каталога на всех страницах.
-function mobileMenu() {
-	var owlC = $('.header__block-hidden .owl-carousel');
-  owlC.owlCarousel({
-    items: 6,
-    margin: 60,
-    loop: true,
-    rewind: false,
-    lazyLoad: true,
-    nav: false,
-    navContainer: '',
-    navText: [ , ],
-    dots: false,
-		autoWidth:true,
-    autoHeight: false,
-    autoHeightClass: 'owl-height',
-    autoplay: true,
-    autoplayHoverPause: true,
-    smartSpeed: 500,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    responsiveClass: true,
-    responsiveRefreshRate: 100
-  });
-
-	// Навигация при клике НАЗАД
-	$('.mainnav__nav-prev').on('click', function () {
-		owlC.trigger('prev.owl.carousel');
-	});
-
-	// Навигация при клике ВПЕРЕД
-	$('.mainnav__nav-next').on('click', function () {
-		owlC.trigger('next.owl.carousel');
 	});
 }
 
@@ -944,22 +882,21 @@ function slideShow() {
 function newsCarousel() {
 	var id = $('#news');
 	var carousel = id.find('.owl-carousel');
-	var buttons = id.find('.products__buttons');
+	var buttons = id.find('.owl-nav');
 	var dots = id.find('.owl-dots');
 	// Функция слайдера для Новостей
 	carousel.owlCarousel({
-		items: 2,
-		margin: 32,
-		slideBy: 2,
+		items: 1,
+		margin: 0,
 		loop: false,
 		rewind: true,
 		lazyLoad: true,
-		nav: false,
-		navContainer: '',
+		nav: true,
+		navContainer: buttons,
 		navText: [ , ],
 		dots: true,
 		dotsContainer: dots,
-		autoHeight: false,
+		autoHeight: true,
 		autoHeightClass: 'owl-height',
 		autoplay: false,
 		autoplayHoverPause: true,
@@ -968,133 +905,7 @@ function newsCarousel() {
 		touchDrag: true,
 		pullDrag: true,
 		responsiveClass: true,
-		responsiveRefreshRate: 100,
-		responsive: {
-			0:{items:1, autoHeight: true},
-			320:{items:1, autoHeight: true},
-			480:{items:2},
-			640:{items:2},
-			768:{items:2},
-			992:{items:2},
-			1200:{items:2}
-		},
-		onInitialized: number,
-		onChanged: number,
-		onResize: number,
-		onResized: number
-	});
-
-	// Нумерация страниц
-	function number() {
-		dots.find('.owl-dot').each(function(i){
-			$(this).find('span').text(i+1)
-		});
-		// Скрываем кнопки навигации
-		dots.hasClass('disabled') ? buttons.hide() : buttons.show();
-		// Скрываем не активные элементы навигации
-		var dotActiveIndex = dots.find('.owl-dot.active').index();
-		var dotVisibleStep = 2;
-		var dotPrevActiveIndex = dotActiveIndex - dotVisibleStep;
-		var dotNextActiveIndex = dotActiveIndex + dotVisibleStep;
-
-		dots.find('.owl-dot')
-			.hide()
-			.filter(function(index, item){
-				if(index >= dotPrevActiveIndex &&  index <= dotNextActiveIndex){
-					return true;
-				}
-				return false;
-			})
-			.show()
-			.addClass('show')
-	}
-
-	// Навигация при клике НАЗАД
-	buttons.find('.prev').on('click', function () {
-		carousel.trigger('prev.owl.carousel');
-	});
-
-	// Навигация при клике ВПЕРЕД
-	buttons.find('.next').on('click', function () {
-		carousel.trigger('next.owl.carousel');
-	});
-}
-
-// Функция слайдера для "Акции" на главной странице
-function offer(){
-	var id = $('#offer');
-	var carousel = id.find('.owl-carousel');
-	var buttons = id.find('.products__buttons');
-	var dots = id.find('.owl-dots');
-	carousel.owlCarousel({
-		items: 3,
-		margin: 32,
-		loop: false,
-		rewind: true,
-		lazyLoad: true,
-		nav: false,
-		navContainer: '',
-		navText: [ , ],
-		dots: true,
-		dotsContainer: dots,
-		autoHeight: false,
-		autoHeightClass: 'owl-height',
-		autoplay: false,
-		autoplayHoverPause: true,
-		smartSpeed: 500,
-		mouseDrag: true,
-		touchDrag: true,
-		pullDrag: true,
-		responsiveClass: true,
-		responsiveRefreshRate: 100,
-		responsive: {
-			0:{items:1, autoHeight: true},
-			320:{items:1, autoHeight: true},
-			480:{items:2},
-			640:{items:2},
-			768:{items:2},
-			992:{items:3},
-			1200:{items:3}
-		},
-		onInitialized: number,
-		onChanged: number,
-		onResize: number,
-		onResized: number
-	});
-
-	// Нумерация страниц
-	function number() {
-		dots.find('.owl-dot').each(function(i){
-			$(this).find('span').text(i+1)
-		});
-		// Скрываем кнопки навигации
-		dots.hasClass('disabled') ? buttons.hide() : buttons.show();
-		// Скрываем не активные элементы навигации
-		var dotActiveIndex = dots.find('.owl-dot.active').index();
-		var dotVisibleStep = 2;
-		var dotPrevActiveIndex = dotActiveIndex - dotVisibleStep;
-		var dotNextActiveIndex = dotActiveIndex + dotVisibleStep;
-
-		dots.find('.owl-dot')
-			.hide()
-			.filter(function(index, item){
-				if(index >= dotPrevActiveIndex &&  index <= dotNextActiveIndex){
-					return true;
-				}
-				return false;
-			})
-			.show()
-			.addClass('show')
-	}
-
-	// Навигация при клике НАЗАД
-	buttons.find('.prev').on('click', function () {
-		carousel.trigger('prev.owl.carousel');
-	});
-
-	// Навигация при клике ВПЕРЕД
-	buttons.find('.next').on('click', function () {
-		carousel.trigger('next.owl.carousel');
+		responsiveRefreshRate: 100
 	});
 }
 
@@ -3185,7 +2996,6 @@ $(document).ready(function(){
   toTop();
 	viewed();
 	footerLinksMore();
-	mobileMenu();
 	sideNav();
   // Ленивая загрузка
   $(function(){
