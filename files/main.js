@@ -715,8 +715,6 @@ function pdtSale() {
 		var t = $(this);
 		var parents = t.parents().find('#pdt__sale')
 		var btnText = t.find('span')
-		console.log('t', t)
-		console.log('parents', parents)
 		if(t.hasClass('active')){
 			t.removeClass('active')
 			parents.removeClass('active')
@@ -737,7 +735,7 @@ function pdtSale() {
 function pdtBest(){
 	var id = $('#pdt__best');
 	var carousel = id.find('.owl-carousel');
-	var buttons = id.find('.owl-navs');
+	var buttons = id.find('.owl-nav');
 	var dots = id.find('.owl-dots');
 	carousel.owlCarousel({
 		items: 3,
@@ -776,16 +774,16 @@ function pdtBest(){
 function pdtNew(){
 	var id = $('#pdt__new');
 	var carousel = id.find('.owl-carousel');
-	var buttons = id.find('.products__buttons');
+	var buttons = id.find('.owl-nav');
 	var dots = id.find('.owl-dots');
 	carousel.owlCarousel({
-		items: 5,
-		margin: 32,
+		items: 1,
+		margin: 0,
 		loop: false,
 		rewind: true,
 		lazyLoad: true,
-		nav: false,
-		navContainer: '',
+		nav: true,
+		navContainer: buttons,
 		navText: [ , ],
 		dots: true,
 		dotsContainer: dots,
@@ -798,55 +796,7 @@ function pdtNew(){
 		touchDrag: true,
 		pullDrag: true,
 		responsiveClass: true,
-		responsiveRefreshRate: 100,
-		responsive: {
-			0:{items:1, autoHeight: true},
-			320:{items:1, autoHeight: true},
-			480:{items:2},
-			640:{items:2},
-			768:{items:3},
-			992:{items:4},
-			1200:{items:5}
-		},
-		onInitialized: number,
-		onChanged: number,
-		onResize: number,
-		onResized: number
-	});
-
-	// Нумерация страниц
-	function number() {
-		dots.find('.owl-dot').each(function(i){
-			$(this).find('span').text(i+1)
-		});
-		// Скрываем кнопки навигации
-		dots.hasClass('disabled') ? buttons.hide() : buttons.show();
-		// Скрываем не активные элементы навигации
-		var dotActiveIndex = dots.find('.owl-dot.active').index();
-		var dotVisibleStep = 2;
-		var dotPrevActiveIndex = dotActiveIndex - dotVisibleStep;
-		var dotNextActiveIndex = dotActiveIndex + dotVisibleStep;
-
-		dots.find('.owl-dot')
-			.hide()
-			.filter(function(index, item){
-				if(index >= dotPrevActiveIndex &&  index <= dotNextActiveIndex){
-					return true;
-				}
-				return false;
-			})
-			.show()
-			.addClass('show')
-	}
-
-	// Навигация при клике НАЗАД
-	buttons.find('.prev').on('click', function () {
-		carousel.trigger('prev.owl.carousel');
-	});
-
-	// Навигация при клике ВПЕРЕД
-	buttons.find('.next').on('click', function () {
-		carousel.trigger('next.owl.carousel');
+		responsiveRefreshRate: 100
 	});
 }
 
