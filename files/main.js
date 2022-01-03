@@ -279,7 +279,7 @@ function ajaxForms(id,flag,successMessage,errorMessage){
 }
 
 // "Обратный звонок".
-ajaxForms('#viewed-callback','callbackFlag','Спасибо за обращение! Мы перезвоним вам в ближайшее время','Вы уже отправляли запрос. Пожалуйста ожидайте звонка.')
+ajaxForms('#callback','callbackFlag','Спасибо за обращение! Мы перезвоним вам в ближайшее время','Вы уже отправляли запрос. Пожалуйста ожидайте звонка.')
 // "Обратный звонок" в модальном окне.
 ajaxForms('#fancybox__callback','fancyCallbackFlag','Запрос обратного звонка успешно отправлен администрации магазина','Вы уже отправляли запрос. Пожалуйста ожидайте звонка.')
 // "Обратная связь" в модальном окне.
@@ -911,17 +911,21 @@ function newsCarousel() {
 
 // Функция слайдер для "Вы смотрели"
 function viewed() {
-	$('.viewed .owl-carousel').owlCarousel({
-		items: 1,
-		margin: 0,
+	var id = $('#viewed');
+	var carousel = id.find('.owl-carousel');
+	var buttons = id.find('.owl-nav');
+	var dots = id.find('.owl-dots');
+	carousel.owlCarousel({
+		items: 4,
+		margin: 32,
 		loop: false,
 		rewind: true,
 		lazyLoad: true,
 		nav: true,
-		navContainer: '',
+		navContainer: buttons,
 		navText: [ , ],
-		dots: false,
-		dotsContainer: '',
+		dots: true,
+		dotsContainer: dots,
 		autoHeight: false,
 		autoHeightClass: 'owl-height',
 		autoplay: false,
@@ -931,7 +935,16 @@ function viewed() {
 		touchDrag: true,
 		pullDrag: true,
 		responsiveClass: true,
-		responsiveRefreshRate: 100
+		responsiveRefreshRate: 100,
+		responsive: {
+			0:{items:1, autoHeight: true},
+			320:{items:1, autoHeight: true},
+			480:{items:2},
+			640:{items:2},
+			768:{items:3},
+			992:{items:3},
+			1200:{items:4}
+		}
 	});
 }
 
@@ -2995,7 +3008,6 @@ $(document).ready(function(){
   mainnav('#menu .mainnav', '1');
   toTop();
 	viewed();
-	footerLinksMore();
 	sideNav();
   // Ленивая загрузка
   $(function(){
