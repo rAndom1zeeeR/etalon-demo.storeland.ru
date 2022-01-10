@@ -653,6 +653,7 @@
 					
 					<!-- Правая часть -->
 					<div class="main__right">
+						{% IF index_page %}
 						<!-- Слайдшоу -->
 						<section id="slideshow">
 							<div class="slider owl-carousel">
@@ -1458,6 +1459,12 @@
 									</a>
 								</div>
 							</div>
+						</section>
+						{% ENDIF index_page %}
+
+						<!-- Основа -->
+						<section id="main">
+							<div class="body">{BODY}</div>
 						</section>
 
 					</div>

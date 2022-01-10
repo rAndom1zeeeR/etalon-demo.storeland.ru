@@ -124,9 +124,9 @@
 		<div class="row">
 			<!-- Вывод товаров ТАБЛИЦЕЙ -->
 			{% IF GOODS_VIEW_TYPE=1 %}
-			<div class="products__grid">
+			<div class="products__grid flex-stretch">
 				{% FOR goods %}
-				<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}empty{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{goods.ID}" itemscope itemtype="https://schema.org/Product">
+				<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{goods.ID}" itemscope itemtype="https://schema.org/Product">
 					<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{goods.MIN_PRICE_NOW_ID} goodsListForm">
 						<input type="hidden" name="hash" value="{HASH}" />
 						<input type="hidden" name="form[goods_from]" value="{goods.GOODS_FROM}" />
@@ -140,11 +140,8 @@
 								<noscript>
 									<img class="goods-image-medium" src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
 								</noscript>
-								<img class="goods-image-medium lozad script__on" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
+								<img class="lozad script__on" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
 							</a>
-						</div><!-- //END Изображение товара -->
-						<!-- Информация товара -->
-						<div class="product__shop">
 							<!-- Стикеры -->
 							<div class="product__ico flex">
 								{% IF goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT > goods.MIN_PRICE_NOW %}
@@ -159,8 +156,19 @@
 								<span class="ico__best"></span>
 								{% ENDIF %}
 							</div>
+						</div><!-- //END Изображение товара -->
+						<!-- Информация товара -->
+						<div class="product__shop">
+							<!-- Наличие -->
+							<div class="product__rest">
+								{% IF goods.MAX_REST_VALUE = 0 %}
+								<span>Нет в наличии</span>
+								{% ELSE %}
+								<span class="goodsModRestValue" data-value="{goods.MAX_REST_VALUE}">На складе {% IF goods.MAX_REST_VALUE > 10 %}много{% ELSE %}мало{% ENDIF %}</span>
+								{% ENDIF %}
+							</div>
 							<!-- Название товара -->
-							<a class="product__name flex-center" href="{goods.URL_MIN_PRICE_NOW | url_amp}" title="{goods.NAME}">
+							<a class="product__name" href="{goods.URL_MIN_PRICE_NOW | url_amp}" title="{goods.NAME}">
 								<span itemprop="name">{goods.NAME}</span>
 							</a>
 							<!-- Артикул товара -->
@@ -185,7 +193,33 @@
 								{% ENDIF %}
 							</div>
 							<!-- Добавление товара в избранное и сравнение и в корзину -->
-							<div class="product__links flex justify-between {% IF goods.IS_HAS_IN_COMPARE_LIST || goods.IS_HAS_IN_FAVORITES_LIST %}added{% ENDIF %}">
+							<div class="product__links {% IF goods.IS_HAS_IN_COMPARE_LIST || goods.IS_HAS_IN_FAVORITES_LIST %}added{% ENDIF %}">
+								<!-- Добавление в корзину -->
+								{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}
+								<a class="add-notify"
+									title="Уведомить"
+									data-tooltipOFF="Уведомить"
+									rel="nofollow"
+									data-fancybox
+									data-src="#fancybox__notify"
+									href="javascript:;"
+									data-name="{goods.NAME}"
+									data-art="{goods.ART_NUMBER}"
+								>												
+									<i class="material-icons">notifications_active</i>
+									<span>Уведомить</span>
+								</a>
+								{% ELSE %}
+								<a class="{% IF goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+									title="Добавить в корзину &laquo;{goods.NAME}&raquo;"
+									data-tooltipOFF="В корзину"
+									rel="nofollow"
+									href="{% IF goods.COUNT_MODIFICATION > 1 %}{goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+								>
+									<i class="material-icons">local_mall</i>
+									<span>В корзину</span>
+								</a>
+								{% ENDIF %}
 								<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
 								{% IFNOT SETTINGS_COMPARE_DISABLE && goods.IS_HAS_IN_COMPARE_LIST %}
 								<a class="add-compare added"
@@ -233,30 +267,6 @@
 								></a>
 								{% ENDIF %}
 								<!-- //END Добавление товара в избранное и сравнение и в корзину -->
-								<!-- Добавление в корзину -->
-								{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}
-								<a class="add-notify"
-									title="Уведомить"
-									data-tooltipOFF="Уведомить"
-									rel="nofollow"
-									data-fancybox
-									data-src="#fancybox__notify"
-									href="javascript:;"
-									data-name="{goods.NAME}"
-									data-art="{goods.ART_NUMBER}"
-								>												
-									<i class="icon-notify"></i>
-								</a>
-								{% ELSE %}
-								<a class="{% IF goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
-									title="Добавить в корзину &laquo;{goods.NAME}&raquo;"
-									data-tooltipOFF="В корзину"
-									rel="nofollow"
-									href="{% IF goods.COUNT_MODIFICATION > 1 %}{goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
-								>
-									<i class="icon-cart"></i>
-								</a>
-								{% ENDIF %}
 								<!-- Если есть возможность добавить товар в Избранное -->
 								{% IF goods.IS_HAS_IN_FAVORITES_LIST %}
 								<a class="add-favorites added"
