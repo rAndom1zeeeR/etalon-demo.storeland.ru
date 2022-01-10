@@ -820,19 +820,21 @@ function pdtSales(){
 	btn.on('click', function (event){
 		event.preventDefault();
 		var t = $(this);
-		var parents = t.parents().find(id)
-		var btnText = t.find('span')
+		var parents = t.parents().find(id);
+		var btnText = t.find('span');
 		if(t.hasClass('active')){
 			t.removeClass('active')
 			parents.removeClass('active')
 			btnText.text('Показать все')
 			parents.find('.product__items-quad').removeClass('show')
+			parents.find('.product__item').removeClass('show')
 			parents.css({height: ''})
 		}else{
 			t.addClass('active')
 			parents.addClass('active')
 			btnText.text('Скрыть')
 			parents.find('.product__items-quad').addClass('show')
+			parents.find('.product__item').addClass('show')
 			parents.css({height: '100%'})
 		}
 	});
@@ -926,7 +928,7 @@ function viewed() {
 		navText: [ , ],
 		dots: true,
 		dotsContainer: dots,
-		autoHeight: false,
+		autoHeight: true,
 		autoHeightClass: 'owl-height',
 		autoplay: false,
 		autoplayHoverPause: true,
@@ -3009,6 +3011,7 @@ $(document).ready(function(){
   toTop();
 	viewed();
 	sideNav();
+	mobile();
   // Ленивая загрузка
   $(function(){
     var observer = lozad(); // lazy loads elements with default selector as '.lozad'
@@ -3128,4 +3131,12 @@ function sideNav(){
 		$('.addto__menu-item[data-id="'+ id +'"]').addClass('active');
 	});
 
+}
+
+function mobile(){
+	var content = $('.header__top').html();
+	console.log('content', content)
+	var mobile = $('.mobile');
+	console.log('mobile', mobile)
+	mobile.append(content)
 }

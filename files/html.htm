@@ -87,27 +87,30 @@
 					{% IFNOT MOD_LNAME = compare && SETTINGS_COMPARE_DISABLE=0 %}
 					<div class="header__block compare {% IF COMPARE_GOODS_COUNT > 0 %}has-items{% ENDIF %}">
 						<a class="header__link" href="{COMPARE_URL}" title="Сравнение">
+							<i class="material-icons">equalizer</i>
 							<span class="header__label">Сравнение</span>
-							(<span class="header__count count-compare" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>)
+							<span>(<span class="header__count count-compare" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>)</span>
 						</a>
 					</div>
 					{% ENDIF %}
 					<!-- Избранное -->
 					<div class="header__block favorites {% IF FAVORITES_GOODS_COUNT > 0 %}has-items{% ENDIF %}">
 						<a class="header__link" href="{FAVORITES_URL}" title="Избранное">
+							<i class="material-icons">favorite</i>
 							<span class="header__label">Избранное</span>
-							(<span class="header__count count-favorites" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>)
+							<span>(<span class="header__count count-favorites" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>)</span>
 						</a>
 					</div>
 					<!-- ЛК, Войти -->
 					<div class="header__block users">
 						<a class="header__link" href="{USER_LOGIN_URL}" title="Личный кабинет">
+							<i class="material-icons">person_outline</i>
 							<span class="header__label">Вход в ЛК</span>
 						</a>
 					</div>
 					<!-- Почта -->
 					{% IF SETTINGS_STORE_EMAIL_MAIN %}
-					<div class="header__block flex">
+					<div class="header__block header__block-mail flex">
 						<div class="header__block-icon"><i class="material-icons">drafts</i></div>
 						<div class="header__block-content">
 							<a class="header__block-link" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
@@ -195,6 +198,10 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="search__icon button">
+							<i class="material-icons">search</i>
+						</div>
 					</div><!-- //END Поиск -->
 				</div>
 			</div>
@@ -204,12 +211,14 @@
 		<div id="menu">
 			<div class="container">
 				<div class="flex">
+					<!-- Меню. Каталог -->
 					<div class="catalog">
 						<a class="catalog__icon flex" href="{CATALOG_URL}" title="Перейти в каталог">
 							<i class="material-icons">widgets</i>
 							<span>Категории товаров</span>
 						</a>
 					</div>
+					<div class="mobile flex"></div>
 					<!-- Меню. Верхнее -->
 					<div class="menu">
 						<nav class="mainnav" itemscope itemtype="https://schema.org/SiteNavigationElement">
@@ -231,7 +240,7 @@
 						</nav>
 					</div>
 					<!-- Корзина -->
-					<div class="cart">
+					<div class="cart {% IF CART_COUNT_TOTAL > 0 %}has-items{% ENDIF %}">
 						<a class="button-primary cart__icon flex-center" href="{CART_URL}" title="Перейти в корзину">
 							<i class="material-icons">local_mall</i>
 							<span class="cart__count" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
@@ -469,7 +478,7 @@
 											</div>
 										</form>
 									</div>
-									{% IFNOT index_page_new_goods.last %}{index_page_new_goods.index | is_divided("3","</div><div class=product__items>","")}{% ENDIF %}
+									{% IFNOT index_page_new_goods.last %}{index_page_new_goods.index | is_divided("4","</div><div class=product__items>","")}{% ENDIF %}
 									{% IF index_page_new_goods.last %}</div>{% ENDIF %}
 									{% ENDFOR %}
 								</div>
@@ -478,29 +487,31 @@
 						{% ENDIF index_page_new_goods_empty %}
 
 						<!-- Баннер -->
-						<div class="sidebar__block banner">
-							<div class="banner__inner flex">
-								<div class="banner__subtitle">
-									<span>Витамины</span>
-								</div>
-								<a href="{DISCOUNT_URL}" class="banner__title"><span>Скидки до</span><span class="tc">40%</span></a>
-								<div class="banner__label"><span>До конца акции осталось:</span></div>
-								<div class="banner__counter counter flex-center" end="03/30/2022 23:59:59" now="{CURRENT_TIME | date('m/d/Y H:i:s')}">
-									<div class="days flex-center">
-										<span>00</span>
-										<label>дн</label>
+						<div class="sidebar__block" id="banner">
+							<div class="banner__image">
+								<div class="banner__inner flex">
+									<div class="banner__subtitle">
+										<span>Витамины</span>
 									</div>
-									<div class="hours flex-center">
-										<span>00</span>
-										<label>час</label>
-									</div>
-									<div class="minutes flex-center">
-										<span>00</span>
-										<label>мин</label>
-									</div>
-									<div class="seconds flex-center">
-										<span>00</span>
-										<label>сек</label>
+									<a href="{DISCOUNT_URL}" class="banner__title"><span>Скидки до</span><span class="tc">40%</span></a>
+									<div class="banner__label"><span>До конца акции осталось:</span></div>
+									<div class="banner__counter counter flex-center" end="03/30/2022 23:59:59" now="{CURRENT_TIME | date('m/d/Y H:i:s')}">
+										<div class="days flex-center">
+											<span>00</span>
+											<label>дн</label>
+										</div>
+										<div class="hours flex-center">
+											<span>00</span>
+											<label>час</label>
+										</div>
+										<div class="minutes flex-center">
+											<span>00</span>
+											<label>мин</label>
+										</div>
+										<div class="seconds flex-center">
+											<span>00</span>
+											<label>сек</label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -546,7 +557,7 @@
 												</a>
 											</div>
 										</div>
-										{% IFNOT news_list_shop.last %}{news_list_shop.index | is_divided("3","</div><div class=news__items>","")}{% ENDIF %}
+										{% IFNOT news_list_shop.last %}{news_list_shop.index | is_divided("2","</div><div class=news__items>","")}{% ENDIF %}
 										{% IF news_list_shop.last %}</div>{% ENDIF %}
 										{% ENDFOR %}
 									</div>
@@ -897,7 +908,7 @@
 							<div class="block__title">
 								<h3 class="title"><span>Как мы работаем?</span></h3>
 							</div>
-							<div class="advantages__items flex">
+							<div class="advantages__items flex-stretch">
 								<div class="advantages__item">
 									<div class="advantages__icon"><span>1</span></div>
 									<div class="advantages__name">Оформление заказа</div>
