@@ -3012,6 +3012,8 @@ $(document).ready(function(){
 	viewed();
 	sideNav();
 	mobile();
+	counterDate();
+	newsCarousel();
   // Ленивая загрузка
   $(function(){
     var observer = lozad(); // lazy loads elements with default selector as '.lozad'

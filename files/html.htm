@@ -255,6 +255,8 @@
 		<div id="main">
 			<div class="container">
 				<div class="main__inner flex-start">
+					<!-- Левая часть -->
+					{% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog %}
 					<div class="main__left sidebar">
 						<!-- Каталог -->
 						<div class="sidebar__block catalog">
@@ -279,14 +281,14 @@
 						</div>
 
 						<!-- Новинки -->
-						{% IFNOT index_page_new_goods_empty %}
-						<div class="sidebar__block" id="pdt__new">
+						{% IFNOT index_page_new_goods_empty && index_page %}
+						<div id="pdt__new" class="sidebar__block">
 							<div class="sidebar__title block__nav flex">
 								<span class="title">Новинки</span>
 								<div class="owl-nav"></div>
 							</div>
 							<div class="sidebar__content">
-								<div class="products__list flex-stretch owl-carousel">
+								<div class="products__listSmall flex-stretch owl-carousel">
 									{% FOR index_page_new_goods %}
 									{% IF index_page_new_goods.first %}<div class="product__items">{% ENDIF %}
 									<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_new_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF index_page_new_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{index_page_new_goods.ID}" itemscope itemtype="https://schema.org/Product">
@@ -486,8 +488,99 @@
 						</div>
 						{% ENDIF index_page_new_goods_empty %}
 
+						{% IF SHOW_GOODS_PRICE_FILTERS || SHOW_GOODS_FILTERS %}
+						<!-- Если в тарифном плане подключен модуль фильтров по товарам -->
+						<div id="filters" class="sidebar__block filters">
+							<div class="sidebar__title">Фильтры</div>
+							<div class="sidebar__content {% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %}">
+								<form action="" method="get" class="form__filters">
+									<!-- Если есть возможность фильтрации товаров по ценам -->
+									{% IF SHOW_GOODS_PRICE_FILTERS %}
+									<div class="filter__list filters-price collapsible active">
+										<a href="javascript:;" class="filter__name collapsible__click flex justify-between">
+											<span>Цена</span>
+											<i class="material-icons"></i>
+										</a>
+										<div class="filter__items collapsible__content">
+											<div class="priceSlider">
+												<input type="hidden" name="form[filter][available_price][min]" value="{GOODS_FILTER_MIN_AVAILABLE_PRICE}" />
+												<input type="hidden" name="form[filter][available_price][max]" value="{GOODS_FILTER_MAX_AVAILABLE_PRICE}" />
+												<!-- Ползунок фильтров по цене -->
+												<div id="goods-filter-price-slider"></div>
+												<!-- Фильтры по цене -->
+												<div class="goodsFilterPriceRangePointers flex justify-between">
+													<span class="min" style="display:none;">{GOODS_FILTER_MIN_AVAILABLE_PRICE}</span>
+													<span class="max" style="display:none;">{GOODS_FILTER_MAX_AVAILABLE_PRICE}</span>
+													<span>от</span>
+													<input id="goods-filter-min-price" class="inputText" type="text" name="form[filter][price][min]" value="{% IF GOODS_FILTER_MIN_PRICE %}{GOODS_FILTER_MIN_PRICE}{% ELSE %}{GOODS_FILTER_MIN_AVAILABLE_PRICE}{% ENDIF %}" min="1" onkeypress="return keyPress(this, event);" onpaste="return false;" />
+													<span>до</span>
+													<input id="goods-filter-max-price" class="inputText" type="text" name="form[filter][price][max]" value="{% IF GOODS_FILTER_MAX_PRICE %}{GOODS_FILTER_MAX_PRICE}{% ELSE %}{GOODS_FILTER_MAX_AVAILABLE_PRICE}{% ENDIF %}" min="1" onkeypress="return keyPress(this, event);" onpaste="return false;" />
+												</div>
+												<!-- Кнопки Фильтров -->
+												<div class="goodsFilterPriceSubmit flex-center">
+													<a class="button-secondary submit" onclick="$('.form__filters').submit();" title="Показать"><span>Применить</span></a>
+													<a class="clear" href="{PAGE_CANONICAL}" title="Очистить фильры"><span>Очистить</span></a>
+												</div>
+											</div>
+										</div>
+									</div>
+									{% ENDIF %}
+									<!-- Фильтры по характеристикам товаров (Например: Производитель, разрешение экрана, заряд аккомулятора) {% FOR values %}{% IF filter_attr_list.values.CHECKED %}active {% ENDIF %}{% ENDFOR %} -->
+									{% FOR filter_attr_list %}
+									<div class="filter__list collapsible {% FOR values %}{% IF filter_attr_list.values.CHECKED %}active {% ENDIF %}{% ENDFOR %}">
+										<a href="javascript:;" class="filter__name collapsible__click flex justify-between">
+											<span>{filter_attr_list.NAME}</span>
+											<i class="material-icons"></i>
+										</a>
+										<div class="collapsible__content">
+											<input class="filter__search" type="text" placeholder="Я ищу">
+											<div class="filter__items">
+												{% FOR values %}
+												<div class="filter__item flex {% IF filter_attr_list.values.CHECKED %}checked{% ELSEIF filter_attr_list.values.NB_GOODS_FILTERED=0 %}disabled{% ENDIF %}">
+													<input type="checkbox" name="form[filter][attr][{filter_attr_list.ID}][{filter_attr_list.values.ID}]" value="1" id="filterAttrVal{filter_attr_list.values.ID}" class="square" {% IF filter_attr_list.values.CHECKED %}checked="checked" {% ELSEIF filter_attr_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled" {% ENDIF %} />
+													<label for="filterAttrVal{filter_attr_list.values.ID}" data-name="{filter_attr_list.values.VALUE}">
+														<span>{filter_attr_list.values.VALUE}</span>
+														<span>({filter_attr_list.values.NB_GOODS_FILTERED})</span>
+													</label>
+												</div>
+												{% ENDFOR %}
+											</div>
+										</div>
+									</div>
+									{% ENDFOR %}
+									<!-- Фильтры по свойствам товарных модификаций (Например: Цвет, размер, модификация) {% FOR values %}{% IF filter_prop_list.values.CHECKED %}active {% ENDIF %}{% ENDFOR %} -->
+									{% FOR filter_prop_list %}
+									<div class="filter__list collapsible {% FOR values %}{% IF filter_prop_list.values.CHECKED %}active {% ENDIF %}{% ENDFOR %}">
+										<a href="javascript:;" class="filter__name collapsible__click flex justify-between">
+											<span>{filter_prop_list.NAME}</span>
+											<i class="material-icons"></i>
+										</a>
+										<div class="collapsible__content">
+											<input class="filter__search" type="text" placeholder="Я ищу">
+											<div class="filter__items">
+												{% FOR values %}
+												<div class="filter__item flex {% IF filter_prop_list.values.CHECKED %}checked{% ELSEIF filter_prop_list.values.NB_GOODS_FILTERED=0 %}disabled{% ENDIF %}">
+													<input type="checkbox" name="form[filter][prop][{filter_prop_list.ID}][{filter_prop_list.values.ID}]" value="1" id="filterPropVal{filter_prop_list.values.ID}" class="square" {% IF filter_prop_list.values.CHECKED %}checked="checked" {% ELSEIF filter_prop_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled" {% ENDIF %} />
+													<label for="filterPropVal{filter_prop_list.values.ID}" data-name="{filter_prop_list.values.VALUE}">
+														<span>{filter_prop_list.values.VALUE}</span>
+														<span>({filter_prop_list.values.NB_GOODS_FILTERED})</span>
+													</label>
+												</div>
+												{% ENDFOR %}
+											</div>
+										</div>
+									</div>
+									{% ENDFOR %}
+								</form>
+								<div class="filter__buttons">
+									<a href="{PAGE_CANONICAL}" class="goodsFilterClear" title="Очистить фильры"><span>Сбросить фильтры</span></a>
+								</div>
+							</div>
+						</div>
+						{% ENDIF filters %}
+
 						<!-- Баннер -->
-						<div class="sidebar__block" id="banner">
+						<div id="banner" class="sidebar__block">
 							<div class="banner__image">
 								<div class="banner__inner flex">
 									<div class="banner__subtitle">
@@ -518,7 +611,7 @@
 						</div>
 
 						<!-- Новости -->
-						<div class="sidebar__block" id="news">
+						<div id="news" class="sidebar__block">
 							<div class="sidebar__title block__nav flex">
 								<span class="title">Новости магазина</span>
 								<div class="owl-nav"></div>
@@ -606,7 +699,7 @@
 						</div>
 
 						<!-- Мы предлагаем -->
-						<div class="sidebar__block" id="offers">
+						<div id="offers" class="sidebar__block">
 							<div class="sidebar__title">
 								<span>Мы предлагаем</span>
 							</div>
@@ -650,9 +743,10 @@
 							</div>
 						</div>
 					</div>
-					
+					{% ENDIF IS_FULL_CATALOG %}
+
 					<!-- Правая часть -->
-					<div class="main__right">
+					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog %}has-sidebar{% ENDIF %}">
 						{% IF index_page %}
 						<!-- Слайдшоу -->
 						<section id="slideshow">
@@ -703,7 +797,7 @@
 								<h3 class="title"><span>Самое популярное</span></h3>
 								<div class="owl-nav"></div>
 							</div>
-							<div class="products__grid owl-carousel">
+							<div class="products__gridBig owl-carousel">
 								{% FOR index_page_favorites_goods %}
 								<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_favorites_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF index_page_favorites_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{index_page_favorites_goods.ID}" itemscope itemtype="https://schema.org/Product">
 									<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{index_page_favorites_goods.MIN_PRICE_NOW_ID} goodsListForm">
@@ -911,22 +1005,34 @@
 							</div>
 							<div class="advantages__items flex-stretch">
 								<div class="advantages__item">
-									<div class="advantages__icon"><span>1</span></div>
+									<div class="advantages__icon">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#3babeb;stroke-width:4;stroke-miterlimit:10"/></svg>
+										<span>1</span>
+									</div>
 									<div class="advantages__name">Оформление заказа</div>
 									<div class="advantages__text">Вы выбираете качественные товары от проверенных поставщиков</div>
 								</div>
 								<div class="advantages__item">
-									<div class="advantages__icon"><span>2</span></div>
+									<div class="advantages__icon">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#f7aa9d;stroke-width:4;stroke-miterlimit:10"/></svg>
+										<span>2</span>
+									</div>
 									<div class="advantages__name">Подтверждение заказа</div>
 									<div class="advantages__text">Менеджер согласует Ваш заказ</div>
 								</div>
 								<div class="advantages__item">
-									<div class="advantages__icon"><span>3</span></div>
+									<div class="advantages__icon">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#3babeb;stroke-width:4;stroke-miterlimit:10"/></svg>
+										<span>3</span>
+									</div>
 									<div class="advantages__name">Оплата заказа</div>
 									<div class="advantages__text">Вы выбираете удобный и безопасный вариант оплаты</div>
 								</div>
 								<div class="advantages__item">
-									<div class="advantages__icon"><span>4</span></div>
+									<div class="advantages__icon">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#f7aa9d;stroke-width:4;stroke-miterlimit:10"/></svg>
+										<span>4</span>
+									</div>
 									<div class="advantages__name">Доставка заказа</div>
 									<div class="advantages__text">Получите Ваш заказ в магазине, на почте или курьерской службой</div>
 								</div>						
@@ -969,8 +1075,7 @@
 													{% ENDIF %}
 													{% IF index_page_sale_goods.IS_NEW %}
 													<span class="ico__new"></span>
-													{% ENDIF %}
-													{% IF index_page_sale_goods.IS_TOP %}
+													{% ELSEIF index_page_sale_goods.IS_TOP %}
 													<span class="ico__best"></span>
 													{% ENDIF %}
 												</div>
@@ -1460,12 +1565,269 @@
 								</div>
 							</div>
 						</section>
-						{% ENDIF index_page %}
+						{% ELSE %}
 
+						<!-- Заголовки страниц -->
+						<section id="page__title">
+							<div class="block__title">
+								{% IF MOD_LNAME=user && ACT=login %}
+								<h1 class="title"><span>Войти или зарегистрироваться</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=change %}
+								<h1 class="title"><span>Активация нового пароля</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=recovery %}
+								<h1 class="title"><span>Восстановление пароля</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=favorites %}
+								<h1 class="title"><span>Сохраненные товары</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=history_list %}
+								<h1 class="title"><span>Мои заказы</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=history_info %}
+								<h1 class="title"><span>Мой заказ</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=settings %}
+								<h1 class="title"><span>Личный кабинет</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=register %}
+								<h1 class="title"><span>Регистрация клиента</span></h1>
+								{% ELSEIF MOD_LNAME=order && ACT=stage %}
+								<h1 class="title"><span>Оформление заказа. Шаг {ORDER_STAGE_NUM} из 4</span></h1>
+								{% ELSEIF MOD_LNAME=search %}
+								<h1 class="title">
+									<span>
+										<div>Результат поиска по запросу: {% IFNOT search_query_empty %}&laquo;{SEARCH_QUERY}&raquo;{% ENDIF %}</div>
+										<div class="subtitle">({GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")} найд{GOODS_PAGES_RESULTS | gen_word_end("ен","ено","ено")} по запросу)</div>
+									</span>
+								</h1>
+								{% ELSEIF MOD_LNAME=discount && ACT=index && ID %}
+								<h1 class="title"><span>{PROMOTIONAL_CAMPAIGN_NAME}</span></h1>
+								{% ELSEIF MOD_LNAME=discount && ACT=index %}
+								<h1 class="title"><span>Акции</span></h1>
+								{% ELSEIF MOD_LNAME=feedback %}
+								<h1 class="title"><span>Связь с администрацией</span></h1>
+								{% ELSEIF CURRENT_URL=NEWS_SHOP_URL || CURRENT_URL=NEWS_ARTICLES_URL || CURRENT_URL=NEWS_MASS_MEDIA_URL %}
+								<h1 class="title"><span>{NEWS_SECTION_NAME}</span></h1>
+								{% ELSEIF MOD_LNAME=news %}
+								<h1 class="title"><span>{PAGE_TITLE}</span></h1>
+								{% ELSEIF MOD_LNAME=compare %}
+								<h1 class="title"><span>{% IF compare_list_empty %}Ваш список сравнения пуст{% ELSE %}Сравнение товаров{% ENDIF %}</span></h1>
+								{% ELSEIF MOD_LNAME=page %}
+								<h1 class="title"><span>{PAGE_NAME}</span></h1>
+								{% ELSEIF MOD_LNAME= %}
+								<h1 class="title"><span>Внутренняя ошибка сервера. {MSG_HEADER}</span></h1>
+								{% ELSEIF MOD_LNAME=callback %}
+								<h1 class="title"><span>Заказ обратного звонка</span></h1>
+								{% ELSEIF MOD_LNAME=catalog %}
+								<h1 class="title"><span>{CATEGORY_NAME}</span></h1>
+								{% ELSEIF MOD_LNAME=cart %}
+								<h1 class="title"><a href="{CART_URL}" title="Корзина"><span>Корзина</span></a></h1>
+								{% ENDIF %}
+							</div>
+							<!-- Хлебные крошки -->
+							{% IFNOT index_page %}
+							<div id="breadcrumbs">
+								<ul class="flex unstyled" itemscope itemtype="https://schema.org/BreadcrumbList">
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="home">
+										<a itemprop="item" href="{INDEX_PAGE_URL}" title="Перейти на главную"><i class="icon-house"></i><span itemprop="name">Главная</span>
+											<meta itemprop="position" content="1" />
+										</a>
+									</li>
+									{% IF MOD_LNAME=cart %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{CART_URL}" title="Перейти в корзину">
+											<span itemprop="name">{% IF cart_items_empty %}Корзина покупок пуста{% ELSE %}Корзина{% ENDIF %}</span>
+											<meta itemprop="position" content="2" />
+										</a>
+									</li>
+									{% ELSEIF MOD_LNAME=user && ACT=login %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Войти или зарегистрироваться</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=user && ACT=change %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{USER_RECOVERY_URL}" title="Восстановление пароля"><span itemprop="name">Восстановление пароля</span>
+											<meta itemprop="position" content="2" />
+										</a>
+									</li>
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Активация нового пароля</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=user && ACT=recovery %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Восстановление пароля</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=user && ACT=favorites %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Сохраненные товары</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=user && ACT=history_info %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{USER_SETTINGS_URL}" title="Личный кабинет"><span itemprop="name">Личный кабинет</span>
+											<meta itemprop="position" content="2" />
+										</a>
+									</li>
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{USER_HISTORY_LIST_URL}" title="История моих заказов"><span itemprop="name">Мои заказы</span>
+											<meta itemprop="position" content="3" />
+										</a>
+									</li>
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Карточка заказа</span>
+										<meta itemprop="position" content="4" />
+									</li>
+									{% ELSEIF MOD_LNAME=user && ACT=history_list %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{USER_SETTINGS_URL}" title="Личный кабинет"><span itemprop="name">Личный кабинет</span>
+											<meta itemprop="position" content="2" />
+										</a>
+									</li>
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Мои заказы</span>
+										<meta itemprop="position" content="3" />
+									</li>
+									{% ELSEIF MOD_LNAME=user && ACT=settings %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Личный кабинет</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=user && ACT=register %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Регистрация клиента</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=order && ACT=stage %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{CART_URL}" title="Перейти в корзину">
+											<span itemprop="name">Корзина</span>
+											<meta itemprop="position" content="2" />
+										</a>
+									</li>
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Оформление заказа</span>
+										<meta itemprop="position" content="3" />
+									</li>
+									{% ELSEIF MOD_LNAME=search %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Поиск</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=discount && ACT=index && ID %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{DISCOUNT_URL}" title="Перейти на страницу акций магазина"><span itemprop="name">Акции магазина</span>
+											<meta itemprop="position" content="2" />
+										</a>
+									</li>
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">{PROMOTIONAL_CAMPAIGN_NAME}</span>
+										<meta itemprop="position" content="3" />
+									</li>
+									{% ELSEIF MOD_LNAME=discount && ACT=index %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Акции магазина</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=order && ACT=info %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{CART_URL}" title="Перейти в корзину"><span itemprop="name">Корзина</span>
+											<meta itemprop="position" content="2" />
+										</a>
+									</li>
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{CART_URL}"><span itemprop="name">Оформление заказа</span>
+											<meta itemprop="position" content="3" />
+										</a>
+									</li>
+									<li><span>Заказ {% IF ORDER_NUM %}№{ORDER_NUM}{% ENDIF %} успешно оформлен.</span></li>
+									{% ELSEIF MOD_LNAME=feedback && ACT=index %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Связь с администрацией</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF CURRENT_URL=NEWS_SHOP_URL || CURRENT_URL=NEWS_ARTICLES_URL || CURRENT_URL=NEWS_MASS_MEDIA_URL || CURRENT_URL=NEWS_ALL_URL %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">{NEWS_SECTION_NAME}</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=news %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{NEWS_SECTION_URL}" title="{NEWS_SECTION_NAME}"><span itemprop="name">{NEWS_SECTION_NAME}</span>
+											<meta itemprop="position" content="2" />
+										</a>
+									</li>
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">{NEWS_TITLE}</span>
+										<meta itemprop="position" content="3" />
+									</li>
+									{% ELSEIF MOD_LNAME=compare %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Список сравнения</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=page %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">{PAGE_NAME}</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME= %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Внутренняя ошибка сервера</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=callback %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name">Заказ обратного звонка</span>
+										<meta itemprop="position" content="2" />
+									</li>
+									{% ELSEIF MOD_LNAME=goods %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{CATALOG_URL}" title="Перейти в каталог товаров"><span itemprop="name">Каталог</span>
+											<meta itemprop="position" content="2" />
+										</a>
+									</li>
+									{% FOR upper_navigation %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<a itemprop="item" href="{upper_navigation.URL}" title="Перейти в категорию &laquo;{upper_navigation.NAME}&raquo;"><span itemprop="name" title="{upper_navigation.NAME}">{upper_navigation.NAME}</span>
+											<meta itemprop="position" content="{upper_navigation.LEVEL | plus('3')}" /></a></li>
+									{% ENDFOR %}
+									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+										<span itemprop="name" title="{GOODS_NAME}">{GOODS_NAME}</span>
+										<meta itemprop="position" content='{% FOR upper_navigation %}{%IF upper_navigation.last%}{upper_navigation.index | plus("3")}{%ENDIF%}{%ENDFOR%}' />
+									</li>
+									{% ELSEIF MOD_LNAME=catalog %}
+										{% IF IS_FULL_CATALOG %}
+											<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+												<span itemprop="name">Каталог</span>
+												<meta itemprop="position" content="2" />
+											</li>
+										{% ELSE %}
+											<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+												<a itemprop="item" href="{CATALOG_URL}" title="Перейти в каталог продукции нашего магазина"><span itemprop="name">Каталог</span>
+													<meta itemprop="position" content="2" />
+												</a>
+											</li>
+											{% FOR upper_navigation %}
+												{% IF upper_navigation.CURRENT %}
+												<li><span title="{upper_navigation.NAME}">{upper_navigation.NAME}</span></li>
+												{% ELSEIF upper_navigation.CURRENT_PARENT %}
+												<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+													<a itemprop="item" href="{upper_navigation.URL}" title="Перейти в категорию &laquo;{upper_navigation.NAME}&raquo;"><span itemprop="name" title="{upper_navigation.NAME}">{upper_navigation.NAME}</span>
+														<meta itemprop="position" content='{upper_navigation.index | plus("2")}' />
+													</a>
+												</li>
+												{% ENDIF %}
+											{% ENDFOR upper_navigation %}
+										{% ENDIF %}
+									{% ENDIF %}
+								</ul>
+							</div>
+							{% ENDIF %}
+						</section>
+						
 						<!-- Основа -->
 						<section id="main">
 							<div class="body">{BODY}</div>
 						</section>
+						{% ENDIF index_page %}
 
 					</div>
 				</div>
@@ -2109,8 +2471,6 @@
 	<script type="text/javascript">	
 	// Загрузка основных функций шаблона для главной страницы
 	$(document).ready(function(){
-		counterDate();
-		newsCarousel();
 		slideShow();
 		pdtSale();
 		pdtBest();

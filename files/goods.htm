@@ -344,7 +344,7 @@
 			{% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}
 			<div class="productView__description" data-tab-content="1">
 				<div class="block__title">
-					<h2 class="title title_separator"><span>Описание</span></h2>
+					<h2 class="title"><span>Описание</span></h2>
 				</div>
 				<!-- Блок описания товара. Показываем его если есть описание товара -->
 				<div class="htmlDataBlock">
@@ -367,7 +367,7 @@
 			{% IFNOT related_views_goods_empty %}
 			<div class="related__views" data-tab-content="5">		
 				<div class="block__title">
-					<h2 class="title title_separator"><span>Рекомендуем</span></h2>
+					<h2 class="title"><span>Рекомендуем</span></h2>
 				</div>		
 				<div class="products__grid owl-carousel">
 					{% FOR related_views_goods %}
@@ -446,7 +446,7 @@
 		{% IFNOT goods_features_empty %}
 		<div class="productView__features" data-tab-content="2">
 			<div class="block__title">
-				<h2 class="title title_separator"><span>Характеристики</span></h2>
+				<h2 class="title"><span>Характеристики</span></h2>
 			</div>
 			<div class="features__items flex">
 				{% FOR goods_features %}
@@ -463,7 +463,7 @@
 		{% IFNOT goods_delivery_empty %}
 		<div class="productView__delivery" data-tab-content="3">
 			<div class="block__title">
-				<h2 class="title title_separator"><span>Доставка</span></h2>
+				<h2 class="title"><span>Доставка</span></h2>
 			</div>
 			<div class="delivery__items flex-start">
 				{% FOR goods_delivery %}
@@ -530,7 +530,7 @@
 		{% IFNOT SETTINGS_OPINION_DISABLE %}
 		<div class="productView__opinion" data-tab-content="4">
 			<div class="block__title">
-				<h2 class="title title_separator"><span>Отзывы</span></h2>
+				<h2 class="title"><span>Отзывы</span></h2>
 			</div>
 			<div class="flex-start">
 				<div class="opinion__content">					
@@ -714,7 +714,7 @@
 	{% IFNOT related_goods_empty %}
 	<div class="related__goods">
 		<div class="block__title">
-			<h2 class="title title_separator"><span>Сопутствующие</span></h2>
+			<h2 class="title"><span>Сопутствующие</span></h2>
 		</div>		
 		<div class="products__grid owl-carousel">
 			{% FOR related_goods %}

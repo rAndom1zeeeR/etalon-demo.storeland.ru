@@ -11,7 +11,7 @@
 					<!-- Данные покупателя -->
 					<div class="account" order="1">
 						<div class="block__title">
-							<h2 class="title title_separator"><span>Контактные данные</span></h2>
+							<h2 class="title"><span>Контактные данные</span></h2>
 						</div>
 						<div class="row">
 							<div class="form__list">
@@ -60,7 +60,7 @@
 					{% IF SETTINGS_ORDER_FIELDS_COUNTRY < 3 || SETTINGS_ORDER_FIELDS_REGION < 3 || SETTINGS_ORDER_FIELDS_CITY < 3 || SETTINGS_ORDER_FIELDS_ADDRESS < 3 || SETTINGS_ORDER_FIELDS_ZIP_CODE < 3 || SETTINGS_ORDER_FIELDS_CONVENIENT_TIME < 3 || SETTINGS_ORDER_FIELDS_COMMENT < 3 %}
 					<div order="2" class="address {% IF SETTINGS_ORDER_FIELDS_COUNTRY = 1 || SETTINGS_ORDER_FIELDS_REGION = 1 || SETTINGS_ORDER_FIELDS_CITY = 1 || SETTINGS_ORDER_FIELDS_ADDRESS = 1 || SETTINGS_ORDER_FIELDS_ZIP_CODE = 1 || SETTINGS_ORDER_FIELDS_CONVENIENT_TIME = 1 || SETTINGS_ORDER_FIELDS_COMMENT = 1 %}required{% ENDIF %}">
 						<div class="block__title">
-							<h2 class="title title_separator"><span>Адрес доставки</span></h2>
+							<h2 class="title"><span>Адрес доставки</span></h2>
 						</div>
 						<div class="row">
 							<div class="form__list">
@@ -153,7 +153,7 @@
 					<!-- Способ доставки-->
 					<div class="delivery" order="3">
 						<div class="block__title">
-							<h2 class="title title_separator"><span>Cпособ доставки</span></h2>
+							<h2 class="title"><span>Cпособ доставки</span></h2>
 						</div>
 						<div class="form__list">
 							<!-- Старый скрытый вариант способа доставки -->
@@ -239,7 +239,7 @@
 					<!-- Способ оплаты -->
 					<div class="payment" order="4">
 						<div class="block__title">
-							<h2 class="title title_separator"><span>Cпособ оплаты</span></h2>
+							<h2 class="title"><span>Cпособ оплаты</span></h2>
 						</div>
 						<div class="form__list">
 							<!-- Селекты (выборный список) способ оплаты -->
@@ -285,7 +285,7 @@
 					{% IF ORDER_DISCOUNT_COUPON_IS_ENABLED %}
 					<div class="coupons" order="5">
 						<div class="block__title">
-							<h2 class="title title_separator"><span>Купон</span></h2>
+							<h2 class="title"><span>Купон</span></h2>
 						</div>
 						<div class="form__field coupon__order">
 							<input type="hidden" name="oldPromoDiscount" value="0">
@@ -305,7 +305,7 @@
 			<!-- Корзина: Итоговый блок -->
 			<div class="fastOrder__total">
 				<div class="block__title">
-					<h2 class="title title_separator"><span>Ваш заказ</span></h2>
+					<h2 class="title"><span>Ваш заказ</span></h2>
 				</div>
 				<div class="total__items">
 					<!-- Корзина: Доставка -->
