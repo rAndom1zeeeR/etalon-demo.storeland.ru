@@ -256,7 +256,7 @@
 			<div class="container">
 				<div class="main__inner flex-start">
 					<!-- Левая часть -->
-					{% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog %}
+					{% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog || index_page %}
 					<div class="main__left sidebar">
 						<!-- Каталог -->
 						<div class="sidebar__block catalog">
@@ -746,7 +746,7 @@
 					{% ENDIF IS_FULL_CATALOG %}
 
 					<!-- Правая часть -->
-					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog %}has-sidebar{% ENDIF %}">
+					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog || index_page %}has-sidebar{% ENDIF %}">
 						{% IF index_page %}
 						<!-- Слайдшоу -->
 						<section id="slideshow">
@@ -2506,9 +2506,6 @@
 	</script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jquery-star-rating.js?design=Deluxe"></script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}air-datepicker.js?design=THEMENAME"></script>
-	<style>
-		#page__title {display: none;}
-	</style>
 	{% ENDIF %}
 
 	{% IF MOD_LNAME = compare %}
