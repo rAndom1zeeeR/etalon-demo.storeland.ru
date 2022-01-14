@@ -183,7 +183,7 @@
 							</div>
 							<!-- Закрыть -->
 							<a href="javascript:;" class="search__reset">
-								<i class="icon-close"></i>
+								<i class="material-icons">close</i>
 							</a>
 						</form><!-- //END Форма поиска -->
 						<!-- Результаты поиска -->
@@ -974,8 +974,8 @@
 													href="javascript:;"
 													data-name="{index_page_favorites_goods.NAME}"
 													data-art="{index_page_favorites_goods.ART_NUMBER}"
-												>												
-													<i class="icon-notify"></i>
+												>
+													<i class="material-icons">notifications_active</i>
 													<span>Уведомить</span>
 												</a>
 												{% ELSE %}
@@ -985,7 +985,7 @@
 													rel="nofollow"
 													href="{% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}{index_page_favorites_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_favorites_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 												>
-													<i class="icon-cart"></i>
+													<i class="material-icons">shopping_bag</i>
 													<span>В корзину</span>
 												</a>
 												{% ENDIF %}
@@ -1617,6 +1617,8 @@
 								<h1 class="title"><span>{CATEGORY_NAME}</span></h1>
 								{% ELSEIF MOD_LNAME=cart %}
 								<h1 class="title"><a href="{CART_URL}" title="Корзина"><span>Корзина</span></a></h1>
+								{% ELSEIF MOD_LNAME=goods %}
+								<h1 class="title"><span>{GOODS_NAME}</span></h1>
 								{% ENDIF %}
 							</div>
 							<!-- Хлебные крошки -->
@@ -1624,7 +1626,7 @@
 							<div id="breadcrumbs">
 								<ul class="flex unstyled" itemscope itemtype="https://schema.org/BreadcrumbList">
 									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="home">
-										<a itemprop="item" href="{INDEX_PAGE_URL}" title="Перейти на главную"><i class="icon-house"></i><span itemprop="name">Главная</span>
+										<a itemprop="item" href="{INDEX_PAGE_URL}" title="Перейти на главную"><i class="material-icons">home</i><span itemprop="name">Главная</span>
 											<meta itemprop="position" content="1" />
 										</a>
 									</li>
@@ -1841,7 +1843,7 @@
 					<h3 class="title"><span>Вы просматривали</span></h3>
 					<div class="owl-nav"></div>
 				</div>
-				<div class="products__list flex-stretch owl-carousel">
+				<div class="products__listSmall flex-stretch owl-carousel">
 					{% FOR recently_viewed_goods %}
 					<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && recently_viewed_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF recently_viewed_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{recently_viewed_goods.ID}" itemscope itemtype="https://schema.org/Product">
 						<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{recently_viewed_goods.MIN_PRICE_NOW_ID} goodsListForm flex">

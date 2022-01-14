@@ -30,7 +30,7 @@
               <a href="{goods_mod_info.GOODS_MOD_URL}" title="Перейти к странице &laquo;{goods_mod_info.GOODS_NAME}&raquo;">
                 <img src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=Deluxe{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" rel="{goods_mod_info.GOODS_IMAGE_ID}" class="CompareGoodsImageMain{goods_mod_info.GOODS_MOD_ID} goods-image-small" alt="{goods_mod_info.GOODS_NAME}" />
               </a>
-              <a class="remove" href="{COMPARE_DELETE_URL}?id={goods_mod_info.GOODS_MOD_ID}" title="Убрать из таблицы сравнения"><i class="icon-close"></i></a>
+              <a class="remove" href="{COMPARE_DELETE_URL}?id={goods_mod_info.GOODS_MOD_ID}" title="Убрать из таблицы сравнения"><i class="material-icons">filter_alt</i></a>
             </div>
           </div>
         {% ENDFOR %}
@@ -94,13 +94,13 @@
               <div class="actions">
                 <!-- Добавление товара в корзину -->
                 {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods_mod_info.REST_VALUE=0 %}
-                  <a class="add-notify button button2" title="Уведомить" data-tooltipOFF="Уведомить" rel="nofollow" data-fancybox data-src="#fancybox__notify" href="javascript:;" data-name="{goods_mod_info.NAME}" data-art="{goods_mod_info.ART_NUMBER}"><i class="icon-notify"></i><span>Уведомить</span></a>
+                  <a class="add-notify button button2" title="Уведомить" data-tooltipOFF="Уведомить" rel="nofollow" data-fancybox data-src="#fancybox__notify" href="javascript:;" data-name="{goods_mod_info.NAME}" data-art="{goods_mod_info.ART_NUMBER}"><i class="material-icons">notifications_active</i><span>Уведомить</span></a>
                 {% ELSE %}
                   {% IF goods_mod_info.COUNT_MODIFICATION > 1 %}
-                  <a class="add-mod button" title="Добавить в корзину &laquo;{goods_mod_info.GOODS_NAME}&raquo;" data-tooltipOFF="В корзину" rel="nofollow" href="{goods_mod_info.URL_PRICE_NOW}" data-prodname="{goods_mod_info.GOODS_NAME}"><i class="icon-cart"></i><span>Купить</span></a>
+                  <a class="add-mod button" title="Добавить в корзину &laquo;{goods_mod_info.GOODS_NAME}&raquo;" data-tooltipOFF="В корзину" rel="nofollow" href="{goods_mod_info.URL_PRICE_NOW}" data-prodname="{goods_mod_info.GOODS_NAME}"><i class="material-icons">shopping_bag</i><span>Купить</span></a>
                   {% ELSE %}
-                  <!--a class="add-cart quick button" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods_mod_info.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods_mod_info.PRICE_NOW_ID}"><i class="icon-cart"></i><span>Купить</span></a-->
-                  <a class="add-cart button" title="Добавить в корзину &laquo;{goods_mod_info.GOODS_NAME}&raquo;" data-tooltipOFF="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods_mod_info.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods_mod_info.PRICE_NOW_ID}"><i class="icon-cart"></i><span>Купить</span></a>
+                  <!--a class="add-cart quick button" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods_mod_info.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods_mod_info.PRICE_NOW_ID}"><i class="material-icons">shopping_bag</i><span>Купить</span></a-->
+                  <a class="add-cart button" title="Добавить в корзину &laquo;{goods_mod_info.GOODS_NAME}&raquo;" data-tooltipOFF="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods_mod_info.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods_mod_info.PRICE_NOW_ID}"><i class="material-icons">shopping_bag</i><span>Купить</span></a>
                   {% ENDIF %}
                 {% ENDIF %}
                 <!-- /END Добавление товара в корзину -->
@@ -142,7 +142,7 @@
           <div class="content owl-carousel">
           {% FOR values %}
             <div class="compare-td compare-td-{goods_attr_list.values.index}">
-              <span>{% IF goods_attr_list.values.VALUE %}{goods_attr_list.values.VALUE}{% ELSE %}<i class="icon-close"></i>{% ENDIF %}</span>
+              <span>{% IF goods_attr_list.values.VALUE %}{goods_attr_list.values.VALUE}{% ELSE %}<i class="material-icons">filter_alt</i>{% ENDIF %}</span>
             </div>
           {% ENDFOR %}
           </div>
@@ -179,7 +179,8 @@
           </div>
         {% ENDIF %}
       {% ELSE %}
-        <!-- Строка с кратким описанием товара покажется, если оно заполнено хотя бы для одной товарной модификации --
+        <!-- Строка с кратким описанием товара покажется, если оно заполнено хотя бы для одной товарной модификации -->
+        <!--
         {% IFNOT GOODS_GOODS_DESC_SHORT_IS_EMPTY_FOR_ALL %}
           <div class="CompareGoodsTableTbodyComparisonLine {% IF GOODS_GOODS_DESC_SHORT_IS_SAME %}same{% ENDIF %}">
             <div class="cell vtop">
@@ -205,15 +206,23 @@
           </div>
         {% ENDIF %}
       {% ENDIF %}
-      <!-- END Строка №9 Описание товара --
-       -->
+      <!-- END Строка №9 Описание товара -->
     </div>
     <!-- END Тело таблицы сравнения товаров -->
     <!-- Управление выбранными строками -->
     <div class="buttons">
-      <a href="#" class="CompareGoodsHideSelected button hide" title="Скрыть выбранные" style="display:none;"><i class="icon-visibility_off"></i><span>Скрыть</span><span class="hide"> выбранные</span></a>  
-      <a href="#" class="CompareGoodsShowAll button" title="Отобразить скрытые" style="display:none;"><i class="icon-visibility"></i><span>Отобразить</span><span class="hide"> скрытые</span></a>
-      <a href="{COMPARE_RESET_URL}" class="button" title="Очистить список сравнения"><i class="icon-close"></i><span>Очистить</span><span class="hide"> список</span></a>
+      <a href="#" class="CompareGoodsHideSelected button hide" title="Скрыть выбранные" style="display:none;">
+        <i class="material-icons">visibility_off</i>
+        <span>Скрыть</span><span class="hide"> выбранные</span>
+      </a>  
+      <a href="#" class="CompareGoodsShowAll button" title="Отобразить скрытые" style="display:none;">
+        <i class="material-icons">visibility</i>
+        <span>Отобразить</span><span class="hide"> скрытые</span>
+      </a>
+      <a href="{COMPARE_RESET_URL}" class="button" title="Очистить список сравнения">
+        <i class="material-icons">close</i>
+        <span>Очистить</span><span class="hide"> список</span>
+      </a>
     </div>
     <!-- END Управление выбранными строками -->
   </div>

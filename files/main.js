@@ -971,7 +971,6 @@ function quickViewMod() {
 			});
 			block.removeClass('productViewQuick');
 			block.addClass('productViewMod');
-			block.find('.productView__addto .add-cart span').text('Добавить в корзину')
 			block.find('.productView__image img').attr('src', block.find('.productView__image img').data('src'))
 			return block;
 		}
@@ -1284,7 +1283,7 @@ function addTo() {
 										'</div>' +
 									'</div>' +
 									'<div class="addto__actions flex">' +
-              			'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><i class="icon-close"></i></a>' +
+              			'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><i class="material-icons">close</i></a>' +
               		'</div>' +
               	'</div>' +
               '</div>' +
@@ -1349,7 +1348,7 @@ function addTo() {
 						//}
 						
 						// Блок Сообщения
-						var textContainer = '<div class="noty__addto flex"><div class="noty__content"><a class="noty__title flex" href="'+ pageUrl +'"><i class="icon-compare"></i><span>'+ textLabel +'</span></a><a class="noty__message" href="'+ pUrl +'">'+ pName +'</a><div class="noty__price price__now '+ pDataChar +'"><span class="num">' + addSpaces(pDataPrice) + '</span></div></div><div class="noty__image flex-center"><img src="'+ pImg +'" /></div></div>';
+						var textContainer = '<div class="noty__addto flex"><div class="noty__content"><a class="noty__title flex" href="'+ pageUrl +'"><i class="material-icons">equalizer</i><span>'+ textLabel +'</span></a><a class="noty__message" href="'+ pUrl +'">'+ pName +'</a><div class="noty__price price__now '+ pDataChar +'"><span class="num">' + addSpaces(pDataPrice) + '</span></div></div><div class="noty__image flex-center"><img src="'+ pImg +'" /></div></div>';
 
 						// Если есть функция, которая отображает сообщения пользователю
 						if(typeof(Noty) == "function") {
@@ -1480,7 +1479,7 @@ function addTo() {
 										'</div>' +
 									'</div>' +
 									'<div class="addto__actions flex">' +
-              			'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"><i class="icon-close"></i></a>' +
+              			'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"><i class="material-icons">close</i></a>' +
               		'</div>' +
               	'</div>' +
               '</div>' +
@@ -1545,7 +1544,7 @@ function addTo() {
 						//}
 
 						// Блок Сообщения Успешно
-						var textContainer = '<div class="noty__addto flex"><div class="noty__content"><a class="noty__title flex" href="'+ pageUrl +'"><i class="icon-favorites"></i><span>'+ textLabel +'</span></a><a class="noty__message" href="'+ pUrl +'">'+ pName +'</a><div class="noty__price price__now '+ pDataChar +'"><span class="num">' + addSpaces(pDataPrice) + '</span></div></div><div class="noty__image flex-center"><img src="'+ pImg +'" /></div></div>';
+						var textContainer = '<div class="noty__addto flex"><div class="noty__content"><a class="noty__title flex" href="'+ pageUrl +'"><i class="material-icons">favorites</i><span>'+ textLabel +'</span></a><a class="noty__message" href="'+ pUrl +'">'+ pName +'</a><div class="noty__price price__now '+ pDataChar +'"><span class="num">' + addSpaces(pDataPrice) + '</span></div></div><div class="noty__image flex-center"><img src="'+ pImg +'" /></div></div>';
 						
 						// Если есть функция, которая отображает сообщения пользователю
 						if(typeof(Noty) == "function") {
@@ -2167,15 +2166,15 @@ function RefreshImageAction(img,num,cnt) {
 function pageGoods() {
 	// Слайдер доп. изображений
 	$('.thumblist .owl-carousel').owlCarousel({
-		items: 3,
-		margin: 20,
+		items: 4,
+		margin: 16,
 		loop: false,
 		rewind: true,
 		lazyLoad: true,
 		dots: false,
-		nav: true,
+		nav: false,
 		navText: [ , ],
-		autoplay: true,
+		autoplay: false,
 		autoplayHoverPause: true,
 		autoHeight: true,
 		smartSpeed: 500,
@@ -2187,32 +2186,33 @@ function pageGoods() {
 		responsive: {
 			0:{items:2},
 			320:{items:2},
-			480:{items:3},
-			641:{items:3},
-			768:{items:2},
-			992:{items:3},
-			1200:{items:3}
+			375:{items:3},
+			480:{items:4},
+			641:{items:5},
+			768:{items:6},
+			992:{items:4},
+			1200:{items:4}
 		}
 	});
 
 	// Функция Сопутствующие товары Слайдер
-	function relatedGoods(){
-		var id = $('.related__goods');
+	function relatedViews(){
+		var id = $('#related-views');
 		var carousel = id.find('.owl-carousel');
-		var buttons = id.find('.products__buttons');
+		var buttons = id.find('.owl-nav');
 		var dots = id.find('.owl-dots');
 		carousel.owlCarousel({
-			items: 5,
+			items: 4,
 			margin: 32,
 			loop: false,
 			rewind: true,
 			lazyLoad: true,
-			nav: false,
-			navContainer: '',
+			nav: true,
+			navContainer: buttons,
 			navText: [ , ],
 			dots: true,
 			dotsContainer: dots,
-			autoHeight: true,
+			autoHeight: false,
 			autoHeightClass: 'owl-height',
 			autoplay: false,
 			autoplayHoverPause: true,
@@ -2228,66 +2228,27 @@ function pageGoods() {
 				480:{items:2},
 				640:{items:2},
 				768:{items:3},
-				992:{items:4},
-				1200:{items:5}
-			},
-			onInitialized: number,
-			onChanged: number,
-			onResize: number,
-			onResized: number
-		});
-
-		// Нумерация страниц
-		function number() {
-			dots.find('.owl-dot').each(function(i){
-				$(this).find('span').text(i+1)
-			});
-			// Скрываем кнопки навигации
-			dots.hasClass('disabled') ? buttons.hide() : buttons.show();
-			// Скрываем не активные элементы навигации
-			var dotActiveIndex = dots.find('.owl-dot.active').index();
-			var dotVisibleStep = 2;
-			var dotPrevActiveIndex = dotActiveIndex - dotVisibleStep;
-			var dotNextActiveIndex = dotActiveIndex + dotVisibleStep;
-
-			dots.find('.owl-dot')
-				.hide()
-				.filter(function(index, item){
-					if(index >= dotPrevActiveIndex &&  index <= dotNextActiveIndex){
-						return true;
-					}
-					return false;
-				})
-				.show()
-				.addClass('show')
-		}
-
-		// Навигация при клике НАЗАД
-		buttons.find('.prev').on('click', function () {
-			carousel.trigger('prev.owl.carousel');
-		});
-
-		// Навигация при клике ВПЕРЕД
-		buttons.find('.next').on('click', function () {
-			carousel.trigger('next.owl.carousel');
+				992:{items:3},
+				1200:{items:4}
+			}
 		});
 	}
-	// Сопутствующие товары Запуск Слайдера
-	relatedGoods();
+	relatedViews();
 
 	// Функция Сопутствующие товары Слайдер
-	function relatedViews(){
-		var id = $('.related__views');
+	function relatedGoods(){
+		var id = $('#related-goods');
 		var carousel = id.find('.owl-carousel');
+		var buttons = id.find('.owl-nav');
 		var dots = id.find('.owl-dots');
 		carousel.owlCarousel({
-			items: 2,
+			items: 4,
 			margin: 16,
 			loop: false,
 			rewind: true,
 			lazyLoad: true,
 			nav: true,
-			navContainer: '',
+			navContainer: buttons,
 			navText: [ , ],
 			dots: true,
 			dotsContainer: dots,
@@ -2306,14 +2267,14 @@ function pageGoods() {
 				320:{items:1, autoHeight: true},
 				480:{items:1},
 				640:{items:2},
-				768:{items:1},
-				992:{items:2},
-				1200:{items:2}
+				768:{items:2},
+				992:{items:3},
+				1200:{items:4}
 			}
 		});
 	}
 	// Сопутствующие товары Запуск Слайдера
-	relatedViews();
+	relatedGoods();
 
 	// Функция показать больше для Отзывов
 	var opinionContent = $('.opinion__content');
@@ -2345,16 +2306,16 @@ function pageGoods() {
 	$('.opinion__add').on('click', function(event){
 		event.preventDefault();
 		if ($(this).hasClass('active')) {
-			$(this).removeClass('active');
+			// $(this).removeClass('active');
 			$('.opinion__addForm').slideUp(600);
 		}else{
-			$(this).addClass('active');
+			// $(this).addClass('active');
 			$('.opinion__addForm').slideDown(600);
 			$('html, body').animate({scrollTop : jQuery('.opinion__addForm').offset().top}, 500);
 		}
 	});
 	// Валидация формы на странице оформления заказа, а так же формы на страницы связи с администрацией
-	$(".opinion__form .button").on('click', function(){
+	$(".opinion__form button").on('click', function(){
 		var form = $(".opinion__form");
 		form.validate({
 			errorPlacement: function(error, element) { }
@@ -2646,7 +2607,18 @@ function goodsModification() {
 				goodsPriceNow.html(modificationPriceNowFormated);
 				goodsPriceNow.attr('data-price', modificationPriceNow);
 				goodsPriceNow.attr('content', modificationPriceNow);
-				$('.related .checkbox__input').each(function(i, checkbox){
+
+				var relatedPriceNow = $('#related-goods .products__total-price');
+				var goodsID = $('[class^="goodsID-"]');
+				if(goodsID.length){
+					relatedPriceNow.html(modificationPriceNowFormated);
+					relatedPriceNow.attr('data-price', modificationPriceNow);
+					relatedPriceNow.attr('content', modificationPriceNow);
+				}else{
+					relatedPriceNow.find('.num').text('0');
+				}
+
+				$('#related-goods .checkbox__input').each(function(i, checkbox){
 					var $checkbox = $(checkbox);
 					var checkboxActive = $checkbox.prop('checked');
 					if(checkboxActive) {
@@ -2664,7 +2636,8 @@ function goodsModification() {
 				if(modificationRestValue>0) {
 					goodsAvailableTrue.show();
 					goodsAvailableFalse.hide();
-					goodsModView.removeClass('empty');
+					goodsModView.removeClass('productView__empty');
+					$('#related-goods').removeClass('empty');
 					goodsModRestValue.html('В наличии');
 					goodsModRestValue.attr('data-value', modificationRestValue);
 					goodsAvailableQty.find('.quantity').attr('max', modificationRestValue);
@@ -2673,7 +2646,8 @@ function goodsModification() {
 				} else {
 					goodsAvailableTrue.hide();
 					goodsAvailableFalse.show();
-					goodsModView.addClass('empty');
+					goodsModView.addClass('productView__empty');
+					$('#related-goods').addClass('empty');
 					goodsModRestValue.html(modificationRestValue);
 					goodsModRestValue.attr('data-value', modificationRestValue);
 					goodsAvailableQty.find('.quantity').attr('max', modificationRestValue);
@@ -2739,20 +2713,52 @@ function goodsModification() {
 		});
 	});
 
+	$('#related-goods .checkbox__input').on('change', function(){
+    let $checkbox = $(this);
+    let modId = $checkbox.data('mod-id');
+    let checkboxActive = $checkbox.prop('checked');
+    if (checkboxActive) {
+      // Создаём инпут с доп товаром
+      var $input = $('<input class="goodsID-' + modId + '">')
+        .attr('type', 'hidden')
+        .attr('name', 'form[goods_mod_id][' + modId + ']')
+        .attr('data-price', $checkbox.data('mod-price'))
+        .val(1);
+      $('.productView__form').append($input);
+      // Пересчёт цены
+      changePrice($checkbox, checkboxActive);
+      $(this).parent().addClass('added');
+    } else {
+      // Удаляем  доп товар
+      $('.productView__form').find('input[name="form[goods_mod_id][' + modId + ']"]').remove();
+      // Пересчёт цены
+      changePrice($checkbox, checkboxActive)
+      $(this).parent().removeClass('added');
+    }
+  });
+
 	function changePrice(currentCheckbox, checkboxActive){
 		var $checkbox = currentCheckbox;
 		var checkboxPrice = $checkbox.data('mod-price');
-		var $priceNowBlock = $('.productView__price .price__now');
-		var nowPrice = $priceNowBlock.attr('data-price');
+		var priceNowBlock = $('.productView__price .price__now');
+		var priceNowTotal = $('.products__total-price');
+		var nowPrice = priceNowBlock.attr('data-price');
+		var nowPriceTotal = priceNowTotal.attr('data-price');
 		var newPrice = 0;
+		var newPriceTotal = 0;
 		if (checkboxActive) {
 			newPrice = String(parseInt(nowPrice) + parseInt(checkboxPrice));
-			$priceNowBlock.attr('data-price', parseInt(nowPrice) + parseInt(checkboxPrice))
+			priceNowBlock.attr('data-price', parseInt(nowPrice) + parseInt(checkboxPrice))
+			newPriceTotal = String(parseInt(nowPriceTotal) + parseInt(checkboxPrice));
+			priceNowTotal.attr('data-price', parseInt(nowPriceTotal) + parseInt(checkboxPrice))
 		} else {
 			newPrice = String(nowPrice - checkboxPrice);
-			$priceNowBlock.attr('data-price', parseInt(nowPrice)  - parseInt(checkboxPrice))
+			priceNowBlock.attr('data-price', parseInt(nowPrice) - parseInt(checkboxPrice))
+			newPriceTotal = String(nowPriceTotal - checkboxPrice);
+			priceNowTotal.attr('data-price', parseInt(nowPriceTotal) - parseInt(checkboxPrice))
 		}
-		$priceNowBlock.find('.num').text(addSpaces(newPrice))
+		priceNowBlock.find('.num').text(addSpaces(newPrice))
+		priceNowTotal.find('.num').text(addSpaces(newPriceTotal))
 	}
 }
 
@@ -2981,7 +2987,7 @@ function footerLinksMore(){
 		var t = $(this);
 		// Добавляем кнопку Еще если больше 5 пунктов
 		if(t.find('li').length > 5) {
-			t.append('<li class="show"><a class="footer__links-open" href="javascript:;"><span>Ещё</span><i class="icon-tick_down"></i></a></li>');
+			t.append('<li class="show"><a class="footer__links-open" href="javascript:;"><span>Ещё</span><i class="material-icons">keyboard_arrow_down</i></a></li>');
 		}
 		// Действия при нажатии на кнопку Еще
 		t.find('.footer__links-open').on('click', function(){
@@ -3137,8 +3143,6 @@ function sideNav(){
 
 function mobile(){
 	var content = $('.header__top').html();
-	console.log('content', content)
 	var mobile = $('.mobile');
-	console.log('mobile', mobile)
 	mobile.append(content)
 }

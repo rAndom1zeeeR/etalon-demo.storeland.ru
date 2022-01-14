@@ -1,11 +1,11 @@
 {% IF FORM_NOTICE_IS_GOOD %}
-<div class="noty__body 1-{GOODS_MOD_ID} 2-{GOODS_ID} 3-{GOODS_FROM}">
+<div class="noty__body">
 	{% FOR cart_items %}
 		{% IF cart_items.GOODS_MOD_ID = FORM_GOODS_MOD_ID %}
 			<div class="noty__addto flex" data-id="{cart_items.GOODS_ID}">
 				<div class="noty__content">
 					<a class="noty__title flex" href="{CART_URL}">
-						<i class="icon-cart"></i><span>Добавлено в корзину</span>
+						<i class="material-icons">shopping_bag</i><span>Добавлено в корзину</span>
 					</a>
 					<a class="noty__message" href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}">{cart_items.GOODS_NAME}</a>
 					<div class="noty__price price__now {CURRENCY_CHAR_CODE}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</div>
@@ -23,7 +23,7 @@
 	{% ENDFOR %}
 </div>
 {% ELSE %}
-<div class="noty__body 2">
+<div class="noty__body">
 	<div class="noty__addto">
 		<a class="noty__title flex-center" href="{CART_URL}"><span>Не удалось</span></a>
 		<div class="noty__message"><span>Товар не был добавлен в корзину в связи с отсутствием</span></div>
@@ -68,7 +68,7 @@
 				<div class="addto__actions flex">
 					<!-- Удаление -->
 					<a class="addto__remove remove flex-center" href="{cart_items.ORDER_LINE_DELETE_URL}" data-qty="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" data-id="{cart_items.GOODS_ID}" onclick="removeFromCart($(this))">
-						<i class="icon-close"></i>
+						<i class="material-icons">filter_alt</i>
 					</a>
 				</div>
 			</div>

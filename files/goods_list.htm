@@ -110,7 +110,7 @@
 				<div class="filtersActive__items flex">
 					<div class="filters__open">
 						<a class="filters__icon flex-center" href="javascript:;">
-							<i class="icon-filter"></i>
+							<i class="material-icons">filter_alt</i>
 							<span>Фильтры</span>
 						</a>
 					</div>
@@ -119,7 +119,7 @@
 						<span class="filtersActive__name">{filter_attr_list.NAME}:</span>
 						<span class="filtersActive__value">{filter_attr_list.values.VALUE}</span>
 						<span class="filtersActive__nb">{filter_attr_list.values.NB_GOODS_FILTERED}</span>
-						<span class="filtersActive__remove"><i class="icon-close"></i></span>
+						<span class="filtersActive__remove"><i class="material-icons">close</i></span>
 					</label>
 					{% ENDIF %}{% ENDFOR %}{% ENDFOR %}
 					{% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}
@@ -127,7 +127,7 @@
 						<span class="filtersActive__name">{filter_prop_list.NAME}:</span>
 						<span class="filtersActive__value">{filter_prop_list.values.VALUE}</span>
 						<span class="filtersActive__nb">{filter_prop_list.values.NB_GOODS_FILTERED}</span>
-						<span class="filtersActive__remove"><i class="icon-close"></i></span> 
+						<span class="filtersActive__remove"><i class="material-icons">close</i></span> 
 					</label>
 					{% ENDIF %}{% ENDFOR %}{% ENDFOR %}
 				</div>
@@ -513,8 +513,8 @@
 								href="javascript:;"
 								data-name="{goods.NAME}"
 								data-art="{goods.ART_NUMBER}"
-							>												
-								<i class="icon-notify"></i>
+							>
+								<i class="material-icons">notifications_active</i>
 								<span>Уведомить</span>
 							</a>
 							{% ELSE %}
@@ -524,7 +524,7 @@
 								rel="nofollow"
 								href="{% IF goods.COUNT_MODIFICATION > 1 %}{goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 							>
-								<i class="icon-cart"></i>
+								<i class="material-icons">shopping_bag</i>
 								<span>В корзину</span>
 							</a>
 							{% ENDIF %}
@@ -954,7 +954,7 @@
 		<ol class="pages flex-center unstyled">
 			{% IF GOODS_PAGES_SHOW_FIRST %}
 			<li class="first">
-				<a href="{GOODS_PAGINATE_URL | url_amp}&page=1" title="Первая страница"><span><i class="icon-arrow_left"></i></span></a>
+				<a href="{GOODS_PAGINATE_URL | url_amp}&page=1" title="Первая страница"><span><i class="material-icons">chevron_left</i></span></a>
 			</li>
 			<li class="prev">
 				<a href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_PREVIOUS}" title="Предыдущая страница"><span>{GOODS_PAGES_PREVIOUS}</span></a>
@@ -966,7 +966,7 @@
 				<a href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_NEXT}" title="Следующая страница"><span>{GOODS_PAGES_NEXT}</span></a>
 			</li>
 			<li class="last">
-				<a href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_LAST}" title="Последняя страница"><span><i class="icon-arrow_right"></i></span></a>
+				<a href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_LAST}" title="Последняя страница"><span><i class="material-icons">chevron_right</i></span></a>
 			</li>
 			{% ENDIF %}
 		</ol>

@@ -19,21 +19,18 @@
 									<div class="form__field">
 										<label for="sites_client_person" class="required"><span>Ваше Имя</span><em>*</em></label>
 										<input id="sites_client_person" type="text" name="form[contact][person]" value="{ORDER_FORM_CONTACT_PERSON}" maxlength="100" class="form__input" type="text" placeholder="ФИО *" required/>
-										<i class="icon-user"></i>
 									</div>
 								</div>
 								<div class="form__fields">
 									<div class="form__field">
 										<label for="sites_client_phone" class="required"><span>Телефон</span><em>*</em></label>
 										<input id="sites_client_phone" type="tel" name="form[contact][phone]" value="{ORDER_FORM_CONTACT_PHONE}" maxlength="255" class="form__input form__phone" type="text" placeholder="Телефон *" required/>
-										<i class="icon-phone"></i>
 									</div>
 								</div>
 								<div class="form__fields email">
 									<div class="form__field">
 										<label for="sites_client_email" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}class="required"{% ENDIF %}><span>Ваш E-mail</span><em>*</em></label>
 										<input id="sites_client_email" type="email" name="form[contact][email]" value="{ORDER_FORM_CONTACT_EMAIL}" maxlength="255" class="form__input" type="text" placeholder="Почта" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}required{% ENDIF %}/>
-										<i class="icon-mail"></i>
 									</div>
 								</div>
 								<!-- Если в тарифном плане подключен раздел личного кабинета -->
@@ -46,7 +43,7 @@
 									<input id="sites_client_pass" type="password" name="form[contact][pass]" value="{ORDER_FORM_CONTACT_PASS}" maxlength="50" minlength="6" class="form__input {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}required{% ENDIF %}" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" placeholder="Придумайте пароль *"/>
 									<div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
 									<div id="capslock">
-										<div><i class="icon-warning"></i></div>
+										<div><i class="material-icons">warning</i></div>
 										<div><strong>Caps Lock включен.</strong></div>
 										<div>Пароль может быть введен неверно.</div>
 									</div>
@@ -293,7 +290,7 @@
 							<input class="coupon__code form__input" type="text" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" placeholder="Введите код"/>
 							<a href="javascript:void(0)" class="coupon__button button" title="Применить">
 								<span>Применить</span>
-								<i class="icon-check"></i>
+								<i class="material-icons">check</i>
 							</a>
 							<a href="javascript:void(0)" class="coupon__reset" title="Сбросить"></a>
 						</div>
@@ -405,7 +402,7 @@
 				<div class="addto__actions flex">
 					<!-- Удаление -->
 					<a class="addto__remove remove flex-center" href="{cart_items.ORDER_LINE_DELETE_URL}" data-qty="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" data-id="{cart_items.GOODS_ID}" onclick="removeFromCart($(this))">
-						<i class="icon-close"></i>
+						<i class="material-icons">close</i>
 					</a>
 				</div>
 			</div>

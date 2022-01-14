@@ -36,9 +36,9 @@
 							<div class="cart__actions flex">
 								<div class="cart__qty">
 									<div class="qty flex-center">
-										<a href="javascript:void(0)" class="qty__minus flex-center unselectable" title="Уменьшить"><i class="icon-minus"></i></a>
+										<a href="javascript:void(0)" class="qty__minus flex-center unselectable" title="Уменьшить"><i class="material-icons">remove</i></a>
 										<input type="text" name="form[quantity][{cart_items.GOODS_MOD_ID}]" maxlength="4" value="{cart_items.ORDER_LINE_QUANTITY}" max="{cart_items.GOODS_MOD_REST_VALUE}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" class="cartqty" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off" />
-										<a href="javascript:void(0)" class="qty__plus flex-center unselectable" title="Увеличить"><i class="icon-plus"></i></a>
+										<a href="javascript:void(0)" class="qty__plus flex-center unselectable" title="Увеличить"><i class="material-icons">add</i></a>
 									</div>
 								</div>
 								<div class="cart__price {CURRENCY_CHAR_CODE}">
@@ -49,7 +49,7 @@
 							</div>
 							<!-- Удалить -->
 							<a class="cart__delete flex-center remove" data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="cartDelete($(this))" class="remove">
-								<i class="icon-close"></i>
+								<i class="material-icons">filter_alt</i>
 							</a>
 						</div>
 					</div>
