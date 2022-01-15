@@ -32,17 +32,21 @@
 {% ENDIF %}
 
 <!-- Блок для обновления данных корзины. Не виден пользователю -->
-<div style="display:none;" id="newCartWord">
-	товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}
-</div>
-<div style="display:none;" id="newCartSum">
-	{CART_SUM_NOW | money_format}
-</div>
-<div style="display:none;" id="newCartCount">
-  {CART_COUNT_TOTAL}
-</div>
+<div style="display:none;" id="newCartWord">товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</div>
+<div style="display:none;" id="newCartSum">{CART_SUM_NOW | money_format}</div>
+<div style="display:none;" id="newCartCount">{CART_COUNT_TOTAL}</div>
 <div style="display:none;" id="newCartData">
-	{% IFNOT cart_items_empty %}
+	<div class="addto__total flex {CURRENCY_CHAR_CODE}">
+		<b>Моя корзина</b>
+		<span class="cartCountTotal">
+			<span class="cart__count">{CART_COUNT_TOTAL}</span>
+			<span class="cart__word">товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</span>
+		</span>
+		<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>
+		<a class="removeAll" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
+			<i class="material-icons">disabled_by_default</i>
+		</a>
+	</div>
 	<div class="addto__items">
 		{% FOR cart_items %}
 		<div class="addto__item flex" data-id="{cart_items.GOODS_ID}">
@@ -65,7 +69,7 @@
 						<span class="price__now" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
 					</div>
 				</div>
-				<div class="addto__actions flex">
+				<div class="addto__actions">
 					<!-- Удаление -->
 					<a class="addto__remove remove flex-center" href="{cart_items.ORDER_LINE_DELETE_URL}" data-qty="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" data-id="{cart_items.GOODS_ID}" onclick="removeFromCart($(this))">
 						<i class="material-icons">close</i>
@@ -75,17 +79,9 @@
 		</div>
 		{% ENDFOR %}
 	</div>
-	<div class="addto__total {CURRENCY_CHAR_CODE}">
-		<span class="addto__label">Итого:</span>
-		<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>
-	</div>
-	{% ENDIF %}
 	<div class="addto__empty">В корзине пока ничего нет</div>
-	<div class="addto__buttons flex justify-between">
-		<a class="button5 removeAll" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
-			<span>Очистить</span>
-		</a>
-		<a href="{CART_URL}" class="button-primary" title="Перейти в Корзину"><span>В корзину</span></a>
+	<div class="addto__buttons">
+		<a href="{CART_URL}" class="button-primary" title="Перейти в Корзину"><span>Перейти в корзину</span></a>
 	</div>
 </div>
 
@@ -95,4 +91,5 @@ $('.cart__word').html($('#newCartWord').html());
 $('.cartSumNow').html($('#newCartSum').html());
 $('.cart__count').html($('#newCartCount').html());
 $('.cart__count').attr('data-count', $('#newCartCount').html());
+$('.addto__cart').html($('#newCartData').html());
 </script>

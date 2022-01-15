@@ -32,7 +32,7 @@
 .noty_type__warning a, .noty_type__warning a:visited, .noty_type__warning a:focus, .noty_type__warning a:hover {}
 /*** Страница: Ajax добавление товара в корзину ***/
 .noty_layout {border-radius: 3rem;}
-.noty__addto {padding: 1rem;}
+.noty__addto {padding: 2rem;}
 .noty__addto i {font-size: 1.5rem;margin-right: 1rem;}
 .noty_type__success .noty__addto {background-color: #f5f5f5;}
 .noty_type__warning .noty__addto {background-color: #f5f5f5;}

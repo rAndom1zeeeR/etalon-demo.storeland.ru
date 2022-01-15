@@ -489,14 +489,25 @@
 								<span>Уведомить</span>
 							</a>
 							{% ELSE %}
-							<a class="button-primary {% IF goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+							<a class="{% IF goods.NB_GOODS_IN_CART %}button flex justify-between{% ELSE %}button-primary{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
 								title="Добавить в корзину &laquo;{goods.NAME}&raquo;"
 								data-tooltipOFF="В корзину"
 								rel="nofollow"
 								href="{% IF goods.COUNT_MODIFICATION > 1 %}{goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 							>
 								<i class="material-icons">shopping_bag</i>
-								<span>В корзину</span>
+								<span class="inCart__label-add">В корзину</span>
+								<span class="inCart__block">
+									<span class="inCart__label">В корзине</span>
+									<span class="inCart__count">{goods.NB_GOODS_IN_CART}</span>
+								</span>
+								<span class="inCart__add">
+									<span>+ 1</span>
+									{% FOR mods %}
+									{% IF goods.mods.index > 1 %}{continue}{% ENDIF %}
+									<span class="inCart__measure">{goods.mods.MEASURE_NAME}.</span>
+									{% ENDFOR %}
+								</span>
 							</a>
 							{% ENDIF %}
 						</div>

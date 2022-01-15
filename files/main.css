@@ -341,12 +341,12 @@ h6 {font-size: 0.875rem;}
 /*** Выпадающее обхекты ***/
 /**************************************/
 .dropdown {position: relative;}
-.dropdown__content {display: none;min-width: 12rem;max-width: 28rem;margin-top: -1px;padding: 2rem;right: 0;top: 3rem;height: auto;background: #3babeb;border: .25rem solid #0a84c9;position: absolute;z-index: 11;transition: all 0.3s ease-in-out;}
-.opened .dropdown__content, .dropdown__content.opened {display: block;}
+.dropdown__content {transform: scale(1,0);min-width: 12rem;max-width: 28rem;padding: 1rem;right: 0;top: 3rem;height: auto;background: #ffffff;border: .25rem solid #0a84c9;position: absolute;z-index: 11;transition: all 0.3s ease-in-out;}
+.opened .dropdown__content, .dropdown__content.opened {transform: scale(1);}
 .dropdown__open {position: relative;cursor: pointer;}
 @media all and (min-width: 768px) {
 	.dropdown .dropdown__open:before {content: "";right: 0;bottom: -4rem;height: 5rem;width: 100%;display: block;position: absolute;}
-	.dropdown:hover .dropdown__content {display: block;}
+	.dropdown:hover .dropdown__content {transform: scale(1);}
 }
 @media (max-width: 479.98px) {
 	.dropdown__content {width: 18rem;padding: 1rem;}
@@ -567,24 +567,27 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 .addto__title {display: none;font-size: 1.25rem;font-weight: bold;margin-bottom: 2rem;}
 .addto__empty {font-size: 1.25rem;font-weight: bold;margin: 1rem 0;}
-.addto__items {max-height: 14rem;overflow-y: auto;}
-.addto__item {margin-top: 1rem;transition: all 0.3s ease;align-items: stretch;}
-.addto__image {width: 6rem;height: 6rem;}
-.addto__content {width: calc(100% - 6rem);}
-.addto__info {padding: .75rem 1rem;width: calc(100% - 2rem);}
-.addto__name {max-height: 2.25rem;overflow: hidden;display: block;}
-.addto__price {margin-top: .75rem;}
-.addto__mod {display: none;}
+.addto__items {max-height: 22.5rem;overflow-y: auto;}
+.addto__item {margin-bottom: 1rem;padding-bottom: 1rem;border-bottom: 1px solid #d7d7d7;transition: all 0.3s ease;align-items: stretch;}
+.addto__image {width: 5rem;height: 5rem;}
+.addto__content {width: calc(100% - 5rem);}
+.addto__info {padding: .0 1rem;width: calc(100% - 2rem);display: flex;flex-direction: column;}
+.addto__name {order: 2;font-size: 1rem;max-height: 2.25rem;overflow: hidden;display: block;}
+.addto__price {margin-bottom: .75rem;order: 1;}
+.addto__mod {order: 3;color: #868686;font-size: .75rem;margin-top: .75rem;}
 .addto__actions {flex-direction: column;}
 .addto__remove {width: 2rem;height: 2rem;}
 .addto__qty {font-size: 1rem;}
-.addto__total {display: none;}
+.addto__total {color: #868686;border-bottom: 1px solid #d7d7d7;padding-bottom: .5rem;margin-bottom: 1rem;}
+.addto__total b {color: #272727;margin-right: 1rem;}
+.addto__total .price__now {font-size: 1rem;margin-left: .5rem;}
+.addto__total .removeAll {flex-grow: 1;text-align: right;}
 .addto__separator {margin: 0 .25rem;}
 .has-items .addto__title {display: block;}
 .has-items .addto__empty {display: none;}
-.addto__buttons {display: none;padding: .875rem 1rem;}
+.addto__buttons {display: none;}
 .has-items .addto__buttons {display: flex;}
-.addto__buttons .button-primary {padding: 0 3rem;}
+.addto__buttons .button-primary {padding: 0 2rem;width: 100%;}
 .login .addto__buttons {margin-top: 2rem;}
 .login .form__text {margin-bottom: 2rem;}
 @media (max-width: 479.98px) {
@@ -713,7 +716,7 @@ h6 {font-size: 0.875rem;}
 /*** Меню ***/
 /**************************************/
 #menu {background-color: #3babeb;border-bottom: .25rem solid #0a84c9;}
-#menu .mobile {display: none;padding: .25rem 0;}
+#menu .mobile {display: none;padding: .625rem 0;}
 /** Меню. Каталог **/
 .catalog__icon {padding: 0 1rem;color: #ffffff;}
 @media all and (min-width: 992px) {
@@ -733,11 +736,12 @@ h6 {font-size: 0.875rem;}
 #menu .mainnav__list-link span:after {content: '';position: absolute;bottom: -1rem;left: 0;width: 0%;height: .25rem;background-color: #272727;transition: all 0.3s ease;}
 #menu .mainnav__list-link:hover span:after, #menu .mainnav__list-link.active span:after {width: 100%;}
 #menu .mainnav__list-link:hover, #menu .mainnav__list-link.active {color: #272727;}
-
+#menu .overflowMenu .mainnav__list-link {color: #272727;}
 #menu .mainnav__more i {margin-left: .5rem;font-size: 1rem;vertical-align: middle;}
 
 /** Меню. Корзина **/
 #menu .cart {width: 10rem;}
+.cart .dropdown__content {width: 25rem;}
 .cart__icon {color: #ffffff;background-color: #f7aa9d;font-weight: bold;display: flex;padding: 0 .5rem;}
 .cart__icon:hover {color: #ffffff;background-color: #0a84c9;border-color: #0a84c9;}
 .cart__icon span {margin-left: .25rem;}
@@ -878,9 +882,16 @@ h6 {font-size: 0.875rem;}
 .product__price {margin-bottom: 1rem;}
 .product__price .price__now {font-size: 1rem;margin-right: .5rem;}
 .product__price .price__old {font-size: .75rem;}
+.product__addCart {height: 3rem;overflow: hidden;}
 .product__addCart a {width: 100%;}
 .product__addCart a i {display: none;}
 .product__addCart a span {display: inline-block;}
+.inCart .product__addCart .button {padding: 0;display: flex;}
+.product__addCart .inCart__block {display: none;flex-grow: 1;}
+.product__addCart .inCart__add {display: none;background-color: #f7aa9d;padding: 0 .5rem;}
+.inCart .product__addCart .inCart__label-add {display: none;}
+.inCart .product__addCart .inCart__block {display: inline-block;flex-grow: 1;}
+.inCart .product__addCart .inCart__add {display: inline-block;background-color: #f7aa9d;padding: 0 .5rem;}
 @media (max-width: 991.98px) {
 	.product__item {width: 33.333333%;}
 	.product__item:nth-child(n+4) {margin-top: 2rem;}
@@ -986,7 +997,6 @@ h6 {font-size: 0.875rem;}
 #pdt__sales .product__first .product__name {text-align: center;margin-bottom: 1rem;}
 #pdt__sales .product__first .product__price {margin-bottom: 1rem;}
 #pdt__sales .product__first .product__addCart {margin-right: .75rem;}
-#pdt__sales .product__first .product__addCart a {color: #ffffff;line-height: 3rem;}
 #pdt__sales .product__first .product__shop {text-align: center;padding: 0;}
 #pdt__sales .product__first .product__links {justify-content: center;}
 #pdt__sales .product__first .price__now {font-size: 1.5rem;}

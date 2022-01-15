@@ -1201,10 +1201,18 @@ function addCart() {
 						}).show();
 					}
 					// Добавляем активный класс если товар успешно добавился в корзину
-					t.addClass("inCart");
-					$('.product__item[data-id="' + id + '"]').each(function(){
-						$(this).addClass("inCart");
-						console.log('inCart added class', $(this))
+					function inCart(item){
+						item.addClass("inCart");
+						item.find('.product__addCart a').removeClass('button-primary').addClass('button flex justify-between')
+						var count = item.find('.inCart__count');
+						var newCount = parseInt(count.text()) + 1;
+						count.text(newCount)
+					}
+					// Запуск функции для выбранного товара
+					inCart(t);
+					// Запуск функции для товара в других категориях
+					$('.products__gridBig .product__item[data-id="' + id + '"]').each(function(){
+						inCart($(this))
 					});
 				}
 				// Скрытое обновление корзины
