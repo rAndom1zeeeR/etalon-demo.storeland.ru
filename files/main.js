@@ -1274,7 +1274,7 @@ function addTo() {
 					if(flag == 0){
 						$('.addto__compare .addto__items').prepend('' +
               '<div class="addto__item flex" data-id="'+ pDataid +'">' +
-								'<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image flex-center"><img src="'+ pImg +'" class="goods-image-icon" /></a>' +
+								'<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image flex-center"><img src="'+ pImg +'" /></a>' +
 								'<div class="addto__content flex">' +
 									'<div class="addto__info">' +
 										'<a href="'+ pUrl +'" class="addto__name" title="'+ pName +'"><span>'+ pName +'</span></a>' +
@@ -1470,7 +1470,7 @@ function addTo() {
 					if(flag == 0){
 						$('.addto__favorites .addto__items').prepend('' +
               '<div class="addto__item flex" data-id="'+ pDataid +'">' +
-								'<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image flex-center"><img src="'+ pImg +'" class="goods-image-icon" /></a>' +
+								'<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image flex-center"><img src="'+ pImg +'" /></a>' +
 								'<div class="addto__content flex">' +
 									'<div class="addto__info">' +
 										'<a href="'+ pUrl +'" class="addto__name" title="'+ pName +'"><span>'+ pName +'</span></a>' +

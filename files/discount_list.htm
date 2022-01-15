@@ -4,28 +4,33 @@
 <!-- Список акций -->
 <div class="products__container">
 	<div class="row">
-	  <div class="products__grid promotion__grid">
+	  <div class="products__grid promotion__grid flex">
 	  {% FOR promotion_campaign %}
 	  <div class="promotion__item product__item {% IFNOT promotion_campaign.IS_WORK %}promotion__empty{% ENDIF %}" data-id="{promotion_campaign.ID}">
 			<div class="product__form-{promotion_campaign.ID}">
-				<div class="promotion__percentage">
-					<span>- {promotion_campaign.PERCENTAGE}%</span>
-				</div>
-				<a class="promotion__name" href="{promotion_campaign.URL | url_amp}" title="{promotion_campaign.NAME}">
-					<span>{promotion_campaign.NAME}</span>
-				</a>
-				<div class="promotion__date">
-					{% IF promotion_campaign.IS_WORK %}
-					<span>Действует</span>
-					<span>с {promotion_campaign.BEGINNING_TIME | date('d.m.Y')}</span>
-					<span>по {promotion_campaign.EXPIRED_TIME | date('d.m.Y')}</span>
-					{% ELSE %}
-					<span>Акция закончилась</span>
+				<div class="promotion__top flex">
+					<a class="promotion__name" href="{promotion_campaign.URL | url_amp}" title="{promotion_campaign.NAME}">
+						<span>{promotion_campaign.NAME}</span>
+					</a>
+					{% IF promotion_campaign.DESCRIPTION_SHORT %}
+					<div class="promotion__desc">
+						<span>{promotion_campaign.DESCRIPTION_SHORT}</span>
+					</div>
 					{% ENDIF %}
 				</div>
-				<a class="promotion__more" href="{promotion_campaign.URL | url_amp}" title="{promotion_campaign.NAME}">
-					<span>Подробнее</span>
-				</a>
+				<div class="promotion__bottom flex">
+					<div class="promotion__percentage">
+						<span>-{promotion_campaign.PERCENTAGE}%</span>
+					</div>
+					<div class="promotion__date">
+						<i class="material-icons">timer</i>
+						{% IF promotion_campaign.IS_WORK %}
+						<span>До {promotion_campaign.EXPIRED_TIME | date('d.m.Y')}</span>
+						{% ELSE %}
+						<span>Акция закончилась</span>
+						{% ENDIF %}
+					</div>
+				</div>
 			</div>
 	  </div>
 	  {% ENDFOR promotion_campaign %}
