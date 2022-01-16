@@ -172,7 +172,7 @@ button:hover, .button:hover, [class^="button-"]:hover, .paymentFormSubmitLink:ho
 .product__ico {color: #ffffff;z-index: 2;position: absolute;bottom: .5rem;left: .5rem;}
 .product__ico label {display: none;}
 .product__ico span {font-size: .75rem;margin: 0 .25rem;padding: .25rem .5rem;line-height: 1;text-align: center;}
-.ico__sales {background: #fa7761;}
+.ico__sales {color: #fa7761;}
 .ico__sale {background: #fa7761;}
 .ico__sale:before {content: 'Скидка';}
 .ico__best {background: #00b29c;}
@@ -1366,7 +1366,7 @@ h6 {font-size: 0.875rem;}
 .productView .ratings__label {margin-left: 1rem;}
 .productView__available {display: none;}
 .productView__inner {margin-bottom: 1.5rem;}
-.productView__price {padding: 1.5rem 0;border: 1px solid #d7d7d7;border-left: 0;border-right: 0;}
+.productView__price {margin-bottom: 1.5rem;padding: 1.5rem 0;border: 1px solid #d7d7d7;border-left: 0;border-right: 0;}
 .productView__price .price__now {font-size: 1.5rem;font-weight: bold;}
 .productView__price .price__old {margin-left: .75rem;}
 .productView__campaign {margin-left: 1.5rem;}
@@ -1517,8 +1517,8 @@ h6 {font-size: 0.875rem;}
 .productViewMod .productView__inner {display: none;}
 .productViewMod .productView__links {display: none;}
 .productViewMod .productView__offers {display: none;}
-.productView__form {padding: 0;border: 0;}
-.productView__price {border-top: 0;}
+.productViewMod .productView__form {padding: 0;border: 0;}
+.productViewMod .productView__price {border-top: 0;}
 
 
 /**************************************/
@@ -1564,9 +1564,10 @@ h6 {font-size: 0.875rem;}
 .cart__content {width: calc(100% - 5rem);padding-left: 1rem;}
 .cart__name {display: block;margin-bottom: .5rem;}
 .cart__art, .cart__prop {font-size: .75rem;color: #868686;margin-top: .25rem;}
-.cart__price {width: 10rem;padding: 0 1rem 0 2rem;}
+.cart__price {width: 12rem;padding: 0 1rem 0 2rem;}
 .cart__price .price__now {display: block;}
-.cart__info {width: calc(100% - 10rem - 7.125rem - 1.5rem);}
+.cart__price .ico__sales {margin-top: .5rem;}
+.cart__info {width: calc(100% - 12rem - 7.125rem - 1.5rem);}
 /*** Корзина. Итоговый блок ***/
 .cartTable {width: calc(100% - 20rem);padding-right: 2rem;}
 .cartTotal {width: 20rem;position: sticky;top: 0;}
@@ -1589,6 +1590,7 @@ h6 {font-size: 0.875rem;}
 	.cart__price .price__now {display: inline-block;margin-right: 1rem;}
 }
 @media (max-width: 639.98px) {
+	.cart__price {padding: 0 1rem;}
 	.cart__price .price__now {display: block;margin-right: 0;}
 }
 @media (max-width: 479.98px) {

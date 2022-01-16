@@ -1066,24 +1066,26 @@ function quickViewShowMod(href, atempt) {
 }
 
 // Разница в цене в процентах %
-function priceDiff() {
-	var old = parseFloat($('.productView .price__old .num').text().replace(' ',''));
-	var now = parseFloat($('.productView .price__now .num').text().replace(' ',''));
-	var diff = 0;
-	if(old > now){
-		diff = (((old - now)/old)*100).toFixed();
-		$('.productView .ico__sales').text('-' + diff + '%');
-	}else{
-		$('.productView .ico__sales').hide();
-	}
+function priceDiff(obj) {
+	// var obj = $('.productView');
+	// var priceOld = parseFloat(obj.find('.price__old .num').text().replace(' ',''));
+	// var priceNow = parseFloat(obj.find('.price__now .num').text().replace(' ',''));
+	// var diff = 0;
+	// if(priceOld > priceNow){
+	// 	diff = (((priceOld - priceNow)/priceOld)*100).toFixed();
+	// 	obj.find('.ico__sales').text('-' + diff + '%');
+	// }else{
+	// 	obj.find('.ico__sales').hide();
+	// }
 
-	$('.product__item').each(function(){
+	$(obj).each(function(){
 		var old = parseFloat($(this).find('.price__old .num').text().replace(' ',''));
 		var now = parseFloat($(this).find('.price__now .num').text().replace(' ',''));
 		var diff = 0;
 		if(old > now){
-			diff = (((old - now)/old)*100).toFixed();
-			$(this).find('.ico__sales').text('-' + diff + '%');
+			diffPercent = (((old - now)/old)*100).toFixed();
+			diff = (old - now).toFixed();
+			$(this).find('.ico__sales .num').text(addSpaces(diff));
 		}else{
 			$(this).find('.ico__sales').hide();
 		}
@@ -3056,7 +3058,9 @@ $(document).ready(function(){
 $(document).ready(function(){
 	quickViewMod();
 	goodsModRest();
-	priceDiff();
+	// priceDiff('.productView');
+	// priceDiff('.product__item');
+	priceDiff('.cart__item');
 	addCart();
 	addTo();
 	// Добавление товара в корзину
