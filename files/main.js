@@ -792,7 +792,7 @@ function pdtNew(){
 		nav: true,
 		navContainer: buttons,
 		navText: [ , ],
-		dots: true,
+		dots: false,
 		dotsContainer: dots,
 		autoHeight: true,
 		autoHeightClass: 'owl-height',
@@ -2275,9 +2275,9 @@ function pageGoods() {
 			responsive: {
 				0:{items:1, autoHeight: true},
 				320:{items:1, autoHeight: true},
-				480:{items:1},
+				480:{items:2},
 				640:{items:2},
-				768:{items:2},
+				768:{items:3},
 				992:{items:3},
 				1200:{items:4}
 			}

@@ -925,8 +925,8 @@ h6 {font-size: 0.875rem;}
 .products__listSmall .product__links {position: relative;top: auto;right: auto;}
 .products__listSmall .product__links a span {display: none;}
 .products__listSmall .product__links a + a {margin: 0 0 0 .5rem;}
-.products__listSmall .product__name {height: auto;margin-bottom: 1rem;}
-.products__listSmall .product__price {margin-bottom: 1rem;}
+.products__listSmall .product__name {height: auto;max-height: 3.5rem;}
+.products__listSmall .product__price {margin-bottom: .5rem;}
 .products__listSmall .price__now {font-size: 1rem;}
 .products__listSmall .price__old {font-size: .75rem;}
 
@@ -1035,7 +1035,7 @@ h6 {font-size: 0.875rem;}
 .sidebar__content {border: 2px solid #ececec;border-top: 0;padding: 0 1rem;}
 /*** Сайдбар. Адаптивность ***/
 @media (max-width: 1199.98px) {
-	.index .main__left {display: flex;flex-wrap: wrap;}
+	.index .main__left {display: flex;flex-wrap: wrap;align-items: stretch;}
 	.main__left {display: none;}
 	.sidebar__block.catalog {display: none;}
 	.sidebar__block {width: 32%;}
@@ -1064,6 +1064,7 @@ h6 {font-size: 0.875rem;}
 /*** Сайдбар. Новинки ***/
 #pdt__new .product__item {padding: .925rem 0;margin: 0;border: 0;border-top: 1px solid #d7d7d7;}
 #pdt__new .product__item:first-child {border-top: 0;}
+#pdt__new .product__name {height: 2.25rem;}
 /*** Новинки. Адаптивность ***/
 @media (max-width: 991.98px) {
 	#pdt__new .product__item {width: 50%;}
@@ -1087,7 +1088,8 @@ h6 {font-size: 0.875rem;}
 .banner__counter > div label {display: block;font-size: .75rem;}
 /*** Баннер. Адаптивность ***/
 @media (max-width: 1199.98px) {
-	#banner {margin: 0 2rem;width: calc(36% - 4rem);}
+	#banner {margin: 0 2rem 2rem 2rem;width: calc(36% - 4rem);}
+	.banner__image {height: 100%;}
 }
 @media (max-width: 991.98px) {
 	#banner {width: 100%;margin: 0 0 2rem 0;}
@@ -1126,11 +1128,11 @@ h6 {font-size: 0.875rem;}
 
 /*** Сайдбар. Новости ***/
 .news__item {width: 100%;border: 0;padding: .5rem 0;border-top: 1px solid #d7d7d7;}
-.news__image {height: 9rem;margin-bottom: 1rem;position: relative;}
+.news__image {height: 9rem;margin-bottom: .5rem;position: relative;}
 .news__date {padding: .25rem .5rem;color: #ffffff;background-color: #fa7761;font-family: 'Lato', sans-serif;display: inline-block;}
 #news .news__date {left: .5rem;bottom: .5rem;position: absolute;}
 .news__desciprion {display: none;}
-.news__title {margin-bottom: 1rem;max-height: 4rem;overflow: hidden;display: block;}
+.news__title {margin-bottom: .5rem;height: 3.5rem;overflow: hidden;display: block;}
 .news__button {color: #3babeb;}
 .news__button i {vertical-align: middle;}
 /*** Новости. Адаптивность ***/
@@ -1426,10 +1428,10 @@ h6 {font-size: 0.875rem;}
 .productView__offers .offers__content {padding: 0 .75rem;}
 @media (max-width: 1199.98px) {
 	.productView__offers .offers__item {margin-bottom: 1rem;}
-	.productView__offers .offers__item:last-child {margin-bottom: 0;}
 }
 @media (max-width: 479.98px) {
 	.productView__offers .offers__item {width: 100%;}
+	.productView__offers .offers__item:last-child {margin-bottom: 0;}
 }
 
 /** Товар. Табы **/
@@ -1498,11 +1500,17 @@ h6 {font-size: 0.875rem;}
 #related-goods .products__grid {width: calc(75% + 1rem);}
 #related-goods .product__item {background-color: #ffffff;}
 #related-goods .product__checkbox {position: absolute;top: .5rem;right: .5rem;}
+#related-goods.empty .product__checkbox {display: none;}
 #related-goods.empty .button-primary {display: none;}
-.products__total {width: calc(25% - 2rem);margin-right: 1rem;background-color: #ececec;padding: 1.5rem;flex-direction: column;}
+#related-goods.empty .products__total {display: none;}
+.products__total {width: calc(25% - 2rem);margin-right: 1rem;padding: 1.5rem;background-color: #ececec;flex-direction: column;}
 .products__total-label {font-size: 1rem;margin-bottom: 1rem;}
 .products__total-price {display: block;margin-bottom: 2rem;}
 .products__total a {padding: 0 2rem;}
+@media (max-width: 991.98px) {
+	#related-goods .products__grid {width: 100%;}
+	.products__total {width: 100%;margin-bottom: 2rem;}
+}
 
 
 /**************************************/
