@@ -486,14 +486,20 @@ function closeAll() {
 	$('div, a, form, span, nav').removeClass('opened');
 	$('.overflowMenu').removeClass('active');
 	$('.search__reset').click();
+	$('#overlay').click();
 	setTimeout(function () {
 		$('#overlay').removeClass('transparent');
 		$('.search__reset').click();
+		$('#overlay').click();
 	},100)
+	setTimeout(function () {
+		$('#overlay').click();
+		console.log('overlay')
+	},200)
 }
 
 // Закрытие всего при нажатии на темную часть
-$('#overlay').on('click', function(e){
+$('#overlay').on('click', function(event){
 	event.preventDefault();
 	if($(this).hasClass('opened')){
 		closeAll();
@@ -539,38 +545,14 @@ function openMenu() {
     }
   });
 
-  // Открытие Меню
-  $('.menu__icon').on('click', function (event){
-    event.preventDefault();
-		$(this).parent().find('.header__block-hidden').prepend('<div class="preloader small"><div class="loading"></div></div>');
-		$(this).toggleClass('opened');
-		$(this).parent().toggleClass('opened');
-		$(this).parent().find('.header__block-hidden').toggleClass('opened');
-		preload();
-		$('#overlay').toggleClass('opened');
-  });
-
   // Открытие Поиск
-  $('.search__icon').on('click', function (event){
+  $('.catalog__icon').on('click', function (event){
     event.preventDefault();
 		$(this).toggleClass('opened');
 		$(this).parent().toggleClass('opened');
-		$(this).parent().find('.header__block-hidden').toggleClass('opened');
 		$('#overlay').toggleClass('opened');
   });
 
-  // // Открытие поиска
-  // $('.search__icon.button').on('click', function (event) {
-  //   event.preventDefault();
-  //   $(this).parent().toggleClass('opened');
-  //   $('#overlay').addClass('opened');
-  // });
-
-  // Имитация клика по каталогу в меню
-  // $('.mainnav__catalog').on('click', function (event){
-  //   event.preventDefault();
-  //   $('.catalog__icon').click();
-  // });
 }
 
 // Дополнительные пункты меню в шапке Перенос пунктов меню
@@ -2040,9 +2022,9 @@ function catalog() {
 		$(this)[0].form.submit();
 	});
 
-	$('.filtersActive input').on('click', function(){
-		$(this)[0].form.submit();
-	});
+	// $('.filtersActive input').on('click', function(){
+	// 	$(this)[0].form.submit();
+	// });
 
 	// Боковое меню сохранение открытой вложенности
 	$('.collapsible:not(".active")').find('.collapsible__content').css('display', 'none');
@@ -2129,7 +2111,7 @@ function priceFilter() {
 	}
 	
 	// Фильтры открыть
-	$('.filters__open').on('click', function (event) {
+	$('.filters__icon').on('click', function (event) {
 		event.preventDefault();
 		$(this).toggleClass('opened');
 		$('#filters').toggleClass('opened');
@@ -3030,6 +3012,7 @@ $(document).ready(function(){
 	mobile();
 	counterDate();
 	newsCarousel();
+	openCatalog();
   // Ленивая загрузка
   $(function(){
     var observer = lozad(); // lazy loads elements with default selector as '.lozad'
@@ -3157,4 +3140,48 @@ function mobile(){
 	var content = $('.header__top').html();
 	var mobile = $('.mobile');
 	mobile.append(content)
+}
+
+function openCatalog(){
+	// Создаем контейнеры куда будем отправлять наши подкатегории
+	for (var i = 0; i < 4; i++){
+		$('.catalog__subs').append('<div class="catalog__sub catalog__sub-level-'+ i +'" data-level="'+ i +'"></div>')
+	}
+
+	// Сортируем подкатегории по уровням
+	$('.catalog__content .catalog__item').each(function(){
+		var level = $(this).data('level')
+		for (var i = 0; i < 4; i++){
+			if (level == i) {
+				$(this).addClass('level-'+ i +'');
+				$('.catalog__sub-level-'+ i +'').append($(this))
+			}
+			level == '0' ? $(this).addClass('show') : $(this).removeClass('show')
+		}
+	})
+
+	// Отображаем подкатегории при наведении
+	$('.catalog__sub .catalog__item').mouseover(function(){
+		console.log('this', $(this))
+		$('.catalog__sub .catalog__item').removeClass('hover')
+		$(this).addClass('hover')
+		var id = $(this).data('id');
+		var level = $(this).data('level')
+		var next = level + 1;
+		var next2 = level + 2;
+		var prev = next - 1;
+		$('.catalog__sub-level-'+ next +' .catalog__item').each(function(){
+			$('.catalog__sub-level-'+ next +' .catalog__item').removeClass('show')
+			$('.catalog__sub-level-'+ next +' .catalog__item').parent().removeClass('show')
+			$('.catalog__sub-level-'+ next2 +' .catalog__item').removeClass('show')
+			$('.catalog__sub-level-'+ next2 +' .catalog__item').parent().removeClass('show')
+			$('.catalog__sub-level-'+ prev +' .catalog__item').removeClass('hovered')
+			$('.catalog__sub-level-'+ next +' .catalog__item[data-parent="'+ id +'"]').addClass('show')
+			$('.catalog__sub-level-'+ next +' .catalog__item[data-parent="'+ id +'"]').parent().addClass('show')
+			$('.catalog__sub-level-'+ prev +' .catalog__item[data-id="'+ id +'"]').parent().addClass('show')
+			$('.catalog__sub-level-'+ prev +' .catalog__item[data-id="'+ id +'"]').addClass('hovered')
+		})
+		console.log('this2', $(this))
+	})
+	
 }

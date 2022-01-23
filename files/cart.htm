@@ -49,11 +49,12 @@
 									{% ENDIF %}
 									<div class="ico__sales"><span>Скидка </span><span class="num"></span></div>
 								</div>
-								<!-- Удалить -->
-								<a class="cart__delete flex-center remove" data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="cartDelete($(this))" class="remove">
-									<i class="material-icons">close</i>
-								</a>
 							</div>
+							<!-- Удалить -->
+							<a class="cart__delete flex-center remove" data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="cartDelete($(this))">
+								<i class="material-icons">close</i>
+								<span>Удалить</span>
+							</a>
 						</div>
 					</div>
 					{% ENDFOR %}
