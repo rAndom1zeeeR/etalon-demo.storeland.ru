@@ -27,7 +27,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/design/icomoon.css?design=THEMENAME" />
+	<link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+	<!-- <link rel="stylesheet" type="text/css" href="/design/icomoon.css?design=THEMENAME" /> -->
 	<!-- Основные Стили магазина для всех страниц -->
 	<link rel="stylesheet" type="text/css" href="{ASSETS_STYLES_PATH}min.css?design=THEMENAME" />
 	<link rel="stylesheet" type="text/css" href="{ASSETS_STYLES_PATH}jquery.fancybox.min.css?design=THEMENAME" />
@@ -168,7 +169,7 @@
 						<form class="search__form" action="{QUICK_SEARCH_URL}" method="get" title="Поиск по магазину" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
 							<meta itemprop="target" content="{SEARCH_URL}?q={{EMPTY}q}" />
 							<input type="hidden" name="goods_search_field_id" value="0" />
-							<input type="text" name="q" value="{FORM_SEARCH_Q}" class="search__input" placeholder="Искать" autocomplete="off" itemprop="query-input" />
+							<input type="text" name="q" value="{FORM_SEARCH_Q}" class="search__input" placeholder="Поиск по сайту..." autocomplete="off" itemprop="query-input" />
 							<!-- Найти -->
 							<button type="submit" class="search__submit button" title="Искать">
 								<i class="material-icons">search</i>
@@ -271,13 +272,13 @@
 								{% ENDFOR %}
 							</ul>
 							<!-- Меню. Еще -->
-							<ul class="overflowMenu unstyled flex dropdown__content"></ul>
+							<ul class="overflowMenu unstyled dropdown__content"></ul>
 						</nav>
 					</div>
 					<!-- Корзина -->
 					<div class="cart dropdown {% IF CART_COUNT_TOTAL > 0 %}has-items{% ENDIF %}">
 						<a class="button-primary cart__icon flex-center" href="{CART_URL}" title="Перейти в корзину">
-							<i class="material-icons">local_mall</i>
+							<i class="material-icons-two-tone">local_mall</i>
 							<span class="cart__count" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
 							<span class="cartSumNow {CURRENCY_CHAR_CODE}">{CART_SUM_NOW | money_format}</span>
 						</a>
@@ -309,7 +310,7 @@
 													<span>{cart_items.GOODS_NAME}</span>
 												</a>
 												{% IFNOT cart_items.distinctive_properties_empty %}
-												<div class="addto__mod">({% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %}, {% ENDIF %}{% ENDFOR %})</div>
+												<div class="addto__mod">{% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %}, {% ENDIF %}{% ENDFOR %}</div>
 												{% ENDIF %}
 												<!-- Цена -->
 												<div class="addto__price {CURRENCY_CHAR_CODE}">
@@ -357,7 +358,7 @@
 									<div {% IF catalog_full.HIDE %}style="display:none;" {% ENDIF %} data-level="{catalog_full.LEVEL}" class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}">
 										<a href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}" class="catalog__link flex {% IF catalog_full.CURRENT %}opened{% ENDIF %}">
 											<span class="catalog__name">{catalog_full.NAME}</span>
-											{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="open"></span>{% ENDIF %}
+											{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="open {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}"></span>{% ENDIF %}
 										</a>
 									{% IF catalog_full.ISSET_SUB=0 %}
 									</div>
@@ -470,7 +471,7 @@
 														rel="nofollow"
 														href="{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}{index_page_new_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_new_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_new_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 													>
-														<i class="material-icons">local_mall</i>
+														<i class="material-icons-two-tone">local_mall</i>
 													</a>
 													{% ENDIF %}
 													<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
@@ -1262,7 +1263,7 @@
 															rel="nofollow"
 															href="{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}{index_page_sale_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 														>
-															<i class="material-icons">local_mall</i>
+															<i class="material-icons-two-tone">local_mall</i>
 															{% IF index_page_sale_goods.first %}<span>В корзину</span>{% ENDIF %}
 														</a>
 														{% ENDIF %}
@@ -1513,7 +1514,7 @@
 													rel="nofollow"
 													href="{% IF index_page_goods.COUNT_MODIFICATION > 1 %}{index_page_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 												>
-													<i class="material-icons">local_mall</i>
+													<i class="material-icons-two-tone">local_mall</i>
 													<span>В корзину</span>
 												</a>
 												{% ENDIF %}
@@ -2038,7 +2039,7 @@
 										rel="nofollow"
 										href="{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}{recently_viewed_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={recently_viewed_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={recently_viewed_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 									>
-										<i class="material-icons">local_mall</i>
+										<i class="material-icons-two-tone">local_mall</i>
 									</a>
 									{% ENDIF %}
 									<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
@@ -2205,7 +2206,7 @@
 						{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
 						<!-- Телефон 1 2 3 -->
 						{% IF SETTINGS_STORE_PHONE_NUMBER1 || SETTINGS_STORE_PHONE_NUMBER2 || SETTINGS_STORE_PHONE_NUMBER3 %}
-						<div class="footer__contact flex">
+						<div class="footer__contact phone flex">
 							<div class="footer__contact-icon"><i class="material-icons">phone_in_talk</i></div>
 							<div class="footer__contact-content">
 								<label class="footer__contact-label">Телефоны</label>

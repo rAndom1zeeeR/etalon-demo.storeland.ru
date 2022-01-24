@@ -60,7 +60,7 @@
 						<span>{cart_items.GOODS_NAME}</span>
 					</a>
 					{% IFNOT cart_items.distinctive_properties_empty %}
-					<div class="addto__mod">({% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %}, {% ENDIF %}{% ENDFOR %})</div>
+					<div class="addto__mod">{% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %}, {% ENDIF %}{% ENDFOR %}</div>
 					{% ENDIF %}
 					<!-- Цена -->
 					<div class="addto__price {CURRENCY_CHAR_CODE}">
