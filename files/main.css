@@ -724,7 +724,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 /*** Меню ***/
 /**************************************/
-#menu {background-color: #3babeb;border-bottom: .25rem solid #0a84c9;}
+#menu {background-color: #3babeb;border-bottom: .25rem solid #0a84c9;position: sticky;top: 0;z-index: 10;}
 #menu .mobile {display: none;padding: .625rem 0;}
 #menu .menu__inner {position: relative;}
 /** Меню. Каталог **/
@@ -1636,14 +1636,19 @@ h6 {font-size: 0.875rem;}
 .fancybox-content .productView__shop {width: calc(100% - 20rem);}
 .fancybox-content .productView__name {display: block;}
 .fancybox-content .productView__addto button + button {display: none;}
+.productViewMod {vertical-align: bottom;padding: 1rem;width: 100%;max-width: 1148px;}
+.productViewMod .productView__name {display: none;}
 .productViewMod .productView__images {display: none;}
 .productViewMod .productView__shop {width: 100%;padding: 0;}
 .productViewMod .productView__inner {display: none;}
 .productViewMod .productView__links {display: none;}
 .productViewMod .productView__offers {display: none;}
 .productViewMod .productView__form {padding: 0;border: 0;}
-.productViewMod .productView__price {border-top: 0;}
-
+.productViewMod .productView__price {border-top: 0;display: none;}
+.productViewMod .productView__text {display: none;}
+.productViewMod .productView__addto [class^="button-"] {flex-grow: 1;}
+.productViewMod .productView__addto .num {line-height: 1;display: inline-block;font-size: 1rem;}
+.productViewMod .goodsModificationsBlock {margin-top: 0;}
 
 /**************************************/
 /*** Страница: Акции ***/

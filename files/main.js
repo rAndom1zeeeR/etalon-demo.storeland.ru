@@ -1006,6 +1006,8 @@ function quickViewMod() {
 			block.removeClass('productViewQuick');
 			block.addClass('productViewMod');
 			block.find('.productView__image img').attr('src', block.find('.productView__image img').data('src'))
+			block.find('.productView__addto button span').text('Добавить в корзину за');
+			block.find('.productView__addto button').append(block.find('.productView__price .price__now').html())
 			return block;
 		}
 		// Быстрый просмотр товара
@@ -2651,6 +2653,10 @@ function goodsModification() {
 				goodsPriceNow.html(modificationPriceNowFormated);
 				goodsPriceNow.attr('data-price', modificationPriceNow);
 				goodsPriceNow.attr('content', modificationPriceNow);
+
+				if($('.productViewMod .productView__addto .num').length){
+					$('.productViewMod .productView__addto .num').text(addSpaces(modificationPriceNow));
+				}
 
 				var relatedPriceNow = $('#related-goods .products__total-price');
 				var goodsID = $('[class^="goodsID-"]');
