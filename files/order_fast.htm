@@ -352,6 +352,9 @@
 						<span class="addto__qty">{cart_items.ORDER_LINE_QUANTITY}</span>
 						<span class="addto__separator">x</span>
 						<span class="price__now" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
+						{% IF cart_items.GOODS_MOD_PRICE_OLD > cart_items.GOODS_MOD_PRICE_NOW %}
+						<span class="price__old" data-price="{cart_items.GOODS_MOD_PRICE_OLD}">{cart_items.GOODS_MOD_PRICE_OLD | money_format}</span>
+						{% ENDIF %}
 					</div>
 				</div>
 				<div class="addto__actions">

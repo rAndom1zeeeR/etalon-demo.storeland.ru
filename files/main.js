@@ -271,7 +271,7 @@ function ajaxForms(id,flag,successMessage,errorMessage){
   });
 
   // Валидация при клике
-  form.on('click',function(event){
+  form.on('submit',function(event){
     validName(form);
     validPhone(form);
     validEmail(form);
@@ -427,7 +427,9 @@ function removeFromCart(e){
     e.parent().parent().parent().fadeOut().remove();
     var href = e.attr('href');
     var qty = e.data('qty');
+    var id = e.data('id');
     var oldCount = $('.cart__count').attr('data-count');
+		$('.product__item[data-id="'+ id +'"]').removeClass('inCart')
     $.ajax({
       cache  : false,
       url		 : href,
@@ -472,6 +474,10 @@ function removeFromCartAll(e){
         $('.cart__count').attr('data-count', '0').text("0");
         $('.cart .addto__item').remove();
         $('.cart .preloader').hide();
+				$('.product__item').each(function(){
+					$(this).removeClass('inCart');
+					$(this).find('.inCart__count').text('0');
+				})
       }
     });
   }
@@ -708,7 +714,31 @@ function counterDate() {
 			clearInterval(x);
 			$('.counter').hide();
 		}
+		// Запуск Функции анимации
+		counterAnimate('.banner__counter > div')
+		counterAnimate('.product__counter > div')
 	}, 1000);
+	// Добавляем контент анимации
+	$('.banner__counter > div').append('<svg width="52" height="52"><circle class="svg-figure" stroke-dasharray="151" cx="26" cy="26" r="24" transform="rotate(-90, 26, 26)"/></svg>');
+	$('.product__counter > div').append('<svg width="100%" height="100%"><rect class="svg-figure" stroke-dasharray="255" x="0" y="0" width="100%" height="100%" transform="rotate(0, 32, 32)"/></svg>');
+	// Функция анимации счетчика
+	function counterAnimate(obj){		
+		$(obj).each(function(){
+			var item = $(this).find('.svg-figure');
+			var value = $(this).find('span').text();
+			var limit = item.attr('stroke-dasharray')
+			if ($(this).hasClass('days')){
+				var time = 365;
+			}else if ($(this).hasClass('hours')){
+				var time = 24;
+			}else{
+				var time = 60;
+			}
+			var current = parseInt(value/time * limit)
+			item.attr('stroke-dashoffset', current)
+			item.attr('stroke-dasharray', limit)
+		})
+	}
 }
 
 // Функция показать все для "Товары на главной"
@@ -1953,7 +1983,7 @@ function coupons() {
 				// Получаем новую итоговую стоимость заказа
 				var totalBlock = $(data).closest('#myform').find('.total');
 				var totalSum = totalBlock.find('.total-sum').data('total-sum');
-				var deliveryPrice = parseInt($('.cartSumDelivery .num').text());
+				var deliveryPrice = parseInt($('.cartSumDelivery:eq(0) .num').text());
 				var newTotalSum = totalSum + deliveryPrice;
 				// Записываем название и размер скидки по купону
 				$('.total__coupons .total__label span').html(discountName);
@@ -1998,7 +2028,7 @@ function coupons() {
 			$('.total__coupons').hide();
 			$('.total__discount').show();
 			var cartSum = $('.cartSumDiscount').data('value');
-			var deliveryPrice = parseInt($('.cartSumDelivery .num').text());
+			var deliveryPrice = parseInt($('.cartSumDelivery:eq(0) .num').text());
 			var newTotalSum = cartSum + deliveryPrice;
 			$('.cartSumTotal .num').text(addSpaces(newTotalSum));
 			$('.cartSumTotal').attr('data-value', newTotalSum);

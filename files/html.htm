@@ -189,13 +189,15 @@
 						</form><!-- //END Форма поиска -->
 						<!-- Результаты поиска -->
 						<div id="search__result" style="display: none;">
-							<div class="row">
-								<div class="result__inner flex-start">
-									<div class="result__goods"></div>
-									<div class="result__category"></div>
-									<div class="result__showAll">
-										<span class="button">все результаты</span>
-									</div>
+							<div class="result__inner">
+								<div class="result__category">
+									<div class="result__title">Категории товаров</div>
+								</div>
+								<div class="result__goods">
+									<div class="result__title">Товары</div>
+								</div>
+								<div class="result__showAll">
+									<span>Все результаты</span>
 								</div>
 							</div>
 						</div>
@@ -277,7 +279,7 @@
 					</div>
 					<!-- Корзина -->
 					<div class="cart dropdown {% IF CART_COUNT_TOTAL > 0 %}has-items{% ENDIF %}">
-						<a class="button-primary cart__icon flex-center" href="{CART_URL}" title="Перейти в корзину">
+						<a class="button-primary cart__icon flex-center mitt-white" href="{CART_URL}" title="Перейти в корзину">
 							<i class="material-icons-two-tone">local_mall</i>
 							<span class="cart__count" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
 							<span class="cartSumNow {CURRENCY_CHAR_CODE}">{CART_SUM_NOW | money_format}</span>
@@ -317,6 +319,9 @@
 													<span class="addto__qty">{cart_items.ORDER_LINE_QUANTITY}</span>
 													<span class="addto__separator">x</span>
 													<span class="price__now" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
+													{% IF cart_items.GOODS_MOD_PRICE_OLD > cart_items.GOODS_MOD_PRICE_NOW %}
+													<span class="price__old" data-price="{cart_items.GOODS_MOD_PRICE_OLD}">{cart_items.GOODS_MOD_PRICE_OLD | money_format}</span>
+													{% ENDIF %}
 												</div>
 											</div>
 											<div class="addto__actions">
@@ -1083,10 +1088,9 @@
 													<span class="inCart__label-add">В корзину</span>
 													<span class="inCart__block">
 														<span class="inCart__label">В корзине</span>
-														<span class="inCart__count">{index_page_favorites_goods.NB_GOODS_IN_CART}</span>
 													</span>
 													<span class="inCart__add">
-														<span>+ 1</span>
+														<span class="inCart__count">{index_page_favorites_goods.NB_GOODS_IN_CART}</span>
 														{% FOR mods %}
 														{% IF index_page_favorites_goods.mods.index > 1 %}{continue}{% ENDIF %}
 														<span class="inCart__measure">{index_page_favorites_goods.mods.MEASURE_NAME}.</span>
@@ -1108,39 +1112,43 @@
 							<div class="block__title">
 								<h3 class="title"><span>Как мы работаем?</span></h3>
 							</div>
-							<div class="advantages__items flex-stretch">
-								<div class="advantages__item">
-									<div class="advantages__icon">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#3babeb;stroke-width:4;stroke-miterlimit:10"/></svg>
-										<span>1</span>
+							<div class="advantages__inner">
+								<div class="row">
+									<div class="advantages__items flex-stretch">
+										<div class="advantages__item">
+											<div class="advantages__icon">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#3babeb;stroke-width:4;stroke-miterlimit:10"/></svg>
+												<span>1</span>
+											</div>
+											<div class="advantages__name">Оформление заказа</div>
+											<div class="advantages__text">Вы выбираете товары от проверенных поставщиков</div>
+										</div>
+										<div class="advantages__item">
+											<div class="advantages__icon">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#f7aa9d;stroke-width:4;stroke-miterlimit:10"/></svg>
+												<span>2</span>
+											</div>
+											<div class="advantages__name">Подтверждение заказа</div>
+											<div class="advantages__text">Менеджер согласует Ваш заказ</div>
+										</div>
+										<div class="advantages__item">
+											<div class="advantages__icon">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#3babeb;stroke-width:4;stroke-miterlimit:10"/></svg>
+												<span>3</span>
+											</div>
+											<div class="advantages__name">Оплата заказа</div>
+											<div class="advantages__text">Вы выбираете удобный и безопасный вариант оплаты</div>
+										</div>
+										<div class="advantages__item">
+											<div class="advantages__icon">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#f7aa9d;stroke-width:4;stroke-miterlimit:10"/></svg>
+												<span>4</span>
+											</div>
+											<div class="advantages__name">Доставка заказа</div>
+											<div class="advantages__text">Получите Ваш заказ в магазине, на почте или курьерской службой</div>
+										</div>						
 									</div>
-									<div class="advantages__name">Оформление заказа</div>
-									<div class="advantages__text">Вы выбираете качественные товары от проверенных поставщиков</div>
 								</div>
-								<div class="advantages__item">
-									<div class="advantages__icon">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#f7aa9d;stroke-width:4;stroke-miterlimit:10"/></svg>
-										<span>2</span>
-									</div>
-									<div class="advantages__name">Подтверждение заказа</div>
-									<div class="advantages__text">Менеджер согласует Ваш заказ</div>
-								</div>
-								<div class="advantages__item">
-									<div class="advantages__icon">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#3babeb;stroke-width:4;stroke-miterlimit:10"/></svg>
-										<span>3</span>
-									</div>
-									<div class="advantages__name">Оплата заказа</div>
-									<div class="advantages__text">Вы выбираете удобный и безопасный вариант оплаты</div>
-								</div>
-								<div class="advantages__item">
-									<div class="advantages__icon">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 99" style="enable-background:new 0 0 72 99" xml:space="preserve"><path d="M35.9 79.2c-3-6.1-10.4-8.6-15-10.8C9 62.8.7 50.6.7 36.5.7 17.1 16.6 1.3 36 1.3s35.3 15.8 35.3 35.3c0 14.8-9.2 27.6-22.2 32.8-4.1 1.5-9.6 3.6-13.2 9.8zm.1-66.9c-13.4 0-24.3 10.9-24.3 24.3S22.6 60.9 36 60.9 60.3 50 60.3 36.6 49.4 12.3 36 12.3z"/><circle cx="36" cy="92.1" r="4.3" style="fill:none;stroke:#f7aa9d;stroke-width:4;stroke-miterlimit:10"/></svg>
-										<span>4</span>
-									</div>
-									<div class="advantages__name">Доставка заказа</div>
-									<div class="advantages__text">Получите Ваш заказ в магазине, на почте или курьерской службой</div>
-								</div>						
 							</div>
 						</section>
 
