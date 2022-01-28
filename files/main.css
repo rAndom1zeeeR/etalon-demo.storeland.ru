@@ -168,6 +168,7 @@ button:hover, .button:hover, [class^="button-"]:hover, .paymentFormSubmitLink:ho
 .add-compare:before {content: '\f20c';}
 .add-notify {color: #747474;}
 
+
 /*** Иконки Новинка, Хит, Скидка ***/
 .product__ico {color: #ffffff;z-index: 2;position: absolute;bottom: .5rem;left: .5rem;}
 .product__ico label {display: none;}
@@ -617,7 +618,7 @@ h6 {font-size: 0.875rem;}
 .header__link {color: #868686;font-size: 0.8125rem;}
 .has-items .header__link {color: #272727;}
 .has-items .header__link:hover {color: #fa7761;}
-.header__link i {display: none;}
+.header__link i {display: none;vertical-align: middle;}
 .header__block {padding: 0 2rem;border-left: 1px solid #bebebe;}
 .header__block:first-child {border-left: 0;}
 .header__block:last-child {border-left: 0;padding: 0;}

@@ -104,31 +104,32 @@
 					</div>
 					<!-- ЛК, Войти -->
 					<div class="header__block users">
+						
 						<a class="header__link" href="{USER_LOGIN_URL}" title="Личный кабинет">
 							<i class="material-icons">person_outline</i>
-							<span class="header__label">Вход в ЛК</span>
+							<span class="header__label">{% IF CLIENT_IS_LOGIN %}Личный кабинет{% ELSE %}Вход в ЛК{% ENDIF %}</span>
 						</a>
 					</div>
 					<!-- Почта -->
 					{% IF SETTINGS_STORE_EMAIL_MAIN %}
-					<div class="header__block header__block-mail flex">
-						<div class="header__block-icon"><i class="material-icons">drafts</i></div>
-						<div class="header__block-content">
-							<a class="header__block-link" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+					<div class="header__block header__block-mail">
+						<a class="header__block-link flex mitt" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+							<div class="header__block-icon"><i class="material-icons-two-tone">drafts</i></div>
+							<div class="header__block-content">								
 								<span>{SETTINGS_STORE_EMAIL_MAIN}</span>
-							</a>
-						</div>
+							</div>
+						</a>
 					</div>
 					{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
 					<!-- Телефон 1 -->
 					{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
-					<div class="header__block header__block-phone flex">
-						<div class="header__block-icon"><i class="material-icons">phone_in_talk</i></div>
-						<div class="header__block-content">
-							<a class="header__block-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
+					<div class="header__block header__block-phone">
+						<a class="header__block-link flex mitt" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
+							<div class="header__block-icon"><i class="material-icons">phone_in_talk</i></div>
+							<div class="header__block-content">
 								<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE1} ({SETTINGS_STORE_PHONE_CITY_CODE1}) {SETTINGS_STORE_PHONE_NUMBER1}</span>
-							</a>
-						</div>
+							</div>
+						</a>
 					</div>
 					{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
 				</div>
@@ -2202,8 +2203,8 @@
 						</div>
 						<!-- Почта -->
 						{% IF SETTINGS_STORE_EMAIL_MAIN %}
-						<div class="footer__contact flex">
-							<div class="footer__contact-icon"><i class="material-icons">drafts</i></div>
+						<div class="footer__contact flex mitt">
+							<div class="footer__contact-icon"><i class="material-icons-two-tone">drafts</i></div>
 							<div class="footer__contact-content">
 								<label class="footer__contact-label">Электронная почта</label>
 								<a class="footer__contact-link" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
