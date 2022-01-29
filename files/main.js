@@ -87,7 +87,7 @@ function toTop() {
       $('#toTop').fadeOut();
     }
   });
-  $('.toTop').on('click', function () {
+  $('#toTop').on('click', function () {
     $('body,html').animate({
       scrollTop: 0
     }, 800);
@@ -230,7 +230,7 @@ function ajaxForms(id,flag,successMessage,errorMessage){
             t.find('.form__input').val(' ');
             t.parent().append('<div class="form__text">'+ errorMessage +'</div>');
             new Noty({
-              text: '<div class="noty__addto"><div class="noty__title">Успешно</div><div class="noty__message">' + successMessage + '</div></div>',
+              text: '<div class="noty__addto"><div class="noty__message">' + successMessage + '</div></div>',
               layout:"bottomRight",
               type:"success",
               easing:"swing",
@@ -252,7 +252,7 @@ function ajaxForms(id,flag,successMessage,errorMessage){
         t.find('.form__input').val(' ');
         t.parent().find('.form__text').hide();
         new Noty({
-          text: '<div class="noty__addto"><div class="noty__title">Не удалось</div><div class="noty__message">' + errorMessage + '</div></div>',
+          text: '<div class="noty__addto"><div class="noty__message">' + errorMessage + '</div></div>',
           layout:"bottomRight",
           type:"warning",
           easing:"swing",
@@ -554,6 +554,14 @@ function openMenu() {
 		$(this).toggleClass('opened');
 		$(this).parent().toggleClass('opened');
 		$('#overlay').toggleClass('opened');
+  });
+
+	// Открытие Поиск
+  $('.feedback__title').on('click', function (event){
+    event.preventDefault();
+		$(this).toggleClass('opened');
+		$(this).parent().toggleClass('opened');
+		$(this).parent().find('.feedback__content').slideToggle('slow');
   });
 
 }
@@ -1320,22 +1328,24 @@ function addTo() {
 				},
 				success: function(data) {
 					if(flag == 0){
-						$('.addto__compare .addto__items').prepend('' +
-              '<div class="addto__item flex" data-id="'+ pDataid +'">' +
-								'<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image flex-center"><img src="'+ pImg +'" /></a>' +
-								'<div class="addto__content flex">' +
-									'<div class="addto__info">' +
-										'<a href="'+ pUrl +'" class="addto__name" title="'+ pName +'"><span>'+ pName +'</span></a>' +
-										'<div class="addto__price  '+ pDataChar +'">' +
-											'<div class="price__now"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span> <span>р.</span></span></div>' +
+						if($('.addto__compare').length){
+							$('.addto__compare .addto__items').prepend('' +
+								'<div class="addto__item flex" data-id="'+ pDataid +'">' +
+									'<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image flex-center"><img src="'+ pImg +'" /></a>' +
+									'<div class="addto__content flex">' +
+										'<div class="addto__info">' +
+											'<a href="'+ pUrl +'" class="addto__name" title="'+ pName +'"><span>'+ pName +'</span></a>' +
+											'<div class="addto__price  '+ pDataChar +'">' +
+												'<div class="price__now"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span> <span>р.</span></span></div>' +
+											'</div>' +
+										'</div>' +
+										'<div class="addto__actions flex">' +
+											'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><i class="material-icons">close</i></a>' +
 										'</div>' +
 									'</div>' +
-									'<div class="addto__actions flex">' +
-              			'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><i class="material-icons">close</i></a>' +
-              		'</div>' +
-              	'</div>' +
-              '</div>' +
-						'');
+								'</div>' +
+							'');
+						}
 					}
 					if('ok' == data.status) {
 						if(isAdd == 1) {
@@ -1387,7 +1397,7 @@ function addTo() {
 						// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
 						a.attr('href', a.attr('href').replace(new RegExp(from), to))
 								.attr('title', newTitle)
-								.attr('data-tooltipOFF', newTooltip)
+								.attr('data-tooltip', newTooltip)
 								.attr('data-action-is-add', newIsAddStatus);
 
 						// Если рядом с ссылкой в виде круга есть текстовая надпись с описанием действия
@@ -1401,16 +1411,14 @@ function addTo() {
 						// Если есть функция, которая отображает сообщения пользователю
 						if(typeof(Noty) == "function") {
 							new Noty({
-								text: textContainer,
+								text: '<div class="noty__addto"><div class="noty__message">'+ data.message + '</div></div>',
 								layout:"bottomRight",
 								type:"success",
 								theme:"",
 								closeWith: ['click'],
-								textAlign:"center",
-								easing:"swing",
 								animation: {
-									open: 'animated fadeInUp',
-									close: 'animated fadeOutDown',
+									open: 'animated noty_effects_open',
+									close: 'animated noty_effects_close',
 									easing: 'swing',
 									speed: 400
 								},
@@ -1431,16 +1439,14 @@ function addTo() {
 						// Если есть функция, которая отображает сообщения пользователю
 						if(typeof(Noty) == "function") {
 							new Noty({
-								text: textContainer,
+								text: '<div class="noty__addto"><div class="noty__message">'+ data.message + '</div></div>',
 								layout:"bottomRight",
 								type:"warning",
 								theme:"",
 								closeWith: ['click'],
-								textAlign:"center",
-								easing:"swing",
 								animation: {
-									open: 'animated fadeInUp',
-									close: 'animated fadeOutDown',
+									open: 'animated noty_effects_open',
+									close: 'animated noty_effects_close',
 									easing: 'swing',
 									speed: 400
 								},
@@ -1583,7 +1589,7 @@ function addTo() {
 						// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
 						a.attr('href', a.attr('href').replace(new RegExp(from), to))
 								.attr('title', newTitle)
-								.attr('data-tooltipOFF', newTooltip)
+								.attr('data-tooltip', newTooltip)
 								.attr('data-action-is-add', newIsAddStatus);
 
 						// Если рядом с ссылкой в виде круга есть текстовая надпись с описанием действия
@@ -1597,16 +1603,14 @@ function addTo() {
 						// Если есть функция, которая отображает сообщения пользователю
 						if(typeof(Noty) == "function") {
 							new Noty({
-								text: textContainer,
+								text: '<div class="noty__addto"><div class="noty__message">'+ data.message + '</div></div>',
 								layout:"bottomRight",
 								type:"success",
 								theme:"",
 								closeWith: ['click'],
-								textAlign:"center",
-								easing:"swing",
 								animation: {
-									open: 'animated fadeInUp',
-									close: 'animated fadeOutDown',
+									open: 'animated noty_effects_open',
+									close: 'animated noty_effects_close',
 									easing: 'swing',
 									speed: 400
 								},
@@ -1627,16 +1631,14 @@ function addTo() {
 						// Если есть функция, которая отображает сообщения пользователю
 						if(typeof(Noty) == "function") {
 							new Noty({
-								text: textContainer,
+								text: '<div class="noty__addto"><div class="noty__message">'+ data.message + '</div></div>',
 								layout:"bottomRight",
 								type:"warning",
 								theme:"",
 								closeWith: ['click'],
-								textAlign:"center",
-								easing:"swing",
 								animation: {
-									open: 'animated fadeInUp',
-									close: 'animated fadeOutDown',
+									open: 'animated noty_effects_open',
+									close: 'animated noty_effects_close',
 									easing: 'swing',
 									speed: 400
 								},
@@ -2483,7 +2485,7 @@ function prodQty(){
 			t.val(max);
 			val = max;
 			new Noty({
-				text: '<div class="noty__addto"><div class="noty__title">Не удалось</div><div class="noty__message">Внимание! Вы пытаетесь положить в корзину товара больше, чем есть в наличии</div></div>',
+				text: '<div class="noty__addto"><div class="noty__message">Внимание! Вы пытаетесь положить в корзину товара больше, чем есть в наличии</div></div>',
 				layout:"bottomRight",
 				type:"warning",
 				easing:"swing",
@@ -3027,27 +3029,53 @@ function startOrder(){
 }
 
 ///////////////////////////////////////
-// Функция скрывания категорий и меню в подвале, если больше 5 пунктов.
+// Функции шаблона
 ///////////////////////////////////////
-function footerLinksMore(){
-	$('.footer__links').each(function(){
-		var t = $(this);
-		// Добавляем кнопку Еще если больше 5 пунктов
-		if(t.find('li').length > 5) {
-			t.append('<li class="show"><a class="footer__links-open" href="javascript:;"><span>Ещё</span><i class="material-icons">keyboard_arrow_down</i></a></li>');
-		}
-		// Действия при нажатии на кнопку Еще
-		t.find('.footer__links-open').on('click', function(){
-			if($(this).hasClass('opened')){
-				$(this).removeClass('opened')
-				t.find('li').removeClass('show')
-				$(this).parent().addClass('show')
-				$(this).find('span').text('Еще')
-			}else{
-				$(this).addClass('opened')
-				t.find('li').addClass('show')
-				$(this).find('span').text('Скрыть')
+// Функция копирования элементов из верхней части шапки
+function mobile(){
+	var content = $('.header__top').html();
+	var mobile = $('.mobile');
+	mobile.append(content)
+}
+
+// Функция Открытия каталога
+function openCatalog(){
+	// Создаем контейнеры куда будем отправлять наши подкатегории
+	for (var i = 0; i < 4; i++){
+		$('.catalog__subs').append('<div class="catalog__sub catalog__sub-level-'+ i +'" data-level="'+ i +'"></div>')
+	}
+
+	// Сортируем подкатегории по уровням
+	$('.catalog__content .catalog__item').each(function(){
+		var level = $(this).data('level')
+		for (var i = 0; i < 4; i++){
+			if (level == i) {
+				$(this).addClass('level-'+ i +'');
+				$('.catalog__sub-level-'+ i +'').append($(this))
 			}
+			level == '0' ? $(this).addClass('show') : $(this).removeClass('show')
+		}
+	});
+
+	// Отображаем подкатегории при наведении
+	$('.catalog__sub .catalog__item').mouseover(function(){
+		$('.catalog__sub .catalog__item').removeClass('hover')
+		$(this).addClass('hover')
+		var id = $(this).data('id');
+		var level = $(this).data('level')
+		var next = level + 1;
+		var next2 = level + 2;
+		var prev = next - 1;
+		$('.catalog__sub-level-'+ next +' .catalog__item').each(function(){
+			$('.catalog__sub-level-'+ next +' .catalog__item').removeClass('show')
+			$('.catalog__sub-level-'+ next +' .catalog__item').parent().removeClass('show')
+			$('.catalog__sub-level-'+ next2 +' .catalog__item').removeClass('show')
+			$('.catalog__sub-level-'+ next2 +' .catalog__item').parent().removeClass('show')
+			$('.catalog__sub-level-'+ prev +' .catalog__item').removeClass('hovered')
+			$('.catalog__sub-level-'+ next +' .catalog__item[data-parent="'+ id +'"]').addClass('show')
+			$('.catalog__sub-level-'+ next +' .catalog__item[data-parent="'+ id +'"]').parent().addClass('show')
+			$('.catalog__sub-level-'+ prev +' .catalog__item[data-id="'+ id +'"]').parent().addClass('show')
+			$('.catalog__sub-level-'+ prev +' .catalog__item[data-id="'+ id +'"]').addClass('hovered')
 		});
 	});	
 }
@@ -3063,7 +3091,6 @@ $(document).ready(function(){
   mainnav('#menu .mainnav', '1');
   toTop();
 	viewed();
-	sideNav();
 	mobile();
 	counterDate();
 	newsCarousel();
@@ -3152,87 +3179,3 @@ function addOpened(obj){obj.hasClass('opened') ? obj.removeClass('opened') : obj
 function addActive(obj){obj.hasClass('active') ? obj.removeClass('active') : obj.addClass('active')}
 
 
-// Функции боковой навигации
-function sideNav(){
-	$('.sidenav__item[data-open]').on('click', function(event){
-		// if(getClientWidth() < 768){
-		// 	return (true)
-		// }
-		event.preventDefault();
-		$('div, a, form').removeClass('opened');
-		var value = $(this).data('open');
-		if ($('.sidenav__content[data-content="'+ value +'"]').hasClass('opened')){
-			$(this).removeClass('opened');
-			$(this).parent().removeClass('opened');
-			$('.sidenav').removeClass('opened');
-			$('#overlay').removeClass('opened');
-			$('.sidenav__content[data-content="'+ value +'"]').removeClass('opened');
-		}else{
-			$(this).addClass('opened');
-			$(this).parent().addClass('opened');
-			$('.sidenav').addClass('opened');
-			$('#overlay').addClass('opened');
-			$('.sidenav__content[data-content="'+ value +'"]').addClass('opened');
-		}
-		return false;
-	});
-
-	// Открытие Меню и Каталога в сайдбаре
-	$('.addto__menu-nav a').on('click', function(event){
-		event.preventDefault();
-		var id = $(this).data('id')
-		$('.addto__menu-nav a').removeClass('active');
-		$('.addto__menu-item[data-id]').removeClass('active');
-		$(this).addClass('active');
-		$('.addto__menu-item[data-id="'+ id +'"]').addClass('active');
-	});
-
-}
-
-function mobile(){
-	var content = $('.header__top').html();
-	var mobile = $('.mobile');
-	mobile.append(content)
-}
-
-function openCatalog(){
-	// Создаем контейнеры куда будем отправлять наши подкатегории
-	for (var i = 0; i < 4; i++){
-		$('.catalog__subs').append('<div class="catalog__sub catalog__sub-level-'+ i +'" data-level="'+ i +'"></div>')
-	}
-
-	// Сортируем подкатегории по уровням
-	$('.catalog__content .catalog__item').each(function(){
-		var level = $(this).data('level')
-		for (var i = 0; i < 4; i++){
-			if (level == i) {
-				$(this).addClass('level-'+ i +'');
-				$('.catalog__sub-level-'+ i +'').append($(this))
-			}
-			level == '0' ? $(this).addClass('show') : $(this).removeClass('show')
-		}
-	})
-
-	// Отображаем подкатегории при наведении
-	$('.catalog__sub .catalog__item').mouseover(function(){
-		$('.catalog__sub .catalog__item').removeClass('hover')
-		$(this).addClass('hover')
-		var id = $(this).data('id');
-		var level = $(this).data('level')
-		var next = level + 1;
-		var next2 = level + 2;
-		var prev = next - 1;
-		$('.catalog__sub-level-'+ next +' .catalog__item').each(function(){
-			$('.catalog__sub-level-'+ next +' .catalog__item').removeClass('show')
-			$('.catalog__sub-level-'+ next +' .catalog__item').parent().removeClass('show')
-			$('.catalog__sub-level-'+ next2 +' .catalog__item').removeClass('show')
-			$('.catalog__sub-level-'+ next2 +' .catalog__item').parent().removeClass('show')
-			$('.catalog__sub-level-'+ prev +' .catalog__item').removeClass('hovered')
-			$('.catalog__sub-level-'+ next +' .catalog__item[data-parent="'+ id +'"]').addClass('show')
-			$('.catalog__sub-level-'+ next +' .catalog__item[data-parent="'+ id +'"]').parent().addClass('show')
-			$('.catalog__sub-level-'+ prev +' .catalog__item[data-id="'+ id +'"]').parent().addClass('show')
-			$('.catalog__sub-level-'+ prev +' .catalog__item[data-id="'+ id +'"]').addClass('hovered')
-		})
-	})
-	
-}

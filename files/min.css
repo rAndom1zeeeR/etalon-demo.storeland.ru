@@ -1,9 +1,9 @@
 /* noty.css */
 .noty_layout_mixin, #noty_layout__top, #noty_layout__topLeft, #noty_layout__topCenter, #noty_layout__topRight, #noty_layout__bottom, #noty_layout__bottomLeft, #noty_layout__bottomCenter, #noty_layout__bottomRight, #noty_layout__center, #noty_layout__centerLeft, #noty_layout__centerRight {position: fixed;margin: 0;padding: 0;z-index: 9999999;-webkit-transform: translateZ(0) scale(1, 1);transform: translateZ(0) scale(1, 1);-webkit-backface-visibility: hidden;backface-visibility: hidden;-webkit-font-smoothing: subpixel-antialiased;filter: blur(0);-webkit-filter: blur(0);max-width: 90%;}
 #noty_layout__top {top: 0;left: 0%;width: 100%;max-width: 100%;}
-#noty_layout__topLeft {top: 20px;left: 20px;width: 325px;}
+#noty_layout__topLeft {top: 30px;left: 20px;width: 325px;}
 #noty_layout__topCenter {top: 5%;left: 50%;width: 325px;-webkit-transform: translate(-webkit-calc(-50% - .5px)) translateZ(0) scale(1, 1);transform: translate(calc(-50% - .5px)) translateZ(0) scale(1, 1);}
-#noty_layout__topRight {top: 20px;right: 20px;width: 325px;}
+#noty_layout__topRight {top: 30px;right: 20px;width: 325px;}
 #noty_layout__bottom {bottom: 0;left: 0;width: 100%;max-width: 100%;}
 #noty_layout__bottomLeft {bottom: 20px;left: 20px;width: 325px;}
 #noty_layout__bottomCenter {bottom: 5%;left: 50%;width: 325px;-webkit-transform: translate(-webkit-calc(-50% - .5px)) translateZ(0) scale(1, 1);transform: translate(calc(-50% - .5px)) translateZ(0) scale(1, 1);}
@@ -28,31 +28,30 @@
 .noty_bar .noty_body {padding: 0;font-size: 14px;}
 .noty_type__info, .noty_theme__metroui.noty_type__information {background-color: #03A9F4;color: #FFF;}
 .noty_type__alert, .noty_theme__metroui.noty_type__notification {background-color: #fff;color: #1d1d1d;}
-.noty_type__success a, .noty_type__success a:visited, .noty_type__success a:focus, .noty_type__success a:hover {}
-.noty_type__warning a, .noty_type__warning a:visited, .noty_type__warning a:focus, .noty_type__warning a:hover {}
 /*** Страница: Ajax добавление товара в корзину ***/
-.noty_layout {border-radius: 3rem;}
-.noty__addto {padding: 2rem;}
-.noty__addto i {font-size: 1.5rem;margin-right: 1rem;}
-.noty_type__success .noty__addto {background-color: #f5f5f5;}
-.noty_type__warning .noty__addto {background-color: #f5f5f5;}
-.noty__image {width: 9rem;height: 9rem;}
-.noty__content {width: calc(100% - 9rem);padding-right: 2rem;}
-.noty__title {font-size: 1.125rem;font-family: 'Playfair Display';text-transform: uppercase;text-align: center;}
-.noty__title i + span {width: calc(100% - 2.5rem);text-align: left;}
-.noty__message {margin-top: 1.5rem;display: block;}
-.noty__price {margin-top: 1rem;}
-.noty_type__success.noty_has_progressbar .noty_progressbar {background-color: #bebebe;opacity: 1;}
-.noty_type__warning.noty_has_progressbar .noty_progressbar {background-color: #bebebe;opacity: 1;}
-.noty__link {color: #70787D;}
-.noty_type__warning {text-align: center;}
-.noty__addto + .noty__addto {display: none;}
+.noty_has_progressbar .noty_progressbar {height: .25rem;}
+.noty_type__success .noty_progressbar {background-color: #0a84c9;opacity: 1;}
+.noty_type__warning .noty_progressbar {background-color: #fa7761;opacity: 1;}
+.noty__addto {padding: 1rem;border: 4px solid #ececec;background-color: #ffffff;text-align: center;}
+.noty__title {font-weight: bold;}
+.noty__message {display: block;}
+.noty__message a {font-weight: bold;}
 
 .animated {
 -webkit-animation-duration: 1s;
 animation-duration: 1s;
 -webkit-animation-fill-mode: both;
 animation-fill-mode: both;
+}
+
+.noty_effects_open {
+  opacity: 0;
+  transform: translate(50%);
+  animation: noty_anim_in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.noty_effects_close {
+  animation: noty_anim_out 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 @-webkit-keyframes noty_modal_in {
