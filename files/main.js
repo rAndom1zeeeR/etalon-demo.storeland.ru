@@ -521,13 +521,15 @@ function openMenu() {
       $(this).parent().removeClass('opened');
       $('.sidebar__links').removeClass('opened');
       $('#overlay').removeClass('opened');
-      $('.dropdown__content[data-content="'+ value +'"]').removeClass('opened');
+      $('.dropdown__content[data-content="'+ value +'"]').removeClass('opened').slideUp('slow');
+			$('.dropdown__content[data-content="'+ value +'"]').slideUp('slow');
     }else{
       $(this).addClass('opened');
       $(this).parent().addClass('opened');
       $('.sidebar__links').addClass('opened');
       $('#overlay').addClass('opened');
-      $('.dropdown__content[data-content="'+ value +'"]').addClass('opened');
+      $('.dropdown__content[data-content="'+ value +'"]').addClass('opened').slideDown('slow');
+			$('.dropdown__content[data-content="'+ value +'"]').slideDown('slow');
     }
   });
 
@@ -556,13 +558,43 @@ function openMenu() {
 		$('#overlay').toggleClass('opened');
   });
 
-	// Открытие Поиск
+	// Открытие Заказать звонок
   $('.feedback__title').on('click', function (event){
     event.preventDefault();
 		$(this).toggleClass('opened');
 		$(this).parent().toggleClass('opened');
 		$(this).parent().find('.feedback__content').slideToggle('slow');
   });
+
+	// Ховер эффект на корзину в шапке
+	// $('.cart.dropdown').hover(function() {
+	// 	$(this)
+	// 		.toggleClass('opened')
+	// 		.find('.dropdown__content')
+	// 			.stop(true, true)
+	// 			.slideToggle();
+	// });
+
+	// Открытие Заказать звонок
+  // $('.cart.dropdown').on('mouseover', function (event){
+	// 	$(this).addClass('hovered');
+	// 	// $(this).parent().addClass('hovered');
+	// 	$(this).find('.dropdown__content').slideDown('slow');
+	// 	console.log('target', event.target)
+	// 	console.log('relatedTarget', event.relatedTarget)
+  // });
+  // $('.cart.dropdown').on('mouseout', function (event){
+	// 	$(this).removeClass('hovered');
+	// 	// $(this).parent().addClass('hovered');
+	// 	$(this).find('.dropdown__content').slideUp('slow');
+	// 	console.log('out target', event.target)
+	// 	console.log('out relatedTarget', event.relatedTarget)
+  // });
+	// $('.cart__icon').on('mouseout', function (event){
+	// 	$(this).removeClass('opened');
+	// 	$(this).parent().removeClass('opened');
+	// 	$(this).parent().find('.dropdown__content').slideUp('slow');
+  // });
 
 }
 
@@ -605,22 +637,6 @@ function mainnav(id,rows){
 					mainnav.find('.overflowMenu').addClass('opened');
 					$('.mainnav__more i').text('expand_less');
 				} 
-        // mainnav.find('.overflowMenu').hasClass('opened') ? mainnav.find('.overflowMenu').removeClass('opened') : mainnav.find('.overflowMenu').addClass('opened');
-        // mainnav.hasClass('opened') ? mainnav.removeClass('opened') : mainnav.addClass('opened');
-				// $(this).hasClass('opened') ? $(this).removeClass('opened') : $(this).addClass('opened');
-				// $('.mainnav__more i').text('expand_less')
-				// mainnav.toggleClass('opened')
-				// mainnav.find('.overflowMenu').toggleClass('opened')
-				// $(this).toggleClass('opened')
-				// 	if (!$(this).hasClass('opened')){
-				// 		mainnav.removeClass('opened')
-				// 		mainnav.find('.overflowMenu').removeClass('opened')
-				// 		console.log('close')
-				// 	}else{
-				// 		mainnav.addClass('opened')
-				// 		mainnav.find('.overflowMenu').addClass('opened')
-				// 		console.log('open')
-				// 	}
       });
       $(function($){
         $(document).mouseup(function (e){

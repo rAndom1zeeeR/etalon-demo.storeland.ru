@@ -340,7 +340,8 @@ h6 {font-size: 0.875rem;}
 /*** Выпадающее обхекты ***/
 /**************************************/
 .dropdown {position: relative;}
-.dropdown__content {transform: scale(1,0);min-width: 11rem;max-width: 28rem;padding: 1rem;right: 0;top: 3.5rem;height: auto;background: #ffffff;border: .25rem solid #0a84c9;position: absolute;z-index: 11;transition: all 0.3s ease-in-out;}
+.dropdown__content {min-width: 11rem;max-width: 28rem;padding: 1rem;right: 0;top: 3.5rem;height: auto;background: #ffffff;border: .25rem solid #0a84c9;position: absolute;z-index: 11;}
+.dropdown__content {display: block;transform: scale(1,0);transition: all 0.3s ease-in-out;}
 .opened .dropdown__content, .dropdown__content.opened {transform: scale(1);}
 .dropdown__open {position: relative;cursor: pointer;}
 @media all and (min-width: 768px) {
@@ -792,7 +793,7 @@ h6 {font-size: 0.875rem;}
 #menu .cart {width: 10rem;}
 .cart .dropdown__content {width: 25rem;}
 .cart__icon {font-size: 13px;padding: 0 .5rem;height: 3.5rem;overflow: hidden;color: #ffffff;background-color: #f7aa9d;font-weight: bold;font-family: 'Lato', sans-serif;display: flex;}
-.cart__icon:hover {color: #ffffff;background-color: #0a84c9;border-color: #0a84c9;}
+.cart__icon:hover, .cart__icon.opened {color: #ffffff;background-color: #0a84c9;border-color: #0a84c9;}
 .cart__icon .cart__count {margin: 0 .25rem;}
 .cart__icon .cartSumNow {display: none;line-height: 1;}
 .has-items .cart__icon .cartSumNow {display: inline-block;}
