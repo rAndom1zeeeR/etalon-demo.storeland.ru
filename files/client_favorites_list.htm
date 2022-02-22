@@ -77,7 +77,7 @@
 							{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && favorites_goods.MAX_REST_VALUE=0 %}
 							<a class="add-notify"
 								title="Уведомить"
-								data-tooltipOFF="Уведомить"
+								data-tooltip="Уведомить"
 								rel="nofollow"
 								data-fancybox
 								data-src="#fancybox__notify"
@@ -91,7 +91,7 @@
 							{% ELSE %}
 							<a class="{% IF favorites_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
 								title="Добавить в корзину &laquo;{favorites_goods.NAME}&raquo;"
-								data-tooltipOFF="В корзину"
+								data-tooltip="В корзину"
 								rel="nofollow"
 								href="{% IF favorites_goods.COUNT_MODIFICATION > 1 %}{favorites_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={favorites_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 							>
@@ -117,7 +117,7 @@
 								data-char-code="{CURRENCY_CHAR_CODE}"
 								data-add-tooltip="Добавлено в сравнение"
 								data-del-tooltip="Удалено из сравнения"
-								data-tooltipOFF="Убрать из сравнения"
+								data-tooltip="Убрать из сравнения"
 								title="Убрать &laquo;{favorites_goods.NAME}&raquo; из списка сравнения с другими товарами"
 								href="{COMPARE_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}&amp;from={favorites_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 								rel="nofollow"
@@ -139,7 +139,7 @@
 								data-char-code="{CURRENCY_CHAR_CODE}"
 								data-add-tooltip="Добавлено в сравнение"
 								data-del-tooltip="Удалено из сравнения"
-								data-tooltipOFF="Добавить в сравнение"
+								data-tooltip="Добавить в сравнение"
 								title="Добавить &laquo;{favorites_goods.NAME}&raquo; в список сравнения с другими товарами"
 								href="{COMPARE_ADD_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}&amp;from={favorites_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 								rel="nofollow"
@@ -164,7 +164,7 @@
 								data-char-code="{CURRENCY_CHAR_CODE}"
 								data-add-tooltip="Добавить в избранное"
 								data-del-tooltip="Убрать из избранного"
-								data-tooltipOFF="Убрать из избранного"
+								data-tooltip="Убрать из избранного"
 								title="Убрать &laquo;{favorites_goods.NAME}&raquo; из Избранного"
 								href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 								rel="nofollow"

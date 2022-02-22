@@ -4,7 +4,7 @@
 <!-- Список акций -->
 <div class="products__container">
 	<div class="row">
-	  <div class="products__grid promotion__grid flex">
+	  <div class="products__grid promotion__grid flex-start">
 	  {% FOR promotion_campaign %}
 	  <div class="promotion__item product__item {% IFNOT promotion_campaign.IS_WORK %}promotion__empty{% ENDIF %}" data-id="{promotion_campaign.ID}">
 			<div class="product__form-{promotion_campaign.ID}">
@@ -23,8 +23,8 @@
 						<span>-{promotion_campaign.PERCENTAGE}%</span>
 					</div>
 					<div class="promotion__date">
-						<i class="material-icons">timer</i>
 						{% IF promotion_campaign.IS_WORK %}
+						<i class="material-icons">timer</i>
 						<span>До {promotion_campaign.EXPIRED_TIME | date('d.m.Y')}</span>
 						{% ELSE %}
 						<span>Акция закончилась</span>

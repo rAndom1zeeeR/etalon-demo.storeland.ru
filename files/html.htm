@@ -459,7 +459,7 @@
 													{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_new_goods.MAX_REST_VALUE=0 %}
 													<a class="add-notify"
 														title="Уведомить"
-														data-tooltipOFF="Уведомить"
+														data-tooltip="Уведомить"
 														rel="nofollow"
 														data-fancybox
 														data-src="#fancybox__notify"
@@ -472,7 +472,7 @@
 													{% ELSE %}
 													<a class="{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
 														title="Добавить в корзину &laquo;{index_page_new_goods.NAME}&raquo;"
-														data-tooltipOFF="В корзину"
+														data-tooltip="В корзину"
 														rel="nofollow"
 														href="{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}{index_page_new_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_new_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_new_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 													>
@@ -497,7 +497,7 @@
 														data-char-code="{CURRENCY_CHAR_CODE}"
 														data-add-tooltip="Добавлено в сравнение"
 														data-del-tooltip="Удалено из сравнения"
-														data-tooltipOFF="Убрать из сравнения"
+														data-tooltip="Убрать из сравнения"
 														title="Убрать &laquo;{index_page_new_goods.NAME}&raquo; из списка сравнения с другими товарами"
 														href="{COMPARE_DELETE_URL}?id={index_page_new_goods.MIN_PRICE_NOW_ID}&amp;from={index_page_new_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 														rel="nofollow"
@@ -519,7 +519,7 @@
 														data-char-code="{CURRENCY_CHAR_CODE}"
 														data-add-tooltip="Добавлено в сравнение"
 														data-del-tooltip="Удалено из сравнения"
-														data-tooltipOFF="Добавить в сравнение"
+														data-tooltip="Добавить в сравнение"
 														title="Добавить &laquo;{index_page_new_goods.NAME}&raquo; в список сравнения с другими товарами"
 														href="{COMPARE_ADD_URL}?id={index_page_new_goods.MIN_PRICE_NOW_ID}&amp;from={index_page_new_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 														rel="nofollow"
@@ -544,7 +544,7 @@
 														data-char-code="{CURRENCY_CHAR_CODE}"
 														data-add-tooltip="Добавить в избранное"
 														data-del-tooltip="Убрать из избранного"
-														data-tooltipOFF="Убрать из избранного"
+														data-tooltip="Убрать из избранного"
 														title="Убрать &laquo;{index_page_new_goods.NAME}&raquo; из Избранного"
 														href="{FAVORITES_DELETE_URL}?id={index_page_new_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 														rel="nofollow"
@@ -566,7 +566,7 @@
 														data-char-code="{CURRENCY_CHAR_CODE}"
 														data-add-tooltip="Добавить в избранное"
 														data-del-tooltip="Убрать из избранного"
-														data-tooltipOFF="Добавить в избранное"
+														data-tooltip="Добавить в избранное"
 														title="Добавить &laquo;{index_page_new_goods.NAME}&raquo; в Избранное"
 														href="{FAVORITES_ADD_URL}?id={index_page_new_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 														rel="nofollow"
@@ -848,7 +848,7 @@
 					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog || index_page %}has-sidebar{% ENDIF %}">
 						{% IF index_page %}
 						<!-- Слайдшоу -->
-						<section id="slideshow">
+						<section id="slideshow" class="loading">
 							<div class="slider owl-carousel">
 								<!-- Слайд 1 -->
 								<div class="slider__item lozad" data-background-image="{ASSETS_IMAGES_PATH}slide1.jpg?design=THEMENAME">
@@ -891,7 +891,7 @@
 
 						<!-- Хиты продаж -->
 						{% IFNOT index_page_favorites_goods_empty %}
-						<section id="pdt__best">
+						<section id="pdt__best" class="loading">
 							<div class="block__title block__nav flex">
 								<h3 class="title"><span>Самое популярное</span></h3>
 								<div class="owl-nav"></div>
@@ -981,7 +981,7 @@
 													data-char-code="{CURRENCY_CHAR_CODE}"
 													data-add-tooltip="Добавить в избранное"
 													data-del-tooltip="Убрать из избранного"
-													data-tooltipOFF="Убрать из избранного"
+													data-tooltip="Убрать из избранного"
 													title="Убрать &laquo;{index_page_favorites_goods.NAME}&raquo; из Избранного"
 													href="{FAVORITES_DELETE_URL}?id={index_page_favorites_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 													rel="nofollow"
@@ -1003,7 +1003,7 @@
 													data-char-code="{CURRENCY_CHAR_CODE}"
 													data-add-tooltip="Добавить в избранное"
 													data-del-tooltip="Убрать из избранного"
-													data-tooltipOFF="Добавить в избранное"
+													data-tooltip="Добавить в избранное"
 													title="Добавить &laquo;{index_page_favorites_goods.NAME}&raquo; в Избранное"
 													href="{FAVORITES_ADD_URL}?id={index_page_favorites_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 													rel="nofollow"
@@ -1066,7 +1066,7 @@
 												{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_favorites_goods.MAX_REST_VALUE=0 %}
 												<a class="button-empty add-notify"
 													title="Уведомить"
-													data-tooltipOFF="Уведомить"
+													data-tooltip="Уведомить"
 													rel="nofollow"
 													data-fancybox
 													data-src="#fancybox__notify"
@@ -1080,7 +1080,7 @@
 												{% ELSE %}
 												<a class="{% IF index_page_favorites_goods.NB_GOODS_IN_CART %}button flex justify-between{% ELSE %}button-primary{% ENDIF %} {% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
 													title="Добавить в корзину &laquo;{index_page_favorites_goods.NAME}&raquo;"
-													data-tooltipOFF="В корзину"
+													data-tooltip="В корзину"
 													rel="nofollow"
 													href="{% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}{index_page_favorites_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_favorites_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 												>
@@ -1253,7 +1253,7 @@
 														{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_sale_goods.MAX_REST_VALUE=0 %}
 														<a class="{% IF index_page_sale_goods.first %}button-empty{% ENDIF %} add-notify"
 															title="Уведомить"
-															data-tooltipOFF="Уведомить"
+															data-tooltip="Уведомить"
 															rel="nofollow"
 															data-fancybox
 															data-src="#fancybox__notify"
@@ -1267,7 +1267,7 @@
 														{% ELSE %}
 														<a class="{% IF index_page_sale_goods.first %}button-primary{% ENDIF %} {% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
 															title="Добавить в корзину &laquo;{index_page_sale_goods.NAME}&raquo;"
-															data-tooltipOFF="В корзину"
+															data-tooltip="В корзину"
 															rel="nofollow"
 															href="{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}{index_page_sale_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 														>
@@ -1294,7 +1294,7 @@
 														data-char-code="{CURRENCY_CHAR_CODE}"
 														data-add-tooltip="Добавлено в сравнение"
 														data-del-tooltip="Удалено из сравнения"
-														data-tooltipOFF="Убрать из сравнения"
+														data-tooltip="Убрать из сравнения"
 														title="Убрать &laquo;{index_page_sale_goods.NAME}&raquo; из списка сравнения с другими товарами"
 														href="{COMPARE_DELETE_URL}?id={index_page_sale_goods.MIN_PRICE_NOW_ID}&amp;from={index_page_sale_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 														rel="nofollow"
@@ -1316,7 +1316,7 @@
 														data-char-code="{CURRENCY_CHAR_CODE}"
 														data-add-tooltip="Добавлено в сравнение"
 														data-del-tooltip="Удалено из сравнения"
-														data-tooltipOFF="Добавить в сравнение"
+														data-tooltip="Добавить в сравнение"
 														title="Добавить &laquo;{index_page_sale_goods.NAME}&raquo; в список сравнения с другими товарами"
 														href="{COMPARE_ADD_URL}?id={index_page_sale_goods.MIN_PRICE_NOW_ID}&amp;from={index_page_sale_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 														rel="nofollow"
@@ -1341,7 +1341,7 @@
 														data-char-code="{CURRENCY_CHAR_CODE}"
 														data-add-tooltip="Добавить в избранное"
 														data-del-tooltip="Убрать из избранного"
-														data-tooltipOFF="Убрать из избранного"
+														data-tooltip="Убрать из избранного"
 														title="Убрать &laquo;{index_page_sale_goods.NAME}&raquo; из Избранного"
 														href="{FAVORITES_DELETE_URL}?id={index_page_sale_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 														rel="nofollow"
@@ -1363,7 +1363,7 @@
 														data-char-code="{CURRENCY_CHAR_CODE}"
 														data-add-tooltip="Добавить в избранное"
 														data-del-tooltip="Убрать из избранного"
-														data-tooltipOFF="Добавить в избранное"
+														data-tooltip="Добавить в избранное"
 														title="Добавить &laquo;{index_page_sale_goods.NAME}&raquo; в Избранное"
 														href="{FAVORITES_ADD_URL}?id={index_page_sale_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 														rel="nofollow"
@@ -1504,7 +1504,7 @@
 												{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_goods.MAX_REST_VALUE=0 %}
 												<a class="add-notify"
 													title="Уведомить"
-													data-tooltipOFF="Уведомить"
+													data-tooltip="Уведомить"
 													rel="nofollow"
 													data-fancybox
 													data-src="#fancybox__notify"
@@ -1518,7 +1518,7 @@
 												{% ELSE %}
 												<a class="{% IF index_page_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
 													title="Добавить в корзину &laquo;{index_page_goods.NAME}&raquo;"
-													data-tooltipOFF="В корзину"
+													data-tooltip="В корзину"
 													rel="nofollow"
 													href="{% IF index_page_goods.COUNT_MODIFICATION > 1 %}{index_page_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 												>
@@ -1544,7 +1544,7 @@
 													data-char-code="{CURRENCY_CHAR_CODE}"
 													data-add-tooltip="Добавлено в сравнение"
 													data-del-tooltip="Удалено из сравнения"
-													data-tooltipOFF="Убрать из сравнения"
+													data-tooltip="Убрать из сравнения"
 													title="Убрать &laquo;{index_page_goods.NAME}&raquo; из списка сравнения с другими товарами"
 													href="{COMPARE_DELETE_URL}?id={index_page_goods.MIN_PRICE_NOW_ID}&amp;from={index_page_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 													rel="nofollow"
@@ -1566,7 +1566,7 @@
 													data-char-code="{CURRENCY_CHAR_CODE}"
 													data-add-tooltip="Добавлено в сравнение"
 													data-del-tooltip="Удалено из сравнения"
-													data-tooltipOFF="Добавить в сравнение"
+													data-tooltip="Добавить в сравнение"
 													title="Добавить &laquo;{index_page_goods.NAME}&raquo; в список сравнения с другими товарами"
 													href="{COMPARE_ADD_URL}?id={index_page_goods.MIN_PRICE_NOW_ID}&amp;from={index_page_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 													rel="nofollow"
@@ -1591,7 +1591,7 @@
 													data-char-code="{CURRENCY_CHAR_CODE}"
 													data-add-tooltip="Добавить в избранное"
 													data-del-tooltip="Убрать из избранного"
-													data-tooltipOFF="Убрать из избранного"
+													data-tooltip="Убрать из избранного"
 													title="Убрать &laquo;{index_page_goods.NAME}&raquo; из Избранного"
 													href="{FAVORITES_DELETE_URL}?id={index_page_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 													rel="nofollow"
@@ -1613,7 +1613,7 @@
 													data-char-code="{CURRENCY_CHAR_CODE}"
 													data-add-tooltip="Добавить в избранное"
 													data-del-tooltip="Убрать из избранного"
-													data-tooltipOFF="Добавить в избранное"
+													data-tooltip="Добавить в избранное"
 													title="Добавить &laquo;{index_page_goods.NAME}&raquo; в Избранное"
 													href="{FAVORITES_ADD_URL}?id={index_page_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 													rel="nofollow"
@@ -2030,7 +2030,7 @@
 									{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && recently_viewed_goods.MAX_REST_VALUE=0 %}
 									<a class="add-notify"
 										title="Уведомить"
-										data-tooltipOFF="Уведомить"
+										data-tooltip="Уведомить"
 										rel="nofollow"
 										data-fancybox
 										data-src="#fancybox__notify"
@@ -2043,7 +2043,7 @@
 									{% ELSE %}
 									<a class="{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
 										title="Добавить в корзину &laquo;{recently_viewed_goods.NAME}&raquo;"
-										data-tooltipOFF="В корзину"
+										data-tooltip="В корзину"
 										rel="nofollow"
 										href="{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}{recently_viewed_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={recently_viewed_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={recently_viewed_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 									>
@@ -2068,7 +2068,7 @@
 										data-char-code="{CURRENCY_CHAR_CODE}"
 										data-add-tooltip="Добавлено в сравнение"
 										data-del-tooltip="Удалено из сравнения"
-										data-tooltipOFF="Убрать из сравнения"
+										data-tooltip="Убрать из сравнения"
 										title="Убрать &laquo;{recently_viewed_goods.NAME}&raquo; из списка сравнения с другими товарами"
 										href="{COMPARE_DELETE_URL}?id={recently_viewed_goods.MIN_PRICE_NOW_ID}&amp;from={recently_viewed_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 										rel="nofollow"
@@ -2090,7 +2090,7 @@
 										data-char-code="{CURRENCY_CHAR_CODE}"
 										data-add-tooltip="Добавлено в сравнение"
 										data-del-tooltip="Удалено из сравнения"
-										data-tooltipOFF="Добавить в сравнение"
+										data-tooltip="Добавить в сравнение"
 										title="Добавить &laquo;{recently_viewed_goods.NAME}&raquo; в список сравнения с другими товарами"
 										href="{COMPARE_ADD_URL}?id={recently_viewed_goods.MIN_PRICE_NOW_ID}&amp;from={recently_viewed_goods.GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
 										rel="nofollow"
@@ -2115,7 +2115,7 @@
 										data-char-code="{CURRENCY_CHAR_CODE}"
 										data-add-tooltip="Добавить в избранное"
 										data-del-tooltip="Убрать из избранного"
-										data-tooltipOFF="Убрать из избранного"
+										data-tooltip="Убрать из избранного"
 										title="Убрать &laquo;{recently_viewed_goods.NAME}&raquo; из Избранного"
 										href="{FAVORITES_DELETE_URL}?id={recently_viewed_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 										rel="nofollow"
@@ -2137,7 +2137,7 @@
 										data-char-code="{CURRENCY_CHAR_CODE}"
 										data-add-tooltip="Добавить в избранное"
 										data-del-tooltip="Убрать из избранного"
-										data-tooltipOFF="Добавить в избранное"
+										data-tooltip="Добавить в избранное"
 										title="Добавить &laquo;{recently_viewed_goods.NAME}&raquo; в Избранное"
 										href="{FAVORITES_ADD_URL}?id={recently_viewed_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 										rel="nofollow"
@@ -2677,6 +2677,9 @@
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}air-datepicker.js?design=THEMENAME"></script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}debounce.js?design=THEMENAME"></script>
 	{% ENDIF %}
+	<!-- Production -->
+	<script src="https://unpkg.com/@popperjs/core@2"></script>
+	<script src="https://unpkg.com/tippy.js@6"></script>
 	<!-- Слайдер. Карусель -->
 	<link rel="preload" type="text/css" href="{ASSETS_STYLES_PATH}owl.carousel.min.css?design=THEMENAME" as="style" onload="this.onload=null;this.rel='stylesheet'">
 	<noscript>

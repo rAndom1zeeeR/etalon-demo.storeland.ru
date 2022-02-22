@@ -553,9 +553,9 @@ function openMenu() {
   // Открытие Поиск
   $('.catalog__icon').on('click', function (event){
     event.preventDefault();
-		$(this).toggleClass('opened');
+		// $(this).toggleClass('opened');
 		$(this).parent().toggleClass('opened');
-		$('#overlay').toggleClass('opened');
+		$('#overlay').toggleClass('opened transparent');
   });
 
 	// Открытие Заказать звонок
@@ -574,27 +574,6 @@ function openMenu() {
 	// 			.stop(true, true)
 	// 			.slideToggle();
 	// });
-
-	// Открытие Заказать звонок
-  // $('.cart.dropdown').on('mouseover', function (event){
-	// 	$(this).addClass('hovered');
-	// 	// $(this).parent().addClass('hovered');
-	// 	$(this).find('.dropdown__content').slideDown('slow');
-	// 	console.log('target', event.target)
-	// 	console.log('relatedTarget', event.relatedTarget)
-  // });
-  // $('.cart.dropdown').on('mouseout', function (event){
-	// 	$(this).removeClass('hovered');
-	// 	// $(this).parent().addClass('hovered');
-	// 	$(this).find('.dropdown__content').slideUp('slow');
-	// 	console.log('out target', event.target)
-	// 	console.log('out relatedTarget', event.relatedTarget)
-  // });
-	// $('.cart__icon').on('mouseout', function (event){
-	// 	$(this).removeClass('opened');
-	// 	$(this).parent().removeClass('opened');
-	// 	$(this).parent().find('.dropdown__content').slideUp('slow');
-  // });
 
 }
 
@@ -771,7 +750,7 @@ function pdtSale() {
 	var btn = $(id).find('.showAll');
 	var item = $(id).find('.product__item');
 	var buttons = $(id).find('.products__buttons');
-	var max = '8';
+	var max = '12';
 	// Скрываем кнопку показать все если меньше 5 товаров
 	item.length > max ? buttons.show() : buttons.hide();
 	// Функция открытия доп товаров
@@ -1308,8 +1287,8 @@ function addTo() {
 				pDataChar = a.attr('data-char-code'),
 				pDataMod = a.attr('data-mod-id'),
 				aText = a.parent().find('.add-compare'),
-				addTooltip = a.attr('data-action-text-add'),
-				delTooltip = a.attr('data-action-text-del'),
+				addTooltip = a.attr('data-add-tooltip'),
+				delTooltip = a.attr('data-del-tooltip'),
 				requestUrl = a.attr('href');
 
 		var atl = $(this).closest('.product__links');
@@ -1390,6 +1369,12 @@ function addTo() {
 							var textLabel = 'Удалено из сравнения'
 						}
 
+						
+
+						tippy('.add-compare', {
+							content: 'asdasd',
+						});
+
 						// Если указано, что изменилось число товаров на сравнении
 						if(typeof(data.compare_goods_count) != 'undefined') {
 							// Блок информации о том, что есть товары на сравнении
@@ -1412,17 +1397,14 @@ function addTo() {
 
 						// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
 						a.attr('href', a.attr('href').replace(new RegExp(from), to))
-								.attr('title', newTitle)
-								.attr('data-tooltip', newTooltip)
-								.attr('data-action-is-add', newIsAddStatus);
+							.attr('title', newTitle)
+							.attr('data-tooltip', newTooltip)
+							.attr('data-action-is-add', newIsAddStatus);
 
 						// Если рядом с ссылкой в виде круга есть текстовая надпись с описанием действия
 						//if(aText.length) {
-						//  aText.text(aText.attr(isAdd == 1 ? 'data-action-text-del' : 'data-action-text-add'));
+						//  aText.text(aText.attr(isAdd == 1 ? 'data-del-tooltip' : 'data-add-tooltip'));
 						//}
-						
-						// Блок Сообщения
-						var textContainer = '<div class="noty__addto flex"><div class="noty__content"><a class="noty__title flex" href="'+ pageUrl +'"><i class="material-icons">equalizer</i><span>'+ textLabel +'</span></a><a class="noty__message" href="'+ pUrl +'">'+ pName +'</a><div class="noty__price price__now '+ pDataChar +'"><span class="num">' + addSpaces(pDataPrice) + '</span></div></div><div class="noty__image flex-center"><img src="'+ pImg +'" /></div></div>';
 
 						// Если есть функция, которая отображает сообщения пользователю
 						if(typeof(Noty) == "function") {
@@ -1449,9 +1431,6 @@ function addTo() {
 							}).show();
 						}
 					} else if('error' == data.status) {
-						// Блок Сообщения
-						var textContainer = '<div class="noty__addto"><a class="noty__title flex-center" href="'+ pageUrl +'"><span>Не удалось</span></a><div class="noty__message"><span>Для добавления товара в сравнение Вам необходимо </span><a class="noty__link" href="/catalog">перейти в каталог</a></div></div></div>';
-
 						// Если есть функция, которая отображает сообщения пользователю
 						if(typeof(Noty) == "function") {
 							new Noty({
@@ -1502,8 +1481,8 @@ function addTo() {
 				pDataChar = a.attr('data-char-code'),
 				pDataMod = a.attr('data-mod-id'),
 				aText = a.parent().find('.add-compare'),
-				addTooltip = a.attr('data-action-text-add'),
-				delTooltip = a.attr('data-action-text-del'),
+				addTooltip = a.attr('data-add-tooltip'),
+				delTooltip = a.attr('data-del-tooltip'),
 				requestUrl = a.attr('href');
 
 		var atl = $(this).closest('.product__links');
@@ -1604,13 +1583,13 @@ function addTo() {
 
 						// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
 						a.attr('href', a.attr('href').replace(new RegExp(from), to))
-								.attr('title', newTitle)
-								.attr('data-tooltip', newTooltip)
-								.attr('data-action-is-add', newIsAddStatus);
+							.attr('title', newTitle)
+							.attr('data-tooltip', newTooltip)
+							.attr('data-action-is-add', newIsAddStatus);
 
 						// Если рядом с ссылкой в виде круга есть текстовая надпись с описанием действия
 						//if(aText.length) {
-						//  aText.text(aText.attr(isAdd == 1 ? 'data-action-text-del' : 'data-action-text-add'));
+						//  aText.text(aText.attr(isAdd == 1 ? 'data-del-tooltip' : 'data-add-tooltip'));
 						//}
 
 						// Блок Сообщения Успешно
@@ -2849,7 +2828,7 @@ function compare() {
 		autoHeight: true,
 		autoHeightClass: 'owl-height',
 		autoplay: false,
-		autoplayHoverPause: true,
+		autoplayHoverPause: false,
 		smartSpeed: 500,
 		mouseDrag: false,
 		touchDrag: false,
@@ -3130,6 +3109,10 @@ $(document).ready(function(){
 
   // Возврашаем пользователя на страницу с которой был сделан обратный звонок
   $('.callbackredirect').val(document.location.href);
+
+	// Удаление классов загрузки для элементов страницы
+	$('.loading').addClass('loaded');
+	$('div, section').removeClass('loading');
 });
 
 
