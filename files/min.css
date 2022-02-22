@@ -34,8 +34,12 @@
 .noty_type__warning .noty_progressbar {background-color: #fa7761;opacity: 1;}
 .noty__addto {padding: 1rem;border: 4px solid #ececec;background-color: #ffffff;text-align: center;}
 .noty__title {font-weight: bold;}
-.noty__message {display: block;}
+.noty__message {margin: 1rem 0;display: block;}
 .noty__message a {font-weight: bold;}
+.noty__addto.full {text-align: left;max-width: 28rem;}
+.noty__addto.full .button {width: 100%;}
+.noty__image {width: 120px;height: 120px;}
+.noty__content {width: calc(100% - 120px);padding-left: 1rem;}
 
 .animated {
 -webkit-animation-duration: 1s;

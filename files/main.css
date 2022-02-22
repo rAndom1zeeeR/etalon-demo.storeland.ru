@@ -5,10 +5,11 @@ html {font-size: 100%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;
 body {background-color: #ffffff;color: #272727;font-family: 'Noto Sans', sans-serif;font-size: .875rem;line-height: 1.3;font-weight: 400;position: relative;overflow-x: hidden;margin: 0;padding: 0;}
 section {margin: 2rem 0;position: relative;}
 .main__left {width: 25%;flex-grow: 1;}
-.main__right {width: 75%;padding-left: 2rem;flex-grow: 1;}
+.main__right {width: 100%;padding-left: 0;flex-grow: 1;}
+.main__right.has-sidebar {width: 75%;padding-left: 2rem;}
 @media (max-width: 1199.98px) {
 	.main__left {width: 100%;order: 2;}
-	.main__right {width: 100%;padding: 0;order: 1;}
+	.main__right.has-sidebar {width: 100%;padding: 0;order: 1;}
 }
 @media (max-width: 991.98px) {
 	section {margin: 2rem 0;}
@@ -214,7 +215,7 @@ button:hover, .button:hover, [class^="button-"]:hover, .paymentFormSubmitLink:ho
 .success, .warning, .attention, .information, .help {position: relative;width: 100%;margin-bottom: 2rem;padding: 0;overflow: hidden;font-size: 1.25rem;line-height: 1.75rem;text-transform: none;font-weight: normal;}
 .success {color: #272727;}
 .warning {color: #b30020;}
-.attention {color: #8a6d3b;}
+/* .attention {color: #8a6d3b;} */
 .information {color: #64b93a;}
 .help {color: #cecece;}
 .success a, .warning a, .attention a, .information a {color: inherit;font-weight: 600;text-decoration: underline;display: inline;}
@@ -713,15 +714,16 @@ h6 {font-size: 0.875rem;}
 	.header__logo {width: 10rem;}
 }
 @media (max-width: 479.98px) {
+	.header__logo {width: calc(100% - 5rem);margin-right: 2rem;}
 	.header__block-phone {display: none;}
 	.header__block.users {display: block;border-right: 0;}
-	.search {text-align: right;}
-	.search__form {display: none;position: absolute;top: 1rem;right: 0;width: 100%;background-color: #ffffff;}
+	.search {width: auto;padding: 0;position: unset;z-index: 12;}
+	.search__form {display: none;position: absolute;top: 1.5rem;right: 0;width: 100%;background-color: #ffffff;}
 	.opened .search__form {display: block;}
 	.search__icon {display: inline-block;padding: 0 .75rem;}
 	.opened .search__icon {display: none;}
 	.search__icon i {vertical-align: middle;}
-	.header__logo {width: calc(100% - 6rem);}
+	#search__result {top: 5rem;}
 }
 
 
@@ -776,7 +778,7 @@ h6 {font-size: 0.875rem;}
 }
 
 /** Меню. Меню **/
-.page-cart #menu .menu {width: calc(100% - 16.5rem);}
+.page-cart #menu .menu {width: 75%;}
 #menu .menu {padding: 0 1rem;width: calc(75% - 10rem);position: relative;}
 #menu .mainnav__list {height: 3.5rem;}
 #menu .mainnav__list li {position: relative;}
@@ -815,7 +817,7 @@ h6 {font-size: 0.875rem;}
 	.catalog__icon span {display: none;}
 	#menu .menu {display: none;}
 	#menu .cart {width: auto;}
-	.cart__icon {padding: 0 1rem;line-height: 3rem;}
+	.cart__icon {padding: 0 1rem;line-height: 3rem;height: 3rem;}
 	.has-items .cart__icon .cartSumNow {display: none;}
 	#menu .mobile {display: flex;flex-grow: 1;}
 }
@@ -937,7 +939,7 @@ h6 {font-size: 0.875rem;}
 /*** Товары таблицей ***/
 /**************************************/
 .products__container .row {margin: -2rem -.5rem 0 -.5rem;}
-.product__item {width: calc(25% - 1rem);margin: 2rem .5rem 0 .5rem;border: .25rem solid transparent;position: relative;}
+.product__item {width: calc(25% - 1rem);margin: 2rem .5rem 0 .5rem;border: .25rem solid transparent;position: relative;transition: all 0.3s ease;}
 .product__item:hover {border-color: #ececec;}
 .product__image {position: relative;}
 .product__img {height: 11.75rem;}
@@ -1122,6 +1124,8 @@ h6 {font-size: 0.875rem;}
 @media (max-width: 479.98px) {
 	#pdt__sales .product__items-duo .product__item {width: 100%;}
 	#pdt__sales .product__items-quad .product__item {width: 100%;}
+	#pdt__sales .product__items-mono {padding: 0;}
+	.product__counter > div {width: 3.5rem;height: 3.5rem;margin: 0 .25rem;}
 }
 
 
@@ -1165,6 +1169,9 @@ h6 {font-size: 0.875rem;}
 /*** Каталог. Адаптивность ***/
 @media (max-width: 1199.98px) {
 	.sidebar__block.catalog {display: none;}
+}
+@media (max-width: 479.98px) {
+	.catalog__item .open {display: none;}
 }
 
 /*** Сайдбар. Новинки ***/
@@ -1790,8 +1797,7 @@ h6 {font-size: 0.875rem;}
 /*** Иконки с линиями ***/
 /**************************************/
 #feedback {width: 17rem;border: 2px solid #0a84c9;position: fixed;bottom: 0;right: 1rem;z-index: 10;}
-#feedback {}
-#feedback.opened {}
+#feedback .form__fields input {font-size: 13px;}
 .feedback__title {padding: .5rem 1rem;color: #ffffff;background-color: #0a84c9;font-weight: bold;cursor: pointer;}
 .feedback__content {display: none;padding: 1rem;background-color: #ffffff;}
 .feedback__content .form__text {font-size: 13px;margin-bottom: 1rem;}

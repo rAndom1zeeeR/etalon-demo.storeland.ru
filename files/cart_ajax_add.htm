@@ -3,15 +3,15 @@
 	{% FOR cart_items %}
 		{% IF cart_items.GOODS_MOD_ID = FORM_GOODS_MOD_ID %}
 			<div class="noty__addto flex" data-id="{cart_items.GOODS_ID}">
+				<div class="noty__image flex-center">
+					<img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_MEDIUM}{% ENDIF %}" />
+				</div>
 				<div class="noty__content">
 					<a class="noty__title flex" href="{CART_URL}">
-						<i class="material-icons">shopping_bag</i><span>Добавлено в корзину</span>
+						<span>Добавлено в корзину</span>
 					</a>
 					<a class="noty__message" href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}">{cart_items.GOODS_NAME}</a>
 					<div class="noty__price price__now {CURRENCY_CHAR_CODE}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</div>
-				</div>
-				<div class="noty__image flex-center">
-					<img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_MEDIUM}{% ENDIF %}" />
 				</div>
 			</div>
 		{% ELSEIF cart_items.GOODS_ID = FORM_GOODS_ID %}		
@@ -51,7 +51,7 @@
 		{% FOR cart_items %}
 		<div class="addto__item flex" data-id="{cart_items.GOODS_ID}">
 			<a class="addto__image flex-center" href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}">
-				<img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" />
+				<img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" />
 			</a>
 			<div class="addto__content flex-stretch">
 				<div class="addto__info">

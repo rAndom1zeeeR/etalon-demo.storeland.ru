@@ -303,7 +303,7 @@
 									{% FOR cart_items %}
 									<div class="addto__item flex" data-id="{cart_items.GOODS_ID}">
 										<a class="addto__image flex-center" href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}">
-											<img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" />
+											<img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" />
 										</a>
 										<div class="addto__content flex-stretch">
 											<div class="addto__info">
@@ -2482,7 +2482,7 @@
 							<input id="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="Номер телефона" autocomplete="off" required />
 						</div>
 						<div class="form__buttons">
-							<button type="submit" title="Заказать звонок" class="button-primary form__button button">Заказать звонок</button>
+							<button type="submit" title="Заказать звонок" class="button-primary form__button button"><span>Заказать звонок</span></button>
 						</div>
 						<div class="form__pp">
 							<span>Нажимая на кнопку &laquo;Заказать звонок&raquo;, Вы соглашаетесь с</span>
@@ -2513,7 +2513,7 @@
 							<textarea id="callback_comment" class="textarea" rows="2" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_COMMENT}]" placeholder="Комментарий" >{FORM_CALLBACK_COMMENT}</textarea>
 						</div>
 						<div class="form__buttons">
-							<button type="submit" title="Отправить" class="button-primary form__button button">Отправить</button>
+							<button type="submit" title="Отправить" class="button-primary form__button button"><span>Отправить</span></button>
 						</div>
 						<div class="form__pp">
 							<span>Нажимая на кнопку &laquo;Отправить&raquo;, Вы соглашаетесь с</span>
@@ -2545,7 +2545,7 @@
 							<input class="form__input form__email" type="email" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_EMAIL}]" value="{FORM_CALLBACK_EMAIL}" placeholder="email@email.ru *" autocomplete="off" />
 						</div>
 						<div class="form__buttons">
-							<button type="submit" title="Уведомить" class="button-primary form__button button">Уведомить</button>
+							<button type="submit" title="Уведомить" class="button-primary form__button button"><span>Уведомить</span></button>
 						</div>
 						<div class="form__pp">
 							<span>Нажимая на кнопку &laquo;Уведомить&raquo;, Вы соглашаетесь с</span>

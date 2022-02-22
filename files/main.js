@@ -566,6 +566,12 @@ function openMenu() {
 		$(this).parent().find('.feedback__content').slideToggle('slow');
   });
 
+	$('.search__icon').on('click', function(event){
+		event.preventDefault();
+		$(this).parent().toggleClass('opened')
+		$('#overlay').toggleClass('opened');
+	})
+
 	// Ховер эффект на корзину в шапке
 	// $('.cart.dropdown').hover(function() {
 	// 	$(this)
@@ -1626,7 +1632,7 @@ function addTo() {
 						// Если есть функция, которая отображает сообщения пользователю
 						if(typeof(Noty) == "function") {
 							new Noty({
-								text: '<div class="noty__addto"><div class="noty__message">'+ data.message + '</div></div>',
+								text: '<div class="noty__addto full"><div class="noty__title">Войдите в свой аккаунт</div><div class="noty__message">'+ data.message + '</div><div class="noty__buttons"><a class="button-primary button" href="/user/login" title="Войти"><span>Войти</span></a></div></div>',
 								layout:"bottomRight",
 								type:"warning",
 								theme:"",
