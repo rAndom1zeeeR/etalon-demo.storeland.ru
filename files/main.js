@@ -1377,9 +1377,9 @@ function addTo() {
 
 						
 
-						tippy('.add-compare', {
-							content: 'asdasd',
-						});
+						// tippy('.add-compare', {
+						// 	content: 'asdasd',
+						// });
 
 						// Если указано, что изменилось число товаров на сравнении
 						if(typeof(data.compare_goods_count) != 'undefined') {

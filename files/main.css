@@ -165,11 +165,15 @@ button:hover, .button:hover, [class^="button-"]:hover, .paymentFormSubmitLink:ho
 /*** Иконки Товаров ***/
 /**************************************/
 /*** Избранное, Сравнение, В коризну, Уведомить, Нет в наличии ***/
-[class^="add-"]:before {font-family: 'Material Icons';line-height: 1;}
+[class^="add-"]:before {font-family: 'Material Icons two tone';line-height: 1;}
 .add-favorites:before {content: '\e87d';}
 .add-compare:before {content: '\f20c';}
 .add-notify {color: #747474;}
-
+[class^="add-"].added {color: #f7aa9d;}
+[class^="add-"]:before {filter: invert(36%) sepia(71%) saturate(1063%) hue-rotate(169deg) brightness(100%) contrast(96%);transition: all 0.3s ease;}
+[class^="add-"]:hover:before, [class^="add-"].added:before {filter: invert(89%) sepia(73%) saturate(1419%) hue-rotate(293deg) brightness(100%) contrast(94%);}
+[class^="add-"].added:hover:before {filter: invert(36%) sepia(71%) saturate(1063%) hue-rotate(169deg) brightness(100%) contrast(96%);transition: all 0.3s ease;}
+[class^="add-"].added:hover {color: #272727;}
 
 /*** Иконки Новинка, Хит, Скидка ***/
 .product__ico {color: #ffffff;z-index: 2;position: absolute;bottom: .5rem;left: .5rem;}
@@ -935,6 +939,7 @@ h6 {font-size: 0.875rem;}
 	#body .social {margin-top: 1rem;position: relative;top: auto;right: auto;flex-direction: row;width: 100%;justify-content: space-evenly;}
 }
 
+
 /**************************************/
 /*** Товары таблицей ***/
 /**************************************/
@@ -952,6 +957,7 @@ h6 {font-size: 0.875rem;}
 .product__links > a:hover, .product__links > a.added {color: #f7aa9d;}
 .product__links > a .material-icons-two-tone {filter: invert(36%) sepia(71%) saturate(1063%) hue-rotate(169deg) brightness(100%) contrast(96%);transition: all 0.3s ease;}
 .product__links > a:hover .material-icons-two-tone {filter: invert(89%) sepia(73%) saturate(1419%) hue-rotate(293deg) brightness(100%) contrast(94%);}
+.product__links > a.add-notify i {filter: invert(77%) sepia(4%) saturate(9%) hue-rotate(18deg) brightness(98%) contrast(93%);}
 
 .product__shop {padding: .5rem .75rem;}
 .product__rest {margin-bottom: .5rem;position: relative;padding-left: 1rem;color: #868686;font-size: 13px;line-height: 1rem;}
@@ -1499,6 +1505,7 @@ h6 {font-size: 0.875rem;}
 .productView {}
 .productView__images {width: 29rem;position: relative;}
 .productView__image {min-height: 10rem;max-height: 29rem;}
+.productView__image img {max-height: 29rem;}
 .productView .product__ico {top: .5rem;bottom: auto;}
 /* Товар. Доп. изображения */
 .thumblist {margin-top: 1rem;}

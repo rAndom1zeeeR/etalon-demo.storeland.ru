@@ -124,7 +124,7 @@
 					{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
 					<div class="header__block header__block-phone">
 						<a class="header__block-link flex mitt" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
-							<div class="header__block-icon"><i class="material-icons">phone_in_talk</i></div>
+							<div class="header__block-icon"><i class="material-icons-two-tone">phone_in_talk</i></div>
 							<div class="header__block-content">
 								<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE1} ({SETTINGS_STORE_PHONE_CITY_CODE1}) {SETTINGS_STORE_PHONE_NUMBER1}</span>
 							</div>
@@ -467,7 +467,7 @@
 														data-name="{index_page_new_goods.NAME}"
 														data-art="{index_page_new_goods.ART_NUMBER}"
 													>												
-														<i class="material-icons">notifications_active</i>
+														<i class="material-icons-two-tone">notifications_active</i>
 													</a>
 													{% ELSE %}
 													<a class="{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
@@ -1074,7 +1074,7 @@
 													data-name="{index_page_favorites_goods.NAME}"
 													data-art="{index_page_favorites_goods.ART_NUMBER}"
 												>
-													<i class="material-icons">notifications_active</i>
+													<i class="material-icons-two-tone">notifications_active</i>
 													<span>Уведомить</span>
 												</a>
 												{% ELSE %}
@@ -1261,7 +1261,7 @@
 															data-name="{index_page_sale_goods.NAME}"
 															data-art="{index_page_sale_goods.ART_NUMBER}"
 														>												
-															<i class="material-icons">notifications_active</i>
+															<i class="material-icons-two-tone">notifications_active</i>
 															{% IF index_page_sale_goods.first %}<span>Уведомить</span>{% ENDIF %}
 														</a>
 														{% ELSE %}
@@ -1512,7 +1512,7 @@
 													data-name="{index_page_goods.NAME}"
 													data-art="{index_page_goods.ART_NUMBER}"
 												>												
-													<i class="material-icons">notifications_active</i>
+													<i class="material-icons-two-tone">notifications_active</i>
 													<span>Уведомить</span>
 												</a>
 												{% ELSE %}
@@ -2038,7 +2038,7 @@
 										data-name="{recently_viewed_goods.NAME}"
 										data-art="{recently_viewed_goods.ART_NUMBER}"
 									>												
-										<i class="material-icons">notifications_active</i>
+										<i class="material-icons-two-tone">notifications_active</i>
 									</a>
 									{% ELSE %}
 									<a class="{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
@@ -2214,8 +2214,8 @@
 						{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
 						<!-- Телефон 1 2 3 -->
 						{% IF SETTINGS_STORE_PHONE_NUMBER1 || SETTINGS_STORE_PHONE_NUMBER2 || SETTINGS_STORE_PHONE_NUMBER3 %}
-						<div class="footer__contact phone flex">
-							<div class="footer__contact-icon"><i class="material-icons">phone_in_talk</i></div>
+						<div class="footer__contact phone flex mitt">
+							<div class="footer__contact-icon"><i class="material-icons-two-tone">phone_in_talk</i></div>
 							<div class="footer__contact-content">
 								<label class="footer__contact-label">Телефоны</label>
 								{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
@@ -2238,8 +2238,8 @@
 						{% ENDIF SETTINGS_STORE_PHONE_NUMBER123 %}
 						<!-- Адрес -->
 						{% IF SETTINGS_STORE_REGION %}
-						<div class="footer__contact flex">
-							<div class="footer__contact-icon"><i class="material-icons">location_on</i></div>
+						<div class="footer__contact flex mitt">
+							<div class="footer__contact-icon"><i class="material-icons-two-tone">location_on</i></div>
 							<div class="footer__contact-content">
 								<label class="footer__contact-label">Адрес</label>
 								<a class="footer__contact-link" href="https://yandex.ru/maps/?text={SETTINGS_STORE_REGION}&z=17" target="_blank" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -2250,8 +2250,8 @@
 						{% ENDIF SETTINGS_STORE_REGION %}
 						<!-- Режим работы -->
 						{% IF SETTINGS_STORE_WORK_TIME %}
-						<div class="footer__contact flex">
-							<div class="footer__contact-icon"><i class="material-icons">schedule</i></div>
+						<div class="footer__contact flex mitt">
+							<div class="footer__contact-icon"><i class="material-icons-two-tone">schedule</i></div>
 							<div class="footer__contact-content">
 								<label class="footer__contact-label">Режим работы</label>
 								<a class="footer__contact-link" href="{FEEDBACK_URL}" title="Режим работы">
@@ -2678,8 +2678,8 @@
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}debounce.js?design=THEMENAME"></script>
 	{% ENDIF %}
 	<!-- Production -->
-	<script src="https://unpkg.com/@popperjs/core@2"></script>
-	<script src="https://unpkg.com/tippy.js@6"></script>
+	<!-- <script src="https://unpkg.com/@popperjs/core@2"></script>
+	<script src="https://unpkg.com/tippy.js@6"></script> -->
 	<!-- Слайдер. Карусель -->
 	<link rel="preload" type="text/css" href="{ASSETS_STYLES_PATH}owl.carousel.min.css?design=THEMENAME" as="style" onload="this.onload=null;this.rel='stylesheet'">
 	<noscript>
