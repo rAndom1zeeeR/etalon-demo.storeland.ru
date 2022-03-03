@@ -87,8 +87,8 @@
 					<!-- Сравнение -->
 					{% IFNOT MOD_LNAME = compare && SETTINGS_COMPARE_DISABLE=0 %}
 					<div class="header__block compare {% IF COMPARE_GOODS_COUNT > 0 %}has-items{% ENDIF %}">
-						<a class="header__link" href="{COMPARE_URL}" title="Сравнение">
-							<i class="material-icons">equalizer</i>
+						<a class="header__link mitt-white" href="{COMPARE_URL}" title="Сравнение">
+							<i class="material-icons-two-tone">leaderboard</i>
 							<span class="header__label">Сравнение</span>
 							<span>(<span class="header__count count-compare" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>)</span>
 						</a>
@@ -96,16 +96,16 @@
 					{% ENDIF %}
 					<!-- Избранное -->
 					<div class="header__block favorites {% IF FAVORITES_GOODS_COUNT > 0 %}has-items{% ENDIF %}">
-						<a class="header__link" href="{FAVORITES_URL}" title="Избранное">
-							<i class="material-icons">favorite</i>
+						<a class="header__link mitt-white" href="{FAVORITES_URL}" title="Избранное">
+							<i class="material-icons-two-tone">favorite</i>
 							<span class="header__label">Избранное</span>
 							<span>(<span class="header__count count-favorites" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>)</span>
 						</a>
 					</div>
 					<!-- ЛК, Войти -->
 					<div class="header__block users">						
-						<a class="header__link" href="{USER_LOGIN_URL}" title="Личный кабинет">
-							<i class="material-icons">person_outline</i>
+						<a class="header__link mitt-white" href="{USER_LOGIN_URL}" title="Личный кабинет">
+							<i class="material-icons-two-tone">person</i>
 							<span class="header__label">{% IF CLIENT_IS_LOGIN %}Личный кабинет{% ELSE %}Вход в ЛК{% ENDIF %}</span>
 						</a>
 					</div>
@@ -216,8 +216,8 @@
 				<div class="flex menu__inner">
 					<!-- Меню. Каталог -->
 					<div class="catalog">
-						<a class="catalog__icon flex" href="{CATALOG_URL}" title="Перейти в каталог">
-							<i class="material-icons">widgets</i>
+						<a class="catalog__icon flex mitt-white" href="{CATALOG_URL}" title="Перейти в каталог">
+							<i class="material-icons-two-tone">widgets</i>
 							<span>Категории товаров</span>
 						</a>
 						<!-- <div class="catalog__content">
@@ -1739,7 +1739,7 @@
 							<div id="breadcrumbs">
 								<ul class="flex unstyled" itemscope itemtype="https://schema.org/BreadcrumbList">
 									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="home">
-										<a itemprop="item" href="{INDEX_PAGE_URL}" title="Перейти на главную"><i class="material-icons">home</i><span itemprop="name">Главная</span>
+										<a itemprop="item" href="{INDEX_PAGE_URL}" title="Перейти на главную"><span itemprop="name">Главная</span>
 											<meta itemprop="position" content="1" />
 										</a>
 									</li>
