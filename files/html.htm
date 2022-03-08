@@ -260,7 +260,7 @@
 					<!-- Меню. Верхнее -->
 					<div class="menu">
 						<nav class="mainnav" itemscope itemtype="https://schema.org/SiteNavigationElement">
-							<ul class="mainnav__list unstyled flex">
+							<ul class="mainnav__list unstyled flex loading">
 								{% FOR menu %}
 									{% FOR header %}
 										{% FOR links %}
@@ -2464,8 +2464,106 @@
 			<!-- Скрытое обновление корзины -->
 			<div class="hiddenUpdate" style="display: none;"></div>
 
+			<!-- Мобильное меню -->
+			<div class="mobmenu">
+				
+				<!-- Закрыть -->
+				<div class="mobmenu__close" onclick="closeAll()">
+					<i class="material-icons">disabled_by_default</i>
+				</div>
+
+				<!-- Каталог -->
+				<div class="mobmenu__catalog">
+					<div class="mobmenu__title">Каталог товаров</div>
+					<div class="mobmenu__content">
+						<div class="catalog__items">
+							{% FOR catalog_full %}
+							{% IF catalog_full.FIRST %}{% IFNOT catalog_full.LEVEL = 0 %}
+							<div data-level="{catalog_full.LEVEL}" class="sub">
+							{% ENDIF %}{% ENDIF %}
+								<div {% IF catalog_full.HIDE %}style="display:none;" {% ENDIF %} data-level="{catalog_full.LEVEL}" class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}">
+									<a href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}" class="catalog__link flex {% IF catalog_full.CURRENT %}opened{% ENDIF %}">
+										<span class="catalog__name">{catalog_full.NAME}</span>
+										{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="open {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}"></span>{% ENDIF %}
+									</a>
+								{% IF catalog_full.ISSET_SUB=0 %}
+								</div>
+								{% ENDIF %}
+							{% IF catalog_full.LAST %}{% FOR out %}
+							</div>
+						{% IFNOT catalog_full.out.LAST %}
+						</div>
+						{% ENDIF %}{% ENDFOR out %}{% ENDIF %}
+						{% ENDFOR %}
+					</div>
+				</div>
+
+				<!-- Меню -->
+				<div class="mobmenu__menu">
+					<div class="mobmenu__title">Меню</div>
+					<div class="mobmenu__content">
+						<ul class="mainnav__list unstyled">
+							{% FOR menu %}
+								{% FOR header %}
+									{% FOR links %}
+									<li {% IF menu.header.links.SELECTED %}class="active"{% ENDIF %}>
+										<a class="mainnav__list-link {% IF menu.header.links.SELECTED %}active{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}mainnav__catalog{%ENDIF%}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}">
+											<span>{menu.header.links.NAME}</span>
+										</a>
+									</li>
+									{% ENDFOR %}
+								{% ENDFOR %}
+							{% ENDFOR %}
+						</ul>
+					</div>
+				</div>
+
+				<!-- Контакты -->
+				<div class="mobmenu__contacts">
+					<div class="mobmenu__content">
+						<!-- Почта -->
+						{% IF SETTINGS_STORE_EMAIL_MAIN %}
+						<div class="footer__contact email flex mitt">
+							<div class="footer__contact-icon"><i class="material-icons-two-tone">drafts</i></div>
+							<div class="footer__contact-content">
+								<label class="footer__contact-label">Электронная почта</label>
+								<a class="footer__contact-link" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+									<span>{SETTINGS_STORE_EMAIL_MAIN}</span>
+								</a>
+							</div>
+						</div>
+						{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
+						<!-- Телефон 1 2 3 -->
+						{% IF SETTINGS_STORE_PHONE_NUMBER1 || SETTINGS_STORE_PHONE_NUMBER2 || SETTINGS_STORE_PHONE_NUMBER3 %}
+						<div class="footer__contact phone flex mitt">
+							<div class="footer__contact-icon"><i class="material-icons-two-tone">phone_in_talk</i></div>
+							<div class="footer__contact-content">
+								<label class="footer__contact-label">Телефоны</label>
+								{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
+								<a class="footer__contact-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
+									<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE1} ({SETTINGS_STORE_PHONE_CITY_CODE1}) {SETTINGS_STORE_PHONE_NUMBER1}</span>
+								</a>
+								{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
+								{% IF SETTINGS_STORE_PHONE_NUMBER2 %}
+								<a class="footer__contact-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}">
+									<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE2} ({SETTINGS_STORE_PHONE_CITY_CODE2}) {SETTINGS_STORE_PHONE_NUMBER2}</span>
+								</a>
+								{% ENDIF SETTINGS_STORE_PHONE_NUMBER2 %}
+								{% IF SETTINGS_STORE_PHONE_NUMBER3 %}
+								<a class="footer__contact-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}">
+									<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE3} ({SETTINGS_STORE_PHONE_CITY_CODE3}) {SETTINGS_STORE_PHONE_NUMBER3}</span>
+								</a>
+								{% ENDIF SETTINGS_STORE_PHONE_NUMBER3 %}
+							</div>
+						</div>
+						{% ENDIF SETTINGS_STORE_PHONE_NUMBER123 %}
+					</div>
+				</div>				
+				
+			</div>
+
 			<!-- Обратный звонок в модальном окне -->
-			<div id="fancybox__callback" class="modal modal-bg" style="display:none">
+			<div id="fancybox__callback" class="modal" style="display:none">
 				<div class="modal__title block__title">
 					<h2 class="title">Обратный звонок</h2>
 				</div>
@@ -2493,7 +2591,7 @@
 			</div>
 
 			<!-- Обратный звонок в модальном окне -->
-			<div id="fancybox__feedback" class="modal modal-bg" style="display:none">
+			<div id="fancybox__feedback" class="modal" style="display:none">
 				<div class="modal__title block__title">
 					<h2 class="title">Обратная связь</h2>
 				</div>
@@ -2524,7 +2622,7 @@
 			</div>
 
 			<!-- Уведомить о поступлении в модальном окне -->
-			<div id="fancybox__notify" class="modal modal-bg" data-id="" style="display:none">
+			<div id="fancybox__notify" class="modal" data-id="" style="display:none">
 				<div class="modal__title block__title">
 					<h2 class="title">Уведомить</h2>
 				</div>
