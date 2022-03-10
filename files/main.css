@@ -1764,9 +1764,9 @@ h6 {font-size: 0.875rem;}
 /** Товар. Отзывы **/
 .opinion__content {flex-grow: 1;width: calc(100% - 22rem);padding-right: 4rem;}
 .opinion__content h5 {font-weight: bold;}
-.opinion__item {padding-bottom: 2rem;margin-bottom: 2rem;border-bottom: 1px solid #ececec;}
+.opinion__item {padding-bottom: 1.5rem;margin-bottom: 1.5rem;border-bottom: 1px solid #ececec;}
 .opinion__item:last-child {margin-bottom: 0;}
-.opinion__item:nth-child(n+4) {display: none;}
+.opinion__item:nth-child(n+5) {display: none;}
 .opinion__item.show {display: block;}
 .opinion__empty {padding: 1.5rem;background-color: #f5f5f5;}
 .opinion__empty-text {width: calc(100% - 12rem);padding-right: 2rem;}
@@ -1789,11 +1789,18 @@ h6 {font-size: 0.875rem;}
 .opinion__inner {color: #868686;margin-top: 1rem;font-size: 13px;}
 .opinion__separator {margin: 0 .75rem;width: .375rem;height: .375rem;background-color: #bebebe;border-radius: 100%;display: inline-block;}
 .opinion__answer {padding: 1rem;background-color: #f5f5f5;margin-top: 1rem;}
+.opinion__delete {margin-top: 1rem;}
 .opinion__buttons {margin-top: 2rem;text-align: center;}
 .opinion__captcha {position: relative;}
 .opinion__captcha img {position: absolute;right: 0;top: 0}
 .opinion__captcha input {padding-right: 7rem;}
 .captcha__refresh {position: absolute;right: 5rem;top: .75rem;}
+.opinion__nav {margin: 1rem 0;}
+.opinion__nav a {color: #868686;font-weight: bold;padding: .5rem 1rem;border-bottom: 3px solid #ececec;}
+.opinion__nav a.active, .opinion__nav a:hover {color: #272727;border-bottom-color: #0a84c9;}
+.productView__opinion .block__title .title {margin-right: 1rem;}
+.productView__opinion .block__title .ratings:before {font-size: 1.5rem;}
+.productView__opinion .block__title .ratings .rating:before {font-size: 1.5rem;}
 @media (max-width: 991px) {
 	.opinion__empty-text {width: 100%;padding: 0 0 1rem 0;}
 }
@@ -1801,6 +1808,10 @@ h6 {font-size: 0.875rem;}
 	.opinion__content {width: 100%;padding: 0;}
 	.opinion__addForm {position: relative;top: auto;margin-top: 2rem;max-width: 100%;}
 }
+@media (max-width: 479px) {
+	.opinion__nav a {padding: 4px 6px;font-size: 13px;}
+}
+
 
 /** Эти товары часто покупают вместе **/
 #related-goods {padding: 1rem;background-color: #f5f5f5;}
@@ -1888,7 +1899,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 /*** Страница: Акции ***/
 /**************************************/
-.promotion__item {margin: 2rem 1rem 0 1rem;border: 0;}
+.promotion__item {border: 0;}
 .promotion__name {font-weight: bold;}
 .promotion__top {padding: .75rem;border: 2px solid #ececec;border-bottom: 0;}
 .promotion__bottom {color: #ffffff;background-color: #f7aa9d;}
@@ -1900,12 +1911,32 @@ h6 {font-size: 0.875rem;}
 .promotion__empty .promotion__percentage:after {border-left-color: #bebebe;}
 .promotion__empty .promotion__bottom {background-color: #ebebeb;color: #a2a2a2;}
 .promotion__desc {margin-top: 1rem;color: #868686;max-height: 2.5rem;overflow: hidden;}
+.promotion__end {margin-top: 1rem;color: #868686;}
 /** Просмотр Акции **/
 .promotion__container {margin-bottom: 2rem;}
 .promotion__content {margin-bottom: 1rem;}
 .promotion__content strong {margin: 0 .25rem;}
 .promotion__text {margin-top: 1rem;}
 .promotion__date-expired {color: #70787D;}
+@media (max-width: 1199px){
+	.promotion__item {width: calc(33.333333% - 1rem);}
+}
+@media (max-width: 991px){
+	.promotion__item .promotion__date {padding-left: 1rem;}
+}
+@media (max-width: 767px){
+	.promotion__item {width: calc(50% - 1rem);}
+	.promotion__item .promotion__date {padding-left: 2rem;}
+}
+@media (max-width: 639px){
+	.promotion__item .promotion__date {padding-left: 1rem;}
+	.promotion__percentage {padding: .5rem;}
+}
+@media (max-width: 479px){
+	.promotion__item {width: calc(100% - 1rem);}
+	.promotion__item .promotion__date {padding-left: 2rem;}
+}
+
 
 
 /**************************************/
@@ -2039,7 +2070,7 @@ h6 {font-size: 0.875rem;}
 .mitt .material-icons-two-tone {filter: invert(58%) sepia(65%) saturate(1013%) hue-rotate(173deg) brightness(95%) contrast(94%);;transition: all 0.3s ease;}
 .mitt:hover .material-icons-two-tone {filter: invert(93%) sepia(94%) saturate(1517%) hue-rotate(293deg) brightness(100%) contrast(94%);}
 .mitt-white .material-icons-two-tone {filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(1deg) brightness(98%) contrast(106%);}
-
+.mitt-gray .material-icons-two-tone {filter: invert(76%) sepia(0%) saturate(254%) hue-rotate(220deg) brightness(85%) contrast(93%);}
 
 /**************************************/
 /*** Мобильное меню ***/

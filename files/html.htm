@@ -2756,6 +2756,16 @@
 	</script>
 	{% ENDIF %}
 
+	{% IF MOD_LNAME = discount %}
+	<script type="text/javascript">	
+	// Загрузка основных функций шаблона Товары
+	$(document).ready(function(){
+		discountEndDay();
+	});
+	</script>
+	{% ENDIF %}
+
+
 	{% IF MOD_LNAME = goods %}
 	<script type="text/javascript">	
 	// Загрузка основных функций шаблона Товар

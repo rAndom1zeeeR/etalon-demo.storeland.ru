@@ -2424,17 +2424,20 @@ function pageGoods() {
 	// Функция показать больше для Отзывов
 	var opinionContent = $('.opinion__content');
 	var opinionCount = opinionContent.find('.opinion__item').length;
-	if(opinionCount<=3){ opinionContent.find('.opinion__buttons').hide(); }
+	var opinionVisible = opinionContent.find('.opinion__item:visible').length;
+	if(opinionCount<=opinionVisible){ opinionContent.find('.opinion__buttons').hide(); }
 	opinionContent.find('.opinion__buttons .showAll').on('click',function(event){
 		event.preventDefault();
 		if($(this).hasClass('active')){
 			$(this).removeClass('active').find('span').text("Показать все");
 			opinionContent.find('.opinion__item').removeClass('show');
+			$('html, body').animate({scrollTop : jQuery('.productView__opinion').offset().top - 60}, 600);
 		}else{
 			$(this).addClass('active').find('span').text("Скрыть все");
 			opinionContent.find('.opinion__item').addClass('show');
 		}
 	});
+
 	// Переключение для Положительный и Отрицательный отзыв
 	$('.generally label').on('click', function(event){
 		event.preventDefault();
@@ -2443,6 +2446,28 @@ function pageGoods() {
 		$(this).addClass('active');
 		$(this).next('input').attr('checked', true);
 	});
+	
+	// Переключение для Положительный и Отрицательный отзыв
+	$('.opinion__nav a').on('click', function(){
+    if($(this).hasClass('goodOpinions')){
+      $('.good').show();
+      $('.bad').hide();
+			$('.opinion__nav a').removeClass('active')
+			$(this).addClass('active')
+    }
+    else if($(this).hasClass('badOpinions')){
+      $('.good').hide();
+      $('.bad').show();
+			$('.opinion__nav a').removeClass('active')
+			$(this).addClass('active')
+    }else{
+      $('.bad').show();
+      $('.good').show();
+			$('.opinion__nav a').removeClass('active')
+			$(this).addClass('active')
+    }
+  })
+
 	// Добавление отзыва о товаре. Рейтинг
 	if($('.goodsOpinionRating').length){
 		$('.goodsOpinionRating').rating();
@@ -3381,5 +3406,25 @@ function restCookie(){
       deleteCookie('categoryName', '' );
     }
   });
+}
+
+// Функция определения кол-ва дней до окончания акции
+function discountEndDay(){
+	$('.promotion__item').each(function(){
+		var end = $(this).find('.promotion__end').data('end')
+		var now = $(this).find('.promotion__end').data('now')
+		var diff = new Date(end).getTime() - new Date(now).getTime();
+		// Получаем кол-во дней
+		var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+		// Проверяем статус акции
+		if(days < 0){
+			var text = 'Акция завершена'
+		}else{
+			var text = 'Осталось ' + days + ' дн' + genWordEnd(days, 'ь', 'я', 'ей')
+		}
+		// Обновляем остаток дней
+		$(this).find('.promotion__end').text(text)
+
+	})
 }
 
