@@ -2213,11 +2213,11 @@
 						</div>
 						<!-- Почта -->
 						{% IF SETTINGS_STORE_EMAIL_MAIN %}
-						<div class="footer__contact flex mitt">
-							<div class="footer__contact-icon"><i class="material-icons-two-tone">drafts</i></div>
-							<div class="footer__contact-content">
-								<label class="footer__contact-label">Электронная почта</label>
-								<a class="footer__contact-link" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+						<div class="contacts__block flex mitt">
+							<div class="contacts__block-icon"><i class="material-icons-two-tone">drafts</i></div>
+							<div class="contacts__block-content">
+								<label class="contacts__block-label">Электронная почта</label>
+								<a class="contacts__block-link" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
 									<span>{SETTINGS_STORE_EMAIL_MAIN}</span>
 								</a>
 							</div>
@@ -2225,22 +2225,22 @@
 						{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
 						<!-- Телефон 1 2 3 -->
 						{% IF SETTINGS_STORE_PHONE_NUMBER1 || SETTINGS_STORE_PHONE_NUMBER2 || SETTINGS_STORE_PHONE_NUMBER3 %}
-						<div class="footer__contact phone flex mitt">
-							<div class="footer__contact-icon"><i class="material-icons-two-tone">phone_in_talk</i></div>
-							<div class="footer__contact-content">
-								<label class="footer__contact-label">Телефоны</label>
+						<div class="contacts__block phone flex mitt">
+							<div class="contacts__block-icon"><i class="material-icons-two-tone">phone_in_talk</i></div>
+							<div class="contacts__block-content">
+								<label class="contacts__block-label">Телефоны</label>
 								{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
-								<a class="footer__contact-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
+								<a class="contacts__block-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
 									<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE1} ({SETTINGS_STORE_PHONE_CITY_CODE1}) {SETTINGS_STORE_PHONE_NUMBER1}</span>
 								</a>
 								{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
 								{% IF SETTINGS_STORE_PHONE_NUMBER2 %}
-								<a class="footer__contact-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}">
+								<a class="contacts__block-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}">
 									<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE2} ({SETTINGS_STORE_PHONE_CITY_CODE2}) {SETTINGS_STORE_PHONE_NUMBER2}</span>
 								</a>
 								{% ENDIF SETTINGS_STORE_PHONE_NUMBER2 %}
 								{% IF SETTINGS_STORE_PHONE_NUMBER3 %}
-								<a class="footer__contact-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}">
+								<a class="contacts__block-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}">
 									<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE3} ({SETTINGS_STORE_PHONE_CITY_CODE3}) {SETTINGS_STORE_PHONE_NUMBER3}</span>
 								</a>
 								{% ENDIF SETTINGS_STORE_PHONE_NUMBER3 %}
@@ -2249,11 +2249,11 @@
 						{% ENDIF SETTINGS_STORE_PHONE_NUMBER123 %}
 						<!-- Адрес -->
 						{% IF SETTINGS_STORE_REGION %}
-						<div class="footer__contact flex mitt">
-							<div class="footer__contact-icon"><i class="material-icons-two-tone">location_on</i></div>
-							<div class="footer__contact-content">
-								<label class="footer__contact-label">Адрес</label>
-								<a class="footer__contact-link" href="https://yandex.ru/maps/?text={SETTINGS_STORE_REGION}&z=17" target="_blank" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+						<div class="contacts__block flex mitt">
+							<div class="contacts__block-icon"><i class="material-icons-two-tone">location_on</i></div>
+							<div class="contacts__block-content">
+								<label class="contacts__block-label">Адрес</label>
+								<a class="contacts__block-link" href="https://yandex.ru/maps/?text={SETTINGS_STORE_REGION}&z=17" target="_blank" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
 									<span>{SETTINGS_STORE_REGION}</span>
 								</a>
 							</div>
@@ -2261,11 +2261,11 @@
 						{% ENDIF SETTINGS_STORE_REGION %}
 						<!-- Режим работы -->
 						{% IF SETTINGS_STORE_WORK_TIME %}
-						<div class="footer__contact flex mitt">
-							<div class="footer__contact-icon"><i class="material-icons-two-tone">schedule</i></div>
-							<div class="footer__contact-content">
-								<label class="footer__contact-label">Режим работы</label>
-								<a class="footer__contact-link" href="{FEEDBACK_URL}" title="Режим работы">
+						<div class="contacts__block flex mitt">
+							<div class="contacts__block-icon"><i class="material-icons-two-tone">schedule</i></div>
+							<div class="contacts__block-content">
+								<label class="contacts__block-label">Режим работы</label>
+								<a class="contacts__block-link" href="{FEEDBACK_URL}" title="Режим работы">
 									<span>{SETTINGS_STORE_WORK_TIME}</span>
 								</a>
 							</div>
@@ -2741,6 +2741,7 @@
 	$(document).ready(function(){
 		catalog();
 		priceFilter();
+		restCookie();
 	});
 	</script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jqueryui.js?design=THEMENAME"></script>

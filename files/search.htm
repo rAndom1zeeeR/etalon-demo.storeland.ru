@@ -67,29 +67,29 @@
 			<!-- Вид Таблица/Список -->
 			<div class="view flex">
 				{% IF GOODS_VIEW_TYPE=1 %}
-				<div class="view__icon active flex-center" title="Таблица"><i class="material-icons">calendar_view_week</i></div>
-				<a href="?q={SEARCH_QUERY}&goods_view_type=2" class="view__icon flex-center" title="Таблица"><i class="material-icons">view_week</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=2" class="view__icon flex-center" title="Таблица крупная"><i class="material-icons-two-tone">view_week</i></a>
+				<div class="view__icon active flex-center" title="Таблица мелкая"><i class="material-icons-two-tone">calendar_view_week</i></div>
 				<span class="view__separator"></span>
-				<a href="?q={SEARCH_QUERY}&goods_view_type=3" class="view__icon flex-center" title="Список"><i class="material-icons">calendar_view_day</i></a>
-				<a href="?q={SEARCH_QUERY}&goods_view_type=4" class="view__icon flex-center" title="Список"><i class="material-icons">view_stream</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=4" class="view__icon flex-center" title="Список крупный"><i class="material-icons-two-tone">view_stream</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=3" class="view__icon flex-center" title="Список мелкий"><i class="material-icons-two-tone">calendar_view_day</i></a>
 				{% ELSEIF GOODS_VIEW_TYPE=2 %}
-				<a href="?q={SEARCH_QUERY}&goods_view_type=1" class="view__icon flex-center" title="Таблица"><i class="material-icons">calendar_view_week</i></a>
-				<div class="view__icon active flex-center" title="Таблица"><i class="material-icons">view_week</i></div>
+				<div class="view__icon active flex-center" title="Таблица крупная"><i class="material-icons-two-tone">view_week</i></div>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=1" class="view__icon flex-center" title="Таблица мелкая"><i class="material-icons-two-tone">calendar_view_week</i></a>
 				<span class="view__separator"></span>
-				<a href="?q={SEARCH_QUERY}&goods_view_type=3" class="view__icon flex-center" title="Список"><i class="material-icons">calendar_view_day</i></a>
-				<a href="?q={SEARCH_QUERY}&goods_view_type=4" class="view__icon flex-center" title="Список"><i class="material-icons">view_stream</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=4" class="view__icon flex-center" title="Список крупный"><i class="material-icons-two-tone">view_stream</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=3" class="view__icon flex-center" title="Список мелкий"><i class="material-icons-two-tone">calendar_view_day</i></a>
 				{% ELSEIF GOODS_VIEW_TYPE=3 %}
-				<a href="?q={SEARCH_QUERY}&goods_view_type=1" class="view__icon flex-center" title="Таблица"><i class="material-icons">calendar_view_week</i></a>
-				<a href="?q={SEARCH_QUERY}&goods_view_type=2" class="view__icon flex-center" title="Таблица"><i class="material-icons">view_week</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=2" class="view__icon flex-center" title="Таблица крупная"><i class="material-icons-two-tone">view_week</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=1" class="view__icon flex-center" title="Таблица мелкая"><i class="material-icons-two-tone">calendar_view_week</i></a>
 				<span class="view__separator"></span>
-				<div class="view__icon active flex-center" title="Список"><i class="material-icons">calendar_view_day</i></div>
-				<a href="?q={SEARCH_QUERY}&goods_view_type=4" class="view__icon flex-center" title="Список"><i class="material-icons">view_stream</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=4" class="view__icon flex-center" title="Список крупный"><i class="material-icons-two-tone">view_stream</i></a>
+				<div class="view__icon active flex-center" title="Список мелкий"><i class="material-icons-two-tone">calendar_view_day</i></div>
 				{% ELSE %}
-				<a href="?q={SEARCH_QUERY}&goods_view_type=1" class="view__icon flex-center" title="Таблица"><i class="material-icons">calendar_view_week</i></a>
-				<a href="?q={SEARCH_QUERY}&goods_view_type=2" class="view__icon flex-center" title="Таблица"><i class="material-icons">view_week</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=2" class="view__icon flex-center" title="Таблица крупная"><i class="material-icons-two-tone">view_week</i></a>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=1" class="view__icon flex-center" title="Таблица мелкая"><i class="material-icons-two-tone">calendar_view_week</i></a>
 				<span class="view__separator"></span>
-				<a href="?q={SEARCH_QUERY}&goods_view_type=3" class="view__icon flex-center" title="Список"><i class="material-icons">calendar_view_day</i></a>
-				<div class="view__icon active flex-center" title="Список"><i class="material-icons">view_stream</i></div>
+				<div class="view__icon active flex-center" title="Список крупный"><i class="material-icons-two-tone">view_stream</i></div>
+				<a href="?q={SEARCH_QUERY}&goods_view_type=3" class="view__icon flex-center" title="Список мелкий"><i class="material-icons-two-tone">calendar_view_day</i></a>
 				{% ENDIF %}
 			</div>
 			<!-- /END Вид Таблица/Список -->

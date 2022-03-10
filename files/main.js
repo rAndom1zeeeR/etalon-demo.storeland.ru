@@ -561,7 +561,12 @@ function openMenu() {
 		$('#overlay').toggleClass('opened transparent');
 		if(getClientWidth() > 991){
 			$(this).parent().toggleClass('opened');
-			$('.mobmenu').removeClass('opened');
+			$('.mobmenu').removeClass('opened');			
+			if($(this).hasClass('opened')){
+				$('#menu').css({'z-index' : '11'})
+			}else{
+				$('#menu').css({'z-index' : '4'})
+			}
 		}else{
 			$(this).parent().removeClass('opened');
 			$('.mobmenu').addClass('opened');
@@ -629,12 +634,14 @@ function mainnav(id,rows,media){
 						mainnav.find('.overflowMenu').removeClass('opened');
 						$('.mainnav__more i').text('expand_more');
 						$('#overlay').removeClass('opened');
+						$('#menu').css({'z-index' : '4'})
 					} else{
 						$(this).addClass('opened');
 						mainnav.addClass('opened');
 						mainnav.find('.overflowMenu').addClass('opened');
 						$('.mainnav__more i').text('expand_less');
 						$('#overlay').addClass('opened')
+						$('#menu').css({'z-index' : '10'})
 					}
 					// Определение положения кнопки еще
 					positionMore()
@@ -2261,7 +2268,7 @@ function priceFilter() {
 		event.preventDefault();
 		$(this).toggleClass('opened');
 		$('#filters').toggleClass('opened');
-		$('#overlay').toggleClass('opened');
+		$('#overlay').toggleClass('opened transparent');
 	});
 
 	// Фильтры поиск
@@ -2323,7 +2330,7 @@ function pageGoods() {
 		responsiveRefreshRate: 100,
 		responsive: {
 			0:{items:2},
-			320:{items:2},
+			320:{items:3},
 			375:{items:3},
 			480:{items:4},
 			641:{items:5},
@@ -3022,6 +3029,7 @@ function cartDelete(s){
 			success:function(d){
 				$('.page-cartTable').html($(d).find('.page-cartTable').html());
 				cartQuantity();
+				priceDiff('.cart__item', 'diff');
 				$('#startOrder').on('click', function() {
 					startOrder();
 					return false;
@@ -3352,5 +3360,26 @@ function ajaxProducts() {
 
 	}
 
+}
+
+// Функция записи состояния Нет в наличии
+function restCookie(){
+	// Куки для кнопки в наличии в каталоге
+  var category_name = $('#page__title .title').text();
+  if(getCookie('empty') === 'hide' && getCookie('categoryName') === category_name) {
+    $("#filter_only_with_rest").prop('checked', true);
+  } else {
+    deleteCookie('categoryName','');
+  }
+  $("#filter_only_with_rest").change(function(){
+     setCookie('categoryName', category_name);
+     
+    if($(this).is(':checked')){
+      setCookie('empty','hide');
+    }else{
+      deleteCookie('empty','hide');
+      deleteCookie('categoryName', '' );
+    }
+  });
 }
 

@@ -7,11 +7,11 @@
 	  <div class="products__grid promotion__grid flex-start">
 	  {% FOR promotion_campaign %}
 	  <div class="promotion__item product__item {% IFNOT promotion_campaign.IS_WORK %}promotion__empty{% ENDIF %}" data-id="{promotion_campaign.ID}">
-			<div class="product__form-{promotion_campaign.ID}">
+			<a class="product__form-{promotion_campaign.ID}" href="{promotion_campaign.URL | url_amp}">
 				<div class="promotion__top flex">
-					<a class="promotion__name" href="{promotion_campaign.URL | url_amp}" title="{promotion_campaign.NAME}">
+					<div class="promotion__name" title="{promotion_campaign.NAME}">
 						<span>{promotion_campaign.NAME}</span>
-					</a>
+					</div>
 					{% IF promotion_campaign.DESCRIPTION_SHORT %}
 					<div class="promotion__desc">
 						<span>{promotion_campaign.DESCRIPTION_SHORT}</span>
@@ -22,16 +22,16 @@
 					<div class="promotion__percentage">
 						<span>-{promotion_campaign.PERCENTAGE}%</span>
 					</div>
-					<div class="promotion__date">
+					<div class="promotion__date mitt-white">
 						{% IF promotion_campaign.IS_WORK %}
-						<i class="material-icons">timer</i>
+						<i class="material-icons-two-tone">timer</i>
 						<span>До {promotion_campaign.EXPIRED_TIME | date('d.m.Y')}</span>
 						{% ELSE %}
 						<span>Акция закончилась</span>
 						{% ENDIF %}
 					</div>
 				</div>
-			</div>
+			</a>
 	  </div>
 	  {% ENDFOR promotion_campaign %}
 	  </div>

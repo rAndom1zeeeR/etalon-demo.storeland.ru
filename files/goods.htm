@@ -110,7 +110,7 @@
 				{% IF GOODS_MOD_MAX_DISCOUNT_ID %}
 				<div class="productView__campaign">
 					<div class="productView__campaign-content flex-center">
-						<i class="material-icons">timer</i>
+						<i class="material-icons-two-tone">timer</i>
 						<span>Акция до </span>
 						<span class="productView__campaign-date">{GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date('d.m.Y')}</span>
 					</div>
@@ -800,8 +800,9 @@
 
 				<!-- Форма добавления отзыва -->
 				<div class="opinion__addForm">
-					<div class="opinion__addForm-title">
+					<div class="opinion__addForm-title mitt-white flex justify-between">
 						<span>Добавить отзыв</span>
+						<i class="material-icons-two-tone">edit</i>
 					</div>
 					<!-- Форма добавления нового отзыва о товаре -->
 					<form method="post" action="{CURRENT_URL}" class="opinion__form" enctype="multipart/form-data">
@@ -811,6 +812,11 @@
 						<!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
 						{ANTISPAM_CODE}
 						<!-- Форма добавления отзыва о товаре -->
+						{% IFNOT opinion_list_empty %}
+						<div class="opinion__block">
+							<span>Вы приобрели товар? Поделитесь своим мнением с другими и возможно вы поможете кому-то сделать правильный выбор!</span>
+						</div>
+						{% ENDIF %}
 						<div class="opinion__block rating flex">
 							<span>Ваша оценка</span>
 							<div class="goodsOpinionRating">
@@ -883,8 +889,9 @@
 <!-- С этим товаром смотрят -->
 <section id="related-views" class="related">
 	{% IFNOT related_views_goods_empty %}
-	<div class="block__title">
-		<h4 class="title"><span>С этим товаром смотрят</span></h4>
+	<div class="block__title block__nav flex">
+		<h2 class="title"><span>С этим товаром смотрят</span></h2>
+		<div class="owl-nav"></div>
 	</div>		
 	<div class="products__grid owl-carousel">
 		{% FOR related_views_goods %}
