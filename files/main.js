@@ -229,6 +229,7 @@ function ajaxForms(id,flag,successMessage,errorMessage){
             t.hide();
             t.find('.form__input').val(' ');
             t.parent().append('<div class="form__text">'+ errorMessage +'</div>');
+						$(id).addClass('error')
             new Noty({
               text: '<div class="noty__addto"><div class="noty__message">' + successMessage + '</div></div>',
               layout:"bottomRight",
@@ -251,6 +252,7 @@ function ajaxForms(id,flag,successMessage,errorMessage){
       function callBackError(type) {
         t.find('.form__input').val(' ');
         t.parent().find('.form__text').hide();
+				$(id).addClass('error')
         new Noty({
           text: '<div class="noty__addto"><div class="noty__message">' + errorMessage + '</div></div>',
           layout:"bottomRight",
@@ -287,11 +289,13 @@ ajaxForms('#fancybox__feedback','fancyFeedbackFlag','Запрос обратно
 // "Обратная связь".
 ajaxForms('.form__feedback','feedbackFlag','Спасибо за обращение! Мы свяжемся с вами в ближайшее время','Вы уже отправляли запрос. Пожалуйста ожидайте.')
 // "Подписаться".
-ajaxForms('#subscribe','subscribeFlag','Спасибо за обращение! Вы подписались на наши уведомления','Вы уже отправляли запрос. Пожалуйста ожидайте.')
+//ajaxForms('#subscribe','subscribeFlag','Спасибо за обращение! Вы подписались на наши уведомления','Вы уже отправляли запрос. Пожалуйста ожидайте.')
 // "Уведомить" в модальном окне.
 ajaxForms('#fancybox__notify','notifyFlag','Вы будете уведомлены о поступлении товара','Вы уже отправляли запрос. Пожалуйста ожидайте.')
 // "Обратный звонок".
 ajaxForms('.page-сallback','pageCallbackFlag','Спасибо за обращение! Мы перезвоним вам в ближайшее время','Вы уже отправляли запрос. Пожалуйста ожидайте звонка.')
+// "Обратный звонок".
+ajaxForms('#feedback','fancyFeedbackFlag','Запрос обратной связи успешно отправлен администрации магазина','Вы уже отправляли запрос. Пожалуйста ожидайте.')
 
 
 ///////////////////////////////////////
@@ -2171,6 +2175,16 @@ function catalog() {
 			$(this).closest('.collapsible').addClass('active');
 		}
 	});
+
+	// Сборосить категорию фильтра
+	$('.filter__clear').on('click', function(event){
+		event.preventDefault();
+		var parent = $(this).closest('.filter__list');
+		var checkboxes = parent.find('[type="checkbox"]')
+		checkboxes.prop('checked', false).attr('checked', false);
+		$('.form__filters')[0].submit();
+	});
+
 }
 
 // Фильтр по ценам
@@ -2326,8 +2340,8 @@ function pageGoods() {
 		var buttons = id.find('.owl-nav');
 		var dots = id.find('.owl-dots');
 		carousel.owlCarousel({
-			items: 4,
-			margin: 32,
+			items: 5,
+			margin: 16,
 			loop: false,
 			rewind: true,
 			lazyLoad: true,
@@ -2352,8 +2366,8 @@ function pageGoods() {
 				480:{items:2},
 				640:{items:2},
 				768:{items:3},
-				992:{items:3},
-				1200:{items:4}
+				992:{items:4},
+				1200:{items:5}
 			}
 		});
 	}
@@ -3259,4 +3273,84 @@ function addOpened(obj){obj.hasClass('opened') ? obj.removeClass('opened') : obj
 
 function addActive(obj){obj.hasClass('active') ? obj.removeClass('active') : obj.addClass('active')}
 
+// Функция подгрузки товаров ajax
+function ajaxProducts() {
+	var pages = $('.pages');
+
+	if(pages.length){
+		// Функция загрузки товаров со след страницы
+		function loadItems(){
+			var url = pages.find('.next a').attr('href');
+			// Проверяем наличие след страницы
+			if(url){
+				// console.log('get goods from url', url)
+				$.ajax({
+					url:url + '&only_body=1',
+					cache:false,
+					dataType: 'html',
+					success:function(data){
+						// Получаем товары
+						var items = $(data).find('.products__ajax').html();
+						// Добавляем товары
+						$('.products__ajax').append(items)
+						// Обновляем изображение подргуженных товаров
+						$('.products__ajax .product__item').each(function(){
+							$(this).find('img').attr('src', $(this).find('img').data('src'))
+						})
+						priceDiff('.products__ajax .product__item', 'percent');
+						// Обновляем навигацию
+						pages.html($(data).find('.pages').html())
+						$('.status__visible').text($('.products__ajax .product__item:visible').length);
+					}
+				})
+			}else{
+				console.log('Загружены все товары')
+				return false;
+			}
+		}
+
+		// Проверка положения нижней границы контейнера
+		function checkPosition() {
+			var coords = $(".products__container")[0].getBoundingClientRect();
+			var windowHeight = document.documentElement.clientHeight;
+			// нижний край элемента виден?
+			var bottomVisible = coords.bottom < windowHeight && coords.bottom > 100;
+			return bottomVisible
+		}
+
+		// обрабатываем скролл на всей странице
+		function throttle(func, limit){
+			var lastFunc;
+			var lastRan;
+			return function(){
+				var context = this;
+				var args = arguments;
+				if (!lastRan){
+					func.apply(context, args);
+					lastRan = Date.now();
+				} else {
+					clearTimeout(lastFunc);
+					lastFunc = setTimeout(function(){
+						if((Date.now() - lastRan) >= limit) {
+							func.apply(context, args);
+							lastRan = Date.now();
+						}
+					}, limit - (Date.now() - lastRan));
+				}
+			}
+		}
+		
+		// код будет срабатывать раз в 1 секунду
+		document.addEventListener('scroll', throttle(function() {
+			if(checkPosition()){
+				console.log('loadItems')
+				return loadItems();
+			} else {
+				return false;
+			}
+		}, 1000));
+
+	}
+
+}
 

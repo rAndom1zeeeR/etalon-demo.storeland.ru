@@ -76,37 +76,37 @@
 			</div>
 			<!-- /END Показывать по: -->
 			<div class="toolbar__filters {% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %}">
-				<a class="filters__icon" href="javascript:;">
-					<i class="material-icons">filter_alt</i>
+				<a class="filters__icon mitt" href="javascript:;">
+					<i class="material-icons-two-tone">filter_alt</i>
 					<span>Фильтры</span>
 				</a>
 			</div>
 			<!-- Вид Таблица/Список -->
 			<div class="view flex">
 				{% IF GOODS_VIEW_TYPE=1 %}
-				<div class="view__icon active flex-center" title="Таблица"><i class="material-icons">calendar_view_week</i></div>
-				<a href="?goods_view_type=2" class="view__icon flex-center" title="Таблица"><i class="material-icons">view_week</i></a>
+				<div class="view__icon active flex-center" title="Таблица"><i class="material-icons-two-tone">calendar_view_week</i></div>
+				<a href="?goods_view_type=2" class="view__icon flex-center" title="Таблица"><i class="material-icons-two-tone">view_week</i></a>
 				<span class="view__separator"></span>
-				<a href="?goods_view_type=3" class="view__icon flex-center" title="Список"><i class="material-icons">calendar_view_day</i></a>
-				<a href="?goods_view_type=4" class="view__icon flex-center" title="Список"><i class="material-icons">view_stream</i></a>
+				<a href="?goods_view_type=3" class="view__icon flex-center" title="Список"><i class="material-icons-two-tone">calendar_view_day</i></a>
+				<a href="?goods_view_type=4" class="view__icon flex-center" title="Список"><i class="material-icons-two-tone">view_stream</i></a>
 				{% ELSEIF GOODS_VIEW_TYPE=2 %}
-				<a href="?goods_view_type=1" class="view__icon flex-center" title="Таблица"><i class="material-icons">calendar_view_week</i></a>
-				<div class="view__icon active flex-center" title="Таблица"><i class="material-icons">view_week</i></div>
+				<a href="?goods_view_type=1" class="view__icon flex-center" title="Таблица"><i class="material-icons-two-tone">calendar_view_week</i></a>
+				<div class="view__icon active flex-center" title="Таблица"><i class="material-icons-two-tone">view_week</i></div>
 				<span class="view__separator"></span>
-				<a href="?goods_view_type=3" class="view__icon flex-center" title="Список"><i class="material-icons">calendar_view_day</i></a>
-				<a href="?goods_view_type=4" class="view__icon flex-center" title="Список"><i class="material-icons">view_stream</i></a>
+				<a href="?goods_view_type=3" class="view__icon flex-center" title="Список"><i class="material-icons-two-tone">calendar_view_day</i></a>
+				<a href="?goods_view_type=4" class="view__icon flex-center" title="Список"><i class="material-icons-two-tone">view_stream</i></a>
 				{% ELSEIF GOODS_VIEW_TYPE=3 %}
-				<a href="?goods_view_type=1" class="view__icon flex-center" title="Таблица"><i class="material-icons">calendar_view_week</i></a>
-				<a href="?goods_view_type=2" class="view__icon flex-center" title="Таблица"><i class="material-icons">view_week</i></a>
+				<a href="?goods_view_type=1" class="view__icon flex-center" title="Таблица"><i class="material-icons-two-tone">calendar_view_week</i></a>
+				<a href="?goods_view_type=2" class="view__icon flex-center" title="Таблица"><i class="material-icons-two-tone">view_week</i></a>
 				<span class="view__separator"></span>
-				<div class="view__icon active flex-center" title="Список"><i class="material-icons">calendar_view_day</i></div>
-				<a href="?goods_view_type=4" class="view__icon flex-center" title="Список"><i class="material-icons">view_stream</i></a>
+				<div class="view__icon active flex-center" title="Список"><i class="material-icons-two-tone">calendar_view_day</i></div>
+				<a href="?goods_view_type=4" class="view__icon flex-center" title="Список"><i class="material-icons-two-tone">view_stream</i></a>
 				{% ELSE %}
-				<a href="?goods_view_type=1" class="view__icon flex-center" title="Таблица"><i class="material-icons">calendar_view_week</i></a>
-				<a href="?goods_view_type=2" class="view__icon flex-center" title="Таблица"><i class="material-icons">view_week</i></a>
+				<a href="?goods_view_type=1" class="view__icon flex-center" title="Таблица"><i class="material-icons-two-tone">calendar_view_week</i></a>
+				<a href="?goods_view_type=2" class="view__icon flex-center" title="Таблица"><i class="material-icons-two-tone">view_week</i></a>
 				<span class="view__separator"></span>
-				<a href="?goods_view_type=3" class="view__icon flex-center" title="Список"><i class="material-icons">calendar_view_day</i></a>
-				<div class="view__icon active flex-center" title="Список"><i class="material-icons">view_stream</i></div>
+				<a href="?goods_view_type=3" class="view__icon flex-center" title="Список"><i class="material-icons-two-tone">calendar_view_day</i></a>
+				<div class="view__icon active flex-center" title="Список"><i class="material-icons-two-tone">view_stream</i></div>
 				{% ENDIF %}
 			</div>
 			<!-- /END Вид Таблица/Список -->
@@ -119,7 +119,7 @@
 		<!-- Вывод товаров ТАБЛИЦЕЙ -->
 		{% IF GOODS_VIEW_TYPE=1 %}
 		<div class="row">
-			<div class="products__grid flex-stretch">
+			<div class="products__grid products__ajax flex-stretch">
 				{% FOR goods %}
 				<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{goods.ID}" itemscope itemtype="https://schema.org/Product">
 					<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{goods.MIN_PRICE_NOW_ID} goodsListForm">
@@ -317,7 +317,7 @@
 		{% ELSEIF GOODS_VIEW_TYPE=2 %}
 		<!-- Вывод товаров Большой ТАБЛИЦЕЙ -->
 		<div class="row">
-			<div class="products__gridBig flex-stretch">
+			<div class="products__gridBig products__ajax flex-stretch">
 				{% FOR goods %}
 				<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{goods.ID}" itemscope itemtype="https://schema.org/Product">
 					<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{goods.MIN_PRICE_NOW_ID} goodsListForm">
@@ -527,7 +527,7 @@
 		</div>
 		{% ELSEIF GOODS_VIEW_TYPE=3 %}
 		<!-- Вывод товаров Маленьким СПИСКОМ -->
-		<div class="products__listSmall">
+		<div class="products__listSmall products__ajax">
 			{% FOR goods %}
 			<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{goods.ID}" itemscope itemtype="https://schema.org/Product">
 				<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{goods.MIN_PRICE_NOW_ID} goodsListForm flex">
@@ -721,7 +721,7 @@
 		</div>
 		{% ELSE %}
 		<!-- Вывод товаров Маленьким СПИСКОМ -->
-		<div class="products__list">
+		<div class="products__list products__ajax">
 			{% FOR goods %}
 			<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{goods.ID}" itemscope itemtype="https://schema.org/Product">
 				<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{goods.MIN_PRICE_NOW_ID} goodsListForm flex">
@@ -822,10 +822,10 @@
 									data-art="{goods.ART_NUMBER}"
 								>												
 									<i class="material-icons-two-tone">notifications_active</i>
-									<span>В корзину</span>
+									<span>Уведомить</span>
 								</a>
 								{% ELSE %}
-								<a class="button-primary {% IF goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+								<a class="button-primary mitt {% IF goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
 									title="Добавить в корзину &laquo;{goods.NAME}&raquo;"
 									data-tooltip="В корзину"
 									rel="nofollow"
@@ -961,6 +961,13 @@
 			</li>
 			{% ENDIF %}
 		</ol>
+		<div class="status">
+			<span>Показано</span>
+			<strong class="status__visible">{GOODS_PAGES_RESULTS_ON_PAGE}</strong>
+			<span>товар{GOODS_PAGES_RESULTS_ON_PAGE | gen_word_end("","а","ов")}</span>
+			<span>из</span>
+			<span class="status__total">{GOODS_PAGES_RESULTS}</span>
+		</div>
 	</div>
 	{% ENDIF %}
 	<!-- //END Страницы -->

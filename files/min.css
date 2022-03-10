@@ -41,6 +41,10 @@
 .noty__image {width: 120px;height: 120px;}
 .noty__content {width: calc(100% - 120px);padding-left: 1rem;}
 
+@media (max-width: 479px){
+  #noty_layout__bottomRight {max-width: 284px;}
+}
+
 .animated {
 -webkit-animation-duration: 1s;
 animation-duration: 1s;
