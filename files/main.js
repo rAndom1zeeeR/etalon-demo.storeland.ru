@@ -1343,8 +1343,10 @@ function addCart() {
 
 					// Открытие/Закрытие корзины при добавлении
 					$('.cart.dropdown').addClass('opened')
+					$('#menu').css({'z-index' : '10'})
 					setTimeout(function () {
 						$('.cart.dropdown').removeClass('opened')
+						$('#menu').css({'z-index' : '4'})
 					}, 2000);
 
 				}
