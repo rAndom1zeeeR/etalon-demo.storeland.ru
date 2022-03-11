@@ -1,8 +1,8 @@
 <!-- В корне каталога товаров отобразим все корневые категории если они есть на сайте -->
 <div class="products">
 	<!-- Вывод категорий -->
-	{% IFNOT nested_categories_list_empty && IS_FULL_CATALOG %}
-	<div class="categories {% IF IS_FULL_CATALOG %}categories__full{% ENDIF %}">
+	{% IFNOT nested_categories_list_empty && IS_FULL_CATALOG || goods_empty %}
+	<div class="categories {% IF IS_FULL_CATALOG || goods_empty %}categories__full{% ENDIF %}">
 		<div class="row">
 			<div class="categories__list flex {% IF index_page %}index{% ENDIF %}">
 				{% FOR nested_categories_list %}
@@ -10,7 +10,7 @@
 					<a class="categories__image flex-center" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
 						<img class="goods-cat-image-medium" src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">
 					</a>
-					<a class="categories__name" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
+					<a class="categories__name flex-center" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
 						<span>{nested_categories_list.NAME}</span>
 					</a>
 				</div>
@@ -19,6 +19,7 @@
 		</div>
 	</div>
 	{% ENDIF %}
+	
 	<!-- Если нет товаров, выводим сообщение пользователю -->
 	{% IF nested_categories_list_empty && goods_empty %}
 		{% IF goods_filters_empty %}
@@ -28,6 +29,9 @@
 		<p class="attention">Нет товаров для выбранных условий</p>
 		<p><a href="{PAGE_CANONICAL}" class="button button2" title="Очистить фильры">Очистить фильры</a></p>
 		{% ENDIF %}
+		<style>
+			.categories {display: none;}
+		</style>
 	{% ENDIF %}
 	<!-- /Если нет товаров, выводим сообщение пользователю -->
 
@@ -37,17 +41,17 @@
 	<div class="toolbar {% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %}">
 		
 		{% IFNOT nested_categories_list_empty %}
-		<div class="categories {% IF IS_FULL_CATALOG %}categories__full{% ENDIF %}">
+		<div class="categories">
 			<div class="row">
 				<div class="categories__list flex {% IF index_page %}index{% ENDIF %}">
-					{% IFNOT IS_FULL_CATALOG %}
+					<!-- {% IFNOT IS_FULL_CATALOG %}
 					<div class="categories__item categories__item-back" data-id="back">
 						<a class="categories__name flex-center" href="#" onclick="history.back();return false;">
 							<i class="material-icons">navigate_before</i>
 							<span>Назад</span>
 						</a>
 					</div>
-					{% ENDIF %}
+					{% ENDIF %} -->
 					{% FOR nested_categories_list %}
 					<div class="categories__item" data-id="{nested_categories_list.ID}" {% IF nested_categories_list.LEVEL> 0 %}style="display: none;"{% ENDIF %}>
 						<a class="categories__image flex-center" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">

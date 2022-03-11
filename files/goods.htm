@@ -54,7 +54,7 @@
 			<h1 class="productView__name" itemprop="name">{GOODS_NAME}</h1>
 			
 			<!--  -->
-			<div class="productView__inner flex justify-between">
+			<div class="productView__inner flex">
 				<!-- Среднее значение по результатам всех отзывов об этом товаре -->
 				{% IFNOT SETTINGS_OPINION_DISABLE %}
 				<div class="productView__ratings flex">
@@ -317,6 +317,12 @@
 			<div class="productView__text" itemprop="description">{GOODS_DESCRIPTION_SHORT}</div>
 			{% ENDIF %}
 
+			<div class="productView__goto">
+				<a href="javascript:;" title="Перейти к полному описанию">
+					<span>Перейти к полному описанию</span>
+				</a>
+			</div>
+
 			<!-- Преимущества -->
 			<div class="productView__offers flex justify-between">
 				<div class="offers__item flex">
@@ -367,7 +373,7 @@
 			</div>
 			<div class="products__grid owl-carousel">
 				{% FOR related_goods %}
-				<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF related_goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF related_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{related_goods.ID}" itemscope itemtype="https://schema.org/Product">
+				<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF related_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{related_goods.ID}" itemscope itemtype="https://schema.org/Product">
 					<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{related_goods.MIN_PRICE_NOW_ID} goodsListForm">
 						<input type="hidden" name="hash" value="{HASH}" />
 						<input type="hidden" name="form[goods_from]" value="{related_goods.GOODS_FROM}" />
@@ -456,11 +462,11 @@
 									<span>Уведомить</span>
 								</a>
 								{% ELSE %}
-								<a class="{% IF related_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+								<a class="add-cart"
 									title="Добавить в корзину &laquo;{related_goods.NAME}&raquo;"
 									data-tooltip="В корзину"
 									rel="nofollow"
-									href="{% IF related_goods.COUNT_MODIFICATION > 1 %}{related_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+									href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_goods.MIN_PRICE_NOW_ID}"
 								>
 									<i class="material-icons-two-tone">local_mall</i>
 									<span>В корзину</span>
@@ -717,7 +723,7 @@
 						<div>Вы приобрели товар? Поделитесь своим мнением с другими и возможно вы поможете кому-то сделать правильный выбор!</div>
 					</div>
 					<div class="opinion__empty-buttons">
-						<a class="button-tertiary opinion__add" href="javascript:;"><span>Оставить отзвы</span></a>
+						<a class="button-tertiary opinion__add" href="javascript:;"><span>Оставить отзывы</span></a>
 					</div>
 				</div>					
 				{% ELSE %}
@@ -871,10 +877,10 @@
 							<label for="goods_opinion_comment">Комментарий:</label>
 							<textarea id="goods_opinion_comment" name="form[{ANTISPAM_FORM_FIELD_NAME_GOODS_OPINION_COMMENT}]" cols="100" rows="2" class="textarea" placeholder="Комментарий" required>{FORM_GOODS_OPINION_COMMENT}</textarea>
 						</div>
-						<div class="opinion__block" style="display: none;">
-							<label for="opinion_generally_is_good1">Порекомендовали бы товар друзьям?</label>
-							<div class="generally">
-								<label for="opinion_generally_is_good1"><i class="material-icons">mood</i><span>Да</span></label>
+						<div class="opinion__block">
+							<div>Порекомендовали бы товар друзьям?</div>
+							<div class="generally flex">
+								<label class="active" for="opinion_generally_is_good1"><i class="material-icons">mood</i><span>Да</span></label>
 								<input id="opinion_generally_is_good1" name="form[{ANTISPAM_FORM_FIELD_NAME_GOODS_OPINION_GENERALLY_IS_GOOD}]" type="radio" value="1" {% IF FORM_GOODS_OPINION_GENERALLY_IS_GOOD=1 %}checked="checked" {% ENDIF %} />
 								<label for="opinion_generally_is_good0"><i class="material-icons">mood_bad</i><span>Нет</span></label>
 								<input id="opinion_generally_is_good0" name="form[{ANTISPAM_FORM_FIELD_NAME_GOODS_OPINION_GENERALLY_IS_GOOD}]" type="radio" value="0" {% IF FORM_GOODS_OPINION_GENERALLY_IS_GOOD=0 %}checked="checked" {% ENDIF %} />
@@ -884,8 +890,8 @@
 						<div class="opinion__block">
 							<label for="opinion_captcha_string" title="Введите код с картинки">Введите код:</label>
 							<div class="opinion__captcha">
-								<input type="text" id="opinion_captcha_string" name="form[{ANTISPAM_FORM_FIELD_NAME_CAPTCHA_STRING}]" autocomplete="off" class="captcha form__input" value="{FORM_}" placeholder="Введите капчу"/>
-								<img src="{CAPTCHA_URL}" class="captcha__image" alt="Код" title="Проверочный код, который нужно ввести в соседнее поле" />
+								<input class="captcha form__input" type="text" id="opinion_captcha_string" name="form[{ANTISPAM_FORM_FIELD_NAME_CAPTCHA_STRING}]" autocomplete="off" value="{FORM_}" placeholder="Введите капчу"/>
+								<img class="captcha__image" src="{CAPTCHA_URL}" alt="Код" title="Проверочный код, который нужно ввести в соседнее поле" />
 								<a class="captcha__refresh" href="javascript:;"><i class="material-icons">refresh</i></a>
 							</div>
 						</div>

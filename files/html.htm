@@ -295,8 +295,8 @@
 										<span class="cart__word">товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</span>
 									</span>
 									<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>
-									<a class="removeAll" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
-										<i class="material-icons">disabled_by_default</i>
+									<a class="removeAll mitt-gray" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
+										<i class="material-icons-two-tone">disabled_by_default</i>
 									</a>
 								</div>
 								<div class="addto__items">
@@ -351,7 +351,7 @@
 			<div class="container">
 				<div class="main__inner flex-start">
 					<!-- Левая часть -->
-					{% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog || index_page %}
+					{% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog && goods_empty=0 || index_page %}
 					<div class="main__left sidebar">
 						<!-- Каталог -->
 						<div class="sidebar__block catalog">
@@ -854,7 +854,7 @@
 					{% ENDIF IS_FULL_CATALOG %}
 
 					<!-- Правая часть -->
-					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog || index_page %}has-sidebar{% ENDIF %}">
+					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog && goods_empty=0 || index_page %}has-sidebar{% ENDIF %}">
 						{% IF index_page %}
 						<!-- Слайдшоу -->
 						<section id="slideshow" class="loading">
@@ -2479,7 +2479,7 @@
 			<div class="mobmenu">
 				
 				<!-- Закрыть -->
-				<div class="mobmenu__close" onclick="closeAll()">
+				<div class="mobmenu__close mitt-gray" onclick="closeAll()">
 					<i class="material-icons-two-tone">disabled_by_default</i>
 				</div>
 
@@ -2534,11 +2534,11 @@
 					<div class="mobmenu__content">
 						<!-- Почта -->
 						{% IF SETTINGS_STORE_EMAIL_MAIN %}
-						<div class="footer__contact email flex mitt">
-							<div class="footer__contact-icon"><i class="material-icons-two-tone">drafts</i></div>
-							<div class="footer__contact-content">
-								<label class="footer__contact-label">Электронная почта</label>
-								<a class="footer__contact-link" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+						<div class="contacts__block email flex mitt">
+							<div class="contacts__block-icon"><i class="material-icons-two-tone">drafts</i></div>
+							<div class="contacts__block-content">
+								<label class="contacts__block-label">Электронная почта</label>
+								<a class="contacts__block-link" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
 									<span>{SETTINGS_STORE_EMAIL_MAIN}</span>
 								</a>
 							</div>
@@ -2546,22 +2546,22 @@
 						{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
 						<!-- Телефон 1 2 3 -->
 						{% IF SETTINGS_STORE_PHONE_NUMBER1 || SETTINGS_STORE_PHONE_NUMBER2 || SETTINGS_STORE_PHONE_NUMBER3 %}
-						<div class="footer__contact phone flex mitt">
-							<div class="footer__contact-icon"><i class="material-icons-two-tone">phone_in_talk</i></div>
-							<div class="footer__contact-content">
-								<label class="footer__contact-label">Телефоны</label>
+						<div class="contacts__block phone flex mitt">
+							<div class="contacts__block-icon"><i class="material-icons-two-tone">phone_in_talk</i></div>
+							<div class="contacts__block-content">
+								<label class="contacts__block-label">Телефоны</label>
 								{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
-								<a class="footer__contact-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
+								<a class="contacts__block-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
 									<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE1} ({SETTINGS_STORE_PHONE_CITY_CODE1}) {SETTINGS_STORE_PHONE_NUMBER1}</span>
 								</a>
 								{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
 								{% IF SETTINGS_STORE_PHONE_NUMBER2 %}
-								<a class="footer__contact-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}">
+								<a class="contacts__block-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}">
 									<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE2} ({SETTINGS_STORE_PHONE_CITY_CODE2}) {SETTINGS_STORE_PHONE_NUMBER2}</span>
 								</a>
 								{% ENDIF SETTINGS_STORE_PHONE_NUMBER2 %}
 								{% IF SETTINGS_STORE_PHONE_NUMBER3 %}
-								<a class="footer__contact-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}">
+								<a class="contacts__block-link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}">
 									<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE3} ({SETTINGS_STORE_PHONE_CITY_CODE3}) {SETTINGS_STORE_PHONE_NUMBER3}</span>
 								</a>
 								{% ENDIF SETTINGS_STORE_PHONE_NUMBER3 %}

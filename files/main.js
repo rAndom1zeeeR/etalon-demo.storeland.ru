@@ -1266,31 +1266,31 @@ function addCart() {
 					}
 				} else {
 					// Сообщение с успешным добавлением
-					if(typeof(Noty) == "function") {
-						new Noty({
-							text: str,
-							layout:"bottomRight",
-							type:"success",
-							theme:"",
-							closeWith: ['click'],
-							textAlign:"center",
-							easing:"swing",
-							animation: {
-								open: 'animated fadeInUp',
-								close: 'animated fadeOutDown',
-								easing: 'swing',
-								speed: 400
-							},
-							timeout:"2000",
-							progressBar:true,
-							closable:true,
-							closeOnSelfClick:true,
-							modal:false,
-							dismissQueue:false,
-							onClose:true,
-							killer:false
-						}).show();
-					}
+					// if(typeof(Noty) == "function") {
+					// 	new Noty({
+					// 		text: str,
+					// 		layout:"bottomRight",
+					// 		type:"success",
+					// 		theme:"",
+					// 		closeWith: ['click'],
+					// 		textAlign:"center",
+					// 		easing:"swing",
+					// 		animation: {
+					// 			open: 'animated fadeInUp',
+					// 			close: 'animated fadeOutDown',
+					// 			easing: 'swing',
+					// 			speed: 400
+					// 		},
+					// 		timeout:"2000",
+					// 		progressBar:true,
+					// 		closable:true,
+					// 		closeOnSelfClick:true,
+					// 		modal:false,
+					// 		dismissQueue:false,
+					// 		onClose:true,
+					// 		killer:false
+					// 	}).show();
+					// }
 
 					// Добавляем активный класс если товар успешно добавился в корзину
 					function inCart(obj){
@@ -2454,13 +2454,12 @@ function pageGoods() {
       $('.bad').hide();
 			$('.opinion__nav a').removeClass('active')
 			$(this).addClass('active')
-    }
-    else if($(this).hasClass('badOpinions')){
+    } else if($(this).hasClass('badOpinions')){
       $('.good').hide();
       $('.bad').show();
 			$('.opinion__nav a').removeClass('active')
 			$(this).addClass('active')
-    }else{
+    } else {
       $('.bad').show();
       $('.good').show();
 			$('.opinion__nav a').removeClass('active')
@@ -2472,6 +2471,7 @@ function pageGoods() {
 	if($('.goodsOpinionRating').length){
 		$('.goodsOpinionRating').rating();
 	}
+
 	// Ссылка на отображение формы для добавление отзыва о товаре
 	$('.opinion__add').on('click', function(event){
 		event.preventDefault();
@@ -2484,6 +2484,7 @@ function pageGoods() {
 			$('html, body').animate({scrollTop : jQuery('.opinion__addForm').offset().top}, 500);
 		}
 	});
+
 	// Валидация формы на странице оформления заказа, а так же формы на страницы связи с администрацией
 	$(".opinion__form button").on('click', function(){
 		var form = $(".opinion__form");
@@ -2493,12 +2494,15 @@ function pageGoods() {
 		form.submit();
 		return false;
 	});
+
 	// Иконка для обновления изображение капчи
-	$('.captcha__refresh').click(function(){
+	$('.captcha__refresh').on('click', function(){
 		RefreshImageAction(this,1,1);
 		$('.captcha__image').attr('src',$('.captcha__image').attr('src')+'&rand'+Math.random(0,10000));
 		return false;
 	});
+	// Имитация клика для капчи
+	$('.captcha__refresh').click();
 
 	// Открытие зон доставки
 	$('.zone__open').on('click', function(event){
@@ -2531,6 +2535,7 @@ function pageGoods() {
 			$(this).attr('rel', txtOld);
 		}
 	});
+
 	// Свернуть и Развернуть отображение кнопок
 	$('.opinion__text.comment').each(function (){
 		var contentHeight = $(this).height();
@@ -2542,6 +2547,13 @@ function pageGoods() {
 			$(this).parent().find('.opinion__text.comment').removeClass('mask');
 		}
 	});
+
+	// Перейти к описанию
+	$('.productView__goto').on('click', function(event){
+		event.preventDefault();
+		$('html, body').animate({scrollTop : jQuery('.productView__tabs').offset().top - 60}, 500);
+	})
+
 }
 
 // Инициализация табов на странице товара
