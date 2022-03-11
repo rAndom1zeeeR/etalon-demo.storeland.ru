@@ -2556,6 +2556,14 @@ function pageGoods() {
 		$('html, body').animate({scrollTop : jQuery('.productView__tabs').offset().top - 60}, 500);
 	})
 
+	// Счетчик доп товаров
+	var thumbCount = $('.thumblist__item').length
+	var thumbVisible = $('.thumblist__item:visible').length
+	var thumbSum = parseInt(thumbCount) - parseInt(thumbVisible)
+	if (thumbCount > thumbVisible) {
+		$('.thumblist__item:nth-child(4) a').attr('data-count', '+' + thumbSum)
+	}
+
 }
 
 // Инициализация табов на странице товара

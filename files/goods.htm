@@ -34,10 +34,10 @@
 
 			{% IFNOT goods_images_empty %}
 			<div class="thumblist">
-				<div class="thumblist__items owl-carousel">
+				<div class="thumblist__items flex">
 					{% FOR goods_images %}
 					{% IF goods_images.ID = GOODS_IMAGE_ID %}{continue}{% ENDIF %}
-					<div class="thumblist__item" data-index="{goods_images.index}">
+					<div class="thumblist__item" data-index="{goods_images.index}" data-count="">
 						<a href="{goods_images.LARGE}" data-fancybox="images" class="flex-center">
 							<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=marketplace" data-src="{goods_images.MEDIUM}" alt="{goods_images.NAME}" itemprop="image" />
 						</a>
