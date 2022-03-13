@@ -1,5 +1,5 @@
 <!-- Форма карточки товара -->
-<div class="productViewBlock" itemscope itemtype="https://schema.org/Product">
+<div class="productViewBlock" itemscope itemtype="https://schema.org/Product" data-id="{GOODS_ID}">
 	<div class="productView flex-start {% IF GOODS_MOD_REST_VALUE=0 %}productView__empty{% ENDIF %}">
 		<!-- Изображение товара  {% IF GOODS_IMAGE_ID = goods_images.ID %}style="display: none;"{% ENDIF %} -->
 		<div class="productView__images" data-id="{GOODS_IMAGE_ID}">
@@ -925,7 +925,7 @@
 	</div>		
 	<div class="products__grid owl-carousel">
 		{% FOR related_views_goods %}
-		<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_views_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF related_views_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{related_views_goods.ID}" itemscope itemtype="https://schema.org/Product">
+		<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_views_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF related_views_goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF related_views_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{related_views_goods.ID}" itemscope itemtype="https://schema.org/Product">
 			<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{related_views_goods.MIN_PRICE_NOW_ID} goodsListForm">
 				<input type="hidden" name="hash" value="{HASH}" />
 				<input type="hidden" name="form[goods_from]" value="{related_views_goods.GOODS_FROM}" />
@@ -1009,11 +1009,11 @@
 							<span>Уведомить</span>
 						</a>
 						{% ELSE %}
-						<a class="add-cart"
+						<a class="{% IF related_views_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
 							title="Добавить в корзину &laquo;{related_views_goods.NAME}&raquo;"
 							data-tooltip="В корзину"
 							rel="nofollow"
-							href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_views_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_views_goods.MIN_PRICE_NOW_ID}"
+							href="{% IF related_views_goods.COUNT_MODIFICATION > 1 %}{related_views_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_views_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_views_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 						>
 							<i class="material-icons-two-tone">local_mall</i>
 							<span>В корзину</span>
