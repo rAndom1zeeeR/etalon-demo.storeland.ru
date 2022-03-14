@@ -1309,6 +1309,11 @@ function addCart() {
 						inCart($(this))
 					});
 
+					// Запуск функции активного класса товара в других категориях
+					$('.product__item[data-id="' + id + '"]').each(function(){
+						$(this).addClass('inCart');
+					});
+
 					// Анимация добавления товара в корзину
 					function animateCart(){
 						var img = t.find('img');
@@ -1347,6 +1352,7 @@ function addCart() {
 					setTimeout(function () {
 						$('.cart.dropdown').removeClass('opened')
 						$('#menu').css({'z-index' : '4'})
+						$.fancybox.close();
 					}, 2000);
 
 				}
@@ -2557,12 +2563,25 @@ function pageGoods() {
 	})
 
 	// Счетчик доп товаров
-	var thumbCount = $('.thumblist__item').length
-	var thumbVisible = $('.thumblist__item:visible').length
-	var thumbSum = parseInt(thumbCount) - parseInt(thumbVisible)
-	if (thumbCount > thumbVisible) {
-		$('.thumblist__item:nth-child(4) a').attr('data-count', '+' + thumbSum)
+	function thumbs(){
+		var thumbCount = $('.thumblist__item').length
+		var thumbVisible = $('.thumblist__item:visible').length
+		var thumbSum = parseInt(thumbCount) - parseInt(thumbVisible)
+		console.log('thumbCount', thumbCount)
+		console.log('thumbVisible', thumbVisible)
+		if (thumbCount > thumbVisible) {
+			$('.thumblist__item').removeClass('last')
+			$('.thumblist__item').eq(thumbVisible - 1).addClass('last')
+			$('.thumblist__item').eq(thumbVisible - 1).find('a').attr('data-count', '+' + thumbSum)
+			$('.thumblist__item').eq(thumbVisible - 2).find('a:before').show();
+		}else{
+			$('.thumblist__item').removeClass('last')
+		}
 	}
+	thumbs();
+	$(window).resize(function(){
+		thumbs();
+	});
 
 }
 
