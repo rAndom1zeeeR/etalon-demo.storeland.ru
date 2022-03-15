@@ -3068,6 +3068,7 @@ function cartQuantity(){
 					$('.cartTotal').html($(d).find('.cartTotal').html());
 					c = $(d).find('.cart__item[data-id="' + id + '"] .cartqty').val();
 					// Вызов функции быстрого заказа в корзине
+					cartMinSum()
 					$('#startOrder').on('click', function() {
 						startOrder();
 						return false;
@@ -3101,6 +3102,7 @@ function cartDelete(s){
 				$('.page-cartTable').html($(d).find('.page-cartTable').html());
 				cartQuantity();
 				priceDiff('.cart__item', 'diff');
+				cartMinSum()
 				$('#startOrder').on('click', function() {
 					startOrder();
 					return false;
@@ -3194,6 +3196,39 @@ function startOrder(){
 	});
 	return false;
 }
+
+// Функция вычисления остатка до минимальной суммы заказа
+function cartMinSum(){
+	var minPrice = parseInt($('.cartTotal__min-price').data('price'));
+	var totalSum = parseInt($('.cartSumTotal').data('value'));
+	if(minPrice > totalSum) {
+		var diff = minPrice - totalSum
+		$('.cartTotal__min-price').find('.num').text(addSpaces(diff))
+		$('.cartTotal__min-price').show();
+		console.log('diff', diff)
+	}else{
+		$('.cartTotal__min-price').hide();
+		console.log('if wrong')
+	}
+
+	
+	$('.cartTotal__min-icon').append('<svg width="48" height="48"><circle class="svg-figure" stroke-dasharray="139" cx="24" cy="24" r="22" transform="rotate(-90, 24, 24)"/></svg>');
+	// Функция анимации счетчика
+	function cartMinSumAnimate(obj){		
+		$(obj).each(function(){
+			var item = $(this).find('.svg-figure');
+			var max = $('.cartTotal__min-price').data('price');
+			var diff = $('.cartTotal__min-price .num').text().replace(' ','');
+			var limit = item.attr('stroke-dasharray')
+			var current = parseFloat(diff/max * limit)
+
+			item.attr('stroke-dashoffset', current)
+			item.attr('stroke-dasharray', limit)
+		})
+	}
+	cartMinSumAnimate('.cartTotal__min-icon')
+}
+
 
 ///////////////////////////////////////
 // Функции шаблона

@@ -70,6 +70,15 @@
 		
 		<!-- Корзина: Итоговый блок -->
 		<div class="cartTotal">
+			<div class="cartTotal__min flex">
+				<div class="cartTotal__min-icon mitt-white">
+					<i class="material-icons-two-tone">local_shipping</i>
+				</div>
+				<div class="cartTotal__min-content">
+					<div class="cartTotal__min-title">{% IF SETTINGS_STORE_ORDER_MIN_ORDER_PRICE > CART_SUM_NOW_WITH_DISCOUNT %}До мин. суммы заказа осталось{% ELSE %}Минимальная сумма заказа достингнута!{% ENDIF %}</div>
+					<div class="cartTotal__min-price price__now" data-price="{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE}">{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE | money_format}</div>
+				</div>
+			</div>
 			<div class="cartTotal__items">
 				<!-- Корзина: Заголовок -->
 				<div class="cartTotal__item total__title flex justify-between">
