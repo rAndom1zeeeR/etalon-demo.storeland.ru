@@ -2102,7 +2102,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 /*** Иконки с линиями ***/
 /**************************************/
-.mitt .material-icons-two-tone {filter: invert(58%) sepia(65%) saturate(1013%) hue-rotate(173deg) brightness(95%) contrast(94%);;transition: all 0.3s ease;}
+.mitt .material-icons-two-tone {filter: invert(58%) sepia(65%) saturate(1013%) hue-rotate(173deg) brightness(95%) contrast(94%);transition: all 0.3s ease;}
 .mitt:hover .material-icons-two-tone {filter: invert(93%) sepia(94%) saturate(1517%) hue-rotate(293deg) brightness(100%) contrast(94%);}
 .mitt-white .material-icons-two-tone {filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(1deg) brightness(98%) contrast(106%);}
 .mitt-gray .material-icons-two-tone {filter: invert(76%) sepia(0%) saturate(254%) hue-rotate(220deg) brightness(85%) contrast(93%);}
@@ -2139,7 +2139,7 @@ h6 {font-size: 0.875rem;}
 .jq-selectbox .jq-selectbox__select {border: 2px solid #ececec;background: none;box-shadow: none;height: 3rem;font: 13px/44px 'Noto Sans', sans-serif;}
 .jq-selectbox .jq-selectbox__trigger {border: 0;width: 2.5rem;}
 .jq-selectbox .jq-selectbox__trigger-arrow {border: 0;top: 6px;right: 0;}
-.jq-selectbox .jq-selectbox__trigger-arrow:after {content: '\e313';font-size: 1.5rem;line-height: 2rem;right: .375rem;position: absolute;font-family: 'Material Icons';pointer-events: none;}
+.jq-selectbox .jq-selectbox__trigger-arrow:after {content: '\e313';color: #3babeb;font-size: 1.5rem;line-height: 2rem;right: .375rem;position: absolute;font-family: 'Material Icons two tone';pointer-events: none;}
 .jq-selectbox .jq-selectbox__select:hover {background: #ffffff;border-color: #3babeb;}
 .jq-selectbox.jqselect.focused .jq-selectbox__select {border: 2px solid #3babeb;}
 .jq-selectbox.focused .jq-selectbox__trigger-arrow:after {color: #3babeb;}
@@ -2147,9 +2147,10 @@ h6 {font-size: 0.875rem;}
 .jq-selectbox .jq-selectbox__dropdown li:hover {background-color: #3babeb;}
 .jq-selectbox .jq-selectbox__dropdown li.selected {background-color: #0a84c9;}
 @media (max-width: 479px) {
-	.jq-selectbox .jq-selectbox__select {padding: 0;border: 0;}
+	.jq-selectbox .jq-selectbox__select {padding: 0;border: 0;height: 2rem;line-height: 2rem;}
 	.jq-selectbox .jq-selectbox__select-text {display: none;}
 	.jq-selectbox .jq-selectbox__trigger {position: relative;width: 1.5rem;}
+	.jq-selectbox .jq-selectbox__trigger-arrow {top: auto;}
 	.jq-selectbox .jq-selectbox__trigger-arrow:after {content: '\e8d5';font-size: 24px;right: 0;}
 	.jq-selectbox .jq-selectbox__dropdown {min-width: 100px;}
 	.jq-selectbox.jqselect.focused .jq-selectbox__select {border: 0;}
