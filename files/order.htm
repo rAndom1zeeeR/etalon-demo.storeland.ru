@@ -469,12 +469,14 @@
         {% ELSEIF ORDER_STAGE_NUM=4 %}
           <a class="button button2" href="{ORDER_STAGE_PAYMENT_URL}" title="Вернуться назад на страницу выбора варианта оплаты заказа">Назад</a>
         {% ENDIF %}
-        <button class="button" type="submit" title="Перейти к следующему шагу">
-          {% IF ORDER_STAGE_NUM=4 %}
-            Оформить заказ
-          {% ELSE %}
-            Перейти к следующему шагу
-          {% ENDIF %}
+        <button class="button-primary button" type="submit" title="Перейти к следующему шагу">
+          <span>
+            {% IF ORDER_STAGE_NUM=4 %}
+              Оформить заказ
+            {% ELSE %}
+              Перейти к следующему шагу
+            {% ENDIF %}
+          </span>
         </button>
       </div>
     </div>

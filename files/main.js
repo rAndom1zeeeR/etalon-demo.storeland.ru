@@ -1155,17 +1155,7 @@ function quickViewShowMod(href, atempt) {
 
 // Разница в цене в процентах %
 function priceDiff(obj,type) {
-	// var obj = $('.productView');
-	// var priceOld = parseFloat(obj.find('.price__old .num').text().replace(' ',''));
-	// var priceNow = parseFloat(obj.find('.price__now .num').text().replace(' ',''));
-	// var diff = 0;
-	// if(priceOld > priceNow){
-	// 	diff = (((priceOld - priceNow)/priceOld)*100).toFixed();
-	// 	obj.find('.ico__sales').text('-' + diff + '%');
-	// }else{
-	// 	obj.find('.ico__sales').hide();
-	// }
-
+	console.log('obj', obj)
 	$(obj).each(function(){
 		var old = parseFloat($(this).find('.price__old .num').text().replace(' ',''));
 		var now = parseFloat($(this).find('.price__now .num').text().replace(' ',''));
@@ -1301,7 +1291,6 @@ function addCart() {
 						var newCount = parseInt(count.text()) + 1;
 						count.text(newCount)
 					}
-
 					// Запуск функции для выбранного товара
 					inCart(t);
 
@@ -1319,10 +1308,12 @@ function addCart() {
 					function animateCart(){
 						var img = t.find('img');
 						var w = img.width();
+
 						if(!img.length){
 							img = t.parents().find('.productView__image img');
 							w = 200;
 						}
+
 						var bascket = $(".cart__icon");
 						img.clone()
 							.css({
@@ -1348,8 +1339,8 @@ function addCart() {
 					animateCart();
 
 					// Открытие/Закрытие корзины при добавлении
-					$('.cart.dropdown').addClass('opened')
-					$('#menu').css({'z-index' : '10'})
+					$('.cart.dropdown').addClass('opened');
+					$('#menu').css({'z-index' : '10'});
 					setTimeout(function () {
 						$('.cart.dropdown').removeClass('opened')
 						$('#menu').css({'z-index' : '4'})
@@ -3107,7 +3098,8 @@ function cartQuantity(){
 				success:function(d){
 					quantity.val($(d).find('.cart__item[data-id="' + id + '"] .cartqty').val());
 					item = $('.cart__item[data-id="' + id + '"]');
-					item.find('.cartPriceTotal span').html($(d).find('.cart__item[data-id="' + id + '"] .cartPriceTotal span').html());
+					item.find('.price__now').html($(d).find('.cart__item[data-id="' + id + '"] .price__now').html());
+					item.find('.price__old').html($(d).find('.cart__item[data-id="' + id + '"] .price__old').html());
 					$('.cartTotal').html($(d).find('.cartTotal').html());
 					c = $(d).find('.cart__item[data-id="' + id + '"] .cartqty').val();
 					// Вызов функции быстрого заказа в корзине
@@ -3128,6 +3120,9 @@ function cartQuantity(){
 			$(this).val('1');
 			$(this).trigger('change');
 		}
+		setTimeout(function(){
+			priceDiff('.cart__item', 'diff');
+		}, 1000);
 	}));
 	quantity();
 }
@@ -3251,7 +3246,6 @@ function cartMinSum(){
 		console.log('diff', diff)
 	}else{
 		$('.cartTotal__min-price').hide();
-		console.log('if wrong')
 	}
 
 	

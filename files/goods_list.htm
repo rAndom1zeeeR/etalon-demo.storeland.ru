@@ -39,6 +39,11 @@
 	{% IFNOT IS_FULL_CATALOG && goods_empty=0 || goods_filters_empty=0 %}
 
 	<!-- Вывод товаров Маленьким СПИСКОМ -->
+	{% IF ID = Товары-на-главной || ID = Хиты-продаж || ID = Новинки %}
+		<style>
+			.products__promo {display: none;}
+		</style>
+	{% ELSE %}
 	<div class="products__promo">
 		<div class="block__title block__nav flex">
 			<h3 class="title"><span>Лучшее предложение</span></h3>
@@ -239,6 +244,7 @@
 			{% ENDFOR %}
 		</div>
 	</div>
+	{% ENDIF %}
 
 	<!-- Верхний блок, изменяющий отображение данных выдачи товаров -->
 	<div class="toolbar {% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %}">

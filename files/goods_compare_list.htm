@@ -2,7 +2,7 @@
 {% IF compare_list_empty %}
   <div class="attention">Ваш список сравнения пуст. Вы можете добавлять сюда товары из <a href="{CATALOG_URL}">каталога</a> и сравнивать их между собой.</div>
   <div class="buttons">
-    <a href="{CATALOG_URL}" class="button" title="Назад в Каталог">Назад</a>
+    <a href="{CATALOG_URL}" class="button-primary button" title="Назад в Каталог"><span>Назад</span></a>
   </div>
 {% ELSE %}
   <div class="CompareGoods">
@@ -209,17 +209,17 @@
     <!-- END Тело таблицы сравнения товаров -->
     <!-- Управление выбранными строками -->
     <div class="buttons">
-      <a href="#" class="CompareGoodsHideSelected button hide" title="Скрыть выбранные" style="display:none;">
+      <a href="#" class="button-primary CompareGoodsHideSelected button hide" title="Скрыть выбранные" style="display:none;">
         <i class="material-icons">visibility_off</i>
-        <span>Скрыть</span><span class="hide"> выбранные</span>
+        <span>Скрыть выбранные</span>
       </a>  
-      <a href="#" class="CompareGoodsShowAll button" title="Отобразить скрытые" style="display:none;">
+      <a href="#" class="button-primary CompareGoodsShowAll button" title="Отобразить скрытые" style="display:none;">
         <i class="material-icons">visibility</i>
-        <span>Отобразить</span><span class="hide"> скрытые</span>
+        <span>Отобразить скрытые</span>
       </a>
-      <a href="{COMPARE_RESET_URL}" class="button" title="Очистить список сравнения">
+      <a href="{COMPARE_RESET_URL}" class="button-primary button" title="Очистить список сравнения">
         <i class="material-icons">close</i>
-        <span>Очистить</span><span class="hide"> список</span>
+        <span>Очистить список</span>
       </a>
     </div>
     <!-- END Управление выбранными строками -->

@@ -924,7 +924,7 @@ h6 {font-size: 0.875rem;}
 .advantages__item:hover svg {transform: scale(1.1)}
 .advantages__item:nth-child(2n) .advantages__icon svg {fill: #f7aa9d;}
 .advantages__icon span {position: absolute;left: calc(50% - 9px);top: calc(50% - 42px);font-family: 'Lato', sans-serif;}
-.advantages__name {font-weight: bold;margin-bottom: .5rem;white-space: nowrap;}
+.advantages__name {font-weight: bold;margin-bottom: .5rem;}
 .advantages__text {font-size: 13px;}
 @media (max-width: 1199px) {
 }
@@ -1095,6 +1095,7 @@ h6 {font-size: 0.875rem;}
 .products__listSmall .product__name {height: auto;max-height: 3.5rem;}
 .products__listSmall .product__price {margin-bottom: .5rem;}
 .products__listSmall .price__now {font-size: 1rem;}
+.products__listSmall .price__old {font-size: .75rem;}
 @media (max-width: 639px) {
 	.products__listSmall .product__name {font-size: 13px;max-height: 3.25rem;}
 }
@@ -1904,7 +1905,7 @@ h6 {font-size: 0.875rem;}
 .fancybox-content .productView__name {display: block;}
 .fancybox-content .productView__addto button + button {display: none;}
 .fancybox-content .productView__goto {display: none;}
-.productViewMod {vertical-align: bottom;padding: 1rem;width: 100%;max-width: 1148px;transition: all 0.6s ease-in-out;transform: translateY(300px);border: .125rem solid #0a84c9;}
+.productViewMod {vertical-align: bottom;margin-left: -1rem;padding: 1rem;width: 100%;max-width: 1136px;transition: all 0.6s ease-in-out;transform: translateY(300px);border: .125rem solid #0a84c9;}
 .fancybox-slide--complete .productViewMod {transform: translateY(0);}
 .productViewMod .productView__name {display: none;}
 .productViewMod .productView__images {display: none;}
@@ -1992,6 +1993,7 @@ h6 {font-size: 0.875rem;}
 .cart__qty {width: 7.125rem;}
 .cart__price {width: 12rem;padding: 0 0 0 2rem;}
 .cart__price .price__now {display: block;font-size: 1rem;}
+.cart__price .price__old {font-size: .75rem;}
 .cart__price .ico__sales {margin-top: .5rem;background-color: transparent;color: #fa7761;font-size: 13px;}
 .cart__info {width: calc(100% - 12rem - 7.125rem);}
 .cart__delete {color: #3babeb;font-size: 13px;}

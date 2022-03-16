@@ -35,12 +35,14 @@
   
   <!-- Ссылка на страницу новостей, откуда пришел пользователь -->
   <div class="news__buttons">
-    <a href="{NEWS_SECTION_URL}" class="button">
-      {% IF NEWS_SECTION_ID=1 %}К другим новостям магазина
-      {% ELSEIF NEWS_SECTION_ID=2 %}К другим статьям
-      {% ELSEIF NEWS_SECTION_ID=3 %}К другим материалам СМИ
-      {% ELSE %}К другим новостям
-      {% ENDIF %}
+    <a href="{NEWS_SECTION_URL}" class="button-primary button">
+      <span>
+        {% IF NEWS_SECTION_ID=1 %}К другим новостям магазина
+        {% ELSEIF NEWS_SECTION_ID=2 %}К другим статьям
+        {% ELSEIF NEWS_SECTION_ID=3 %}К другим материалам СМИ
+        {% ELSE %}К другим новостям
+        {% ENDIF %}
+      </span>
     </a>
   </div>
 </div>
