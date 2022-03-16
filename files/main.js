@@ -1155,7 +1155,6 @@ function quickViewShowMod(href, atempt) {
 
 // Разница в цене в процентах %
 function priceDiff(obj,type) {
-	console.log('obj', obj)
 	$(obj).each(function(){
 		var old = parseFloat($(this).find('.price__old .num').text().replace(' ',''));
 		var now = parseFloat($(this).find('.price__now .num').text().replace(' ',''));
@@ -1309,10 +1308,15 @@ function addCart() {
 						var img = t.find('img');
 						var w = img.width();
 
+						console.log('img', img)
+						console.log('w', w)
+
 						if(!img.length){
 							img = t.parents().find('.productView__image img');
 							w = 200;
 						}
+						console.log('img2', img.offset().top)
+						console.log('w2', img.offset().left)
 
 						var bascket = $(".cart__icon");
 						img.clone()
@@ -1326,7 +1330,7 @@ function addCart() {
 							})
 							.appendTo("body")
 							.animate({
-								opacity: 0.05,
+								opacity: 0.1,
 								left: bascket.offset()['left'],
 								top: bascket.offset()['top'],
 								width: 20
@@ -2601,8 +2605,6 @@ function pageGoods() {
 		var thumbCount = $('.thumblist__item').length
 		var thumbVisible = $('.thumblist__item:visible').length
 		var thumbSum = parseInt(thumbCount) - parseInt(thumbVisible)
-		console.log('thumbCount', thumbCount)
-		console.log('thumbVisible', thumbVisible)
 		if (thumbCount > thumbVisible) {
 			$('.thumblist__item').removeClass('last')
 			$('.thumblist__item').eq(thumbVisible - 1).addClass('last')
