@@ -1307,36 +1307,31 @@ function addCart() {
 					function animateCart(){
 						var img = t.find('img');
 						var w = img.width();
-
-						console.log('img', img)
-						console.log('w', w)
+						var bascket = $(".cart__icon");
 
 						if(!img.length){
 							img = t.parents().find('.productView__image img');
 							w = 200;
 						}
-						console.log('img2', img.offset().top)
-						console.log('w2', img.offset().left)
 
-						var bascket = $(".cart__icon");
 						img.clone()
-							.css({
-								'width' : w,
-								'position' : 'absolute',
-								'z-index' : '9999',
-								'display' : 'block',
-								bottom: img.offset().top,
-								left: img.offset().left
-							})
-							.appendTo("body")
-							.animate({
-								opacity: 0.1,
-								left: bascket.offset()['left'],
-								top: bascket.offset()['top'],
-								width: 20
-							}, 1000, function() {	
-								$(this).remove();
-							});
+								.css({
+									'width' : w,
+									'position' : 'absolute',
+									'z-index' : '9999',
+									'display' : 'block',
+									bottom: img.offset().top,
+									left: img.offset().left
+								})
+								.appendTo("body")
+								.animate({
+									opacity: 0.1,
+									left: bascket.offset()['left'],
+									top: bascket.offset()['top'],
+									width: 20
+								}, 1000, function() {	
+									$(this).remove();
+								});
 					}
 
 					// Запуск Анимации
