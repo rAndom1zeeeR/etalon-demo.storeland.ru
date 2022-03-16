@@ -1602,10 +1602,7 @@ h6 {font-size: 0.875rem;}
 .toolbar-bottom .pages {display: none;}
 .toolbar-bottom .status {margin-top: 2rem;}
 /** Показать/Сортировать **/
-.toolbar .selectBox {flex-grow: 1;}
-.toolbar .selectBox + .selectBox {margin-left: 2rem;}
-.toolbar .selectBox select {width: 100%;}
-.toolbar .selectBox label {display: none;}
+.toolbar .sort-by label {display: none;}
 .toolbar .show-by {display: none;}
 .toolbar .rest-by {margin-left: 2rem;}
 .toolbar .rest-by input {margin-right: .5rem;}
@@ -1631,9 +1628,7 @@ h6 {font-size: 0.875rem;}
 	.toolbar .rest-by {display: none;}
 }
 @media (max-width: 639px) {
-	.toolbar .selectBox + .selectBox {margin-left: 1rem;}
-	.toolbar__filters {margin: 0 2rem 0 0;}
-	.sort {width: 100%;margin-bottom: 1rem;}
+	.toolbar__filters {margin: 0 0 0 1rem;}
 }
 @media (max-width: 479px) {
 	.view__icon:nth-child(2), .view__icon:last-child {display: none;}
@@ -2136,6 +2131,29 @@ h6 {font-size: 0.875rem;}
 	.mobmenu {width: 100%;}
 }
 
+
+/**************************************/
+/*** Select Styler ***/
+/**************************************/
+.jq-selectbox:after {display: none;}
+.jq-selectbox .jq-selectbox__select {border: 2px solid #ececec;background: none;box-shadow: none;height: 3rem;font: 13px/44px 'Noto Sans', sans-serif;}
+.jq-selectbox .jq-selectbox__trigger {border: 0;width: 2.5rem;}
+.jq-selectbox .jq-selectbox__trigger-arrow {border: 0;top: 6px;right: 0;}
+.jq-selectbox .jq-selectbox__trigger-arrow:after {content: '\e313';font-size: 1.5rem;line-height: 2rem;right: .375rem;position: absolute;font-family: 'Material Icons';pointer-events: none;}
+.jq-selectbox .jq-selectbox__select:hover {background: #ffffff;border-color: #3babeb;}
+.jq-selectbox.jqselect.focused .jq-selectbox__select {border: 2px solid #3babeb;}
+.jq-selectbox.focused .jq-selectbox__trigger-arrow:after {color: #3babeb;}
+.jq-selectbox .jq-selectbox__dropdown {border: 2px solid #3babeb;box-shadow: none;}
+.jq-selectbox .jq-selectbox__dropdown li:hover {background-color: #3babeb;}
+.jq-selectbox .jq-selectbox__dropdown li.selected {background-color: #0a84c9;}
+@media (max-width: 479px) {
+	.jq-selectbox .jq-selectbox__select {padding: 0;border: 0;}
+	.jq-selectbox .jq-selectbox__select-text {display: none;}
+	.jq-selectbox .jq-selectbox__trigger {position: relative;width: 1.5rem;}
+	.jq-selectbox .jq-selectbox__trigger-arrow:after {content: '\e8d5';font-size: 24px;right: 0;}
+	.jq-selectbox .jq-selectbox__dropdown {min-width: 100px;}
+	.jq-selectbox.jqselect.focused .jq-selectbox__select {border: 0;}
+}
 
 
 /**************************************/

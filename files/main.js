@@ -3240,7 +3240,6 @@ function cartMinSum(){
 		var diff = minPrice - totalSum
 		$('.cartTotal__min-price').find('.num').text(addSpaces(diff))
 		$('.cartTotal__min-price').show();
-		console.log('diff', diff)
 	}else{
 		$('.cartTotal__min-price').hide();
 	}
@@ -3543,3 +3542,6 @@ function discountEndDay(){
 	})
 }
 
+function stylerOn(){
+	$('select').styler();
+}

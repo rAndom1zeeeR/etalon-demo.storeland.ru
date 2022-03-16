@@ -275,7 +275,7 @@
 			{% ENDFOR %}
 			<div class="sort flex">
 				<!-- Сортировать по: (Поле сортировки товаров по умолчанию) -->
-				<div class="sort-by selectBox">
+				<div class="sort-by">
 					<label>Сортировать по:</label>
 					<!-- Сортировка выпадающим списком	-->
 					<select class="select" name="goods_search_field_id" title="Название сортировки" onchange="this.form.submit();">
@@ -300,7 +300,7 @@
 				</div>
 
 				<!-- Показывать по: (Шаг для выбора пользователем лимита выдачи товаров на страницу от 1 до 100) -->
-				<div class="show-by selectBox">
+				<div class="show-by">
 					<label>Показать:</label>
 					<select class="select" name="per_page" title="Лимит товаров на странице" onchange="this.form.submit();">
 						{% FOR goods_per_page_list %}
