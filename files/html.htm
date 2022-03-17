@@ -132,7 +132,7 @@
 					</div>
 					{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
 				</div>
-				<div class="header__middle flex">
+				<div class="header__middle flex loading">
 					<!-- Логотип -->
 					<div class="header__logo" itemscope itemtype="http://schema.org/Organization">
 						<a href="{INDEX_PAGE_URL}" title="{SETTINGS_STORE_NAME}" itemprop="url">
@@ -358,7 +358,7 @@
 
 						<!-- Новинки -->
 						{% IFNOT index_page_new_goods_empty && index_page %}
-						<div id="pdt__new" class="sidebar__block">
+						<div id="pdt__new" class="sidebar__block loading">
 							<div class="sidebar__title block__nav flex">
 								<span class="title">Новинки</span>
 								<div class="owl-nav"></div>

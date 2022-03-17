@@ -638,6 +638,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 .header__top {justify-content: flex-end;padding: 1rem 0 0 0;}
 .header__middle {padding: 1rem 0;position: relative;}
+.header__middle.loading {height: 95px;}
 .header__link {color: #868686;font-size: 0.8125rem;}
 .has-items .header__link {color: #272727;}
 .has-items .header__link:hover {color: #fa7761;}
@@ -651,12 +652,13 @@ h6 {font-size: 0.875rem;}
 /* Шапка. Телефон */
 .header__block-phone {font-size: 1rem;font-weight: bold;font-family: 'Lato', sans-serif;}
 /* Шапка. Лого */
-.header__logo {width: 16rem;}
+.header__logo {width: 16rem;line-height: 1;}
 /* Шапка. Промо */
 .header__promo {width: 28rem;padding: 0 3rem;}
 .header__promo-item + .header__promo-item {margin-left: 1.75rem;}
+.header__promo-icon {line-height: 1;}
 .header__promo-icon svg {fill: #0a84c9;}
-.header__promo-content {width: 7rem;padding-left: 1rem;}
+.header__promo-content {width: 7rem;padding-left: 1rem;line-height: 18px;}
 /* Шапка. Поиск */
 .search {width: calc(100% - 16rem - 28rem);flex-grow: 1;position: relative;}
 .search__icon {display: none;}
@@ -878,7 +880,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 #slideshow {overflow: hidden;}
 #slideshow.loading {height: 16rem;background-color: #f5f5f5;}
-.slider__item {background-size: cover;background-position: right;background-repeat: no-repeat;}
+.slider__item {background-size: cover;background-position: right;background-repeat: no-repeat;width: 100%;}
 .slider__content {padding: 2rem;max-width: 80%;flex-direction: column;}
 .slider__title {margin-bottom: 1.5rem;font-size: 3rem;font-weight: bold;line-height: 1;text-transform: uppercase;text-align: center;display: block;}
 .slider__title span {display: inline-block;}
@@ -996,6 +998,7 @@ h6 {font-size: 0.875rem;}
 .products__container .row {margin: -2rem -.5rem 0 -.5rem;}
 .product__item {width: calc(25% - 1rem);margin: 2rem .5rem 0 .5rem;border: .25rem solid transparent;position: relative;transition: all 0.3s ease;}
 .product__item:hover {border-color: #ececec;}
+.loading .product__item {margin: 0;}
 .product__image {position: relative;}
 .product__img {height: 185px;}
 .product__links {position: relative;}
@@ -1013,7 +1016,7 @@ h6 {font-size: 0.875rem;}
 .product__rest:before {content: '';width: .375rem;height: .375rem;background-color: #f7aa9d;border-radius: 100%;display: block;position: absolute;left: 0;top: .25rem;}
 .product__empty .product__rest:before {background-color: #bebebe;}
 .product__name {margin-bottom: .5rem;height: 3.5rem;overflow: hidden;display: block;}
-.product__price {margin-bottom: 1rem;}
+.product__price {margin-bottom: 1rem;line-height: 1;}
 .products__grid .price__now {font-size: 1rem;margin-right: .5rem;}
 .products__grid .price__old {font-size: .75rem;}
 .product__addCart {height: 3rem;overflow: hidden;}
@@ -1146,7 +1149,7 @@ h6 {font-size: 0.875rem;}
 
 
 /*** Самое популярное ***/
-#pdt__best.loading {height: 28.5rem;}
+#pdt__best.loading {height: 30.5rem;}
 #pdt__best .price__now {font-size: 1.25rem;}
 #pdt__best .price__old {font-size: .75rem;}
 #pdt__best .product__img {height: 244px;}
@@ -1306,7 +1309,8 @@ h6 {font-size: 0.875rem;}
 }
 
 /*** Сайдбар. Новинки ***/
-#pdt__new .product__item {padding: .925rem 0;margin: 0;border: 0;border-top: 1px solid #ececec;}
+#pdt__new.loading {height: 549px;}
+#pdt__new .product__item {padding: 1rem 0;margin: 0;border: 0;border-top: 1px solid #ececec;}
 #pdt__new .product__item:first-child {border-top: 0;}
 #pdt__new .product__name {height: 2.125rem;font-size: 13px;}
 /*** Новинки. Адаптивность ***/
@@ -2166,7 +2170,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 .nojs .preloader {display: none;}
 .nojs #toTop, .nojs .quickview, .nojs .filters-price #goods-filter-price-slider {display: none;}
-.nojs .owl-carousel {display: block;}
+.nojs .owl-carousel {display: flex;flex-wrap: wrap;}
 .nojs .scriptOff {display: none;}
 
 
