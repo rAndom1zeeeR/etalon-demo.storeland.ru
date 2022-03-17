@@ -151,6 +151,16 @@
 							</a>
 							<!-- Артикул товара -->
 							<meta itemprop="sku" content="{goods.ART_NUMBER}" />
+							<!-- Краткое описание -->
+							<div itemprop="description" class="product__desc" style="display: none;">
+								{% IF goods.DESCRIPTION_SHORT %}
+									{goods.DESCRIPTION_SHORT}
+								{% ELSEIF goods.DESCRIPTION_LARGE %}
+									{goods.DESCRIPTION_LARGE}
+								{% ELSE %}
+									Описание товара "{goods.NAME}"
+								{% ENDIF %}
+							</div>
 							<!-- Цена для поисковиков -->
 							<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
 								<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -445,6 +455,16 @@
 							</a>
 							<!-- Артикул товара -->
 							<meta itemprop="sku" content="{goods.ART_NUMBER}" />
+							<!-- Краткое описание -->
+							<div itemprop="description" class="product__desc" style="display: none;">
+								{% IF goods.DESCRIPTION_SHORT %}
+									{goods.DESCRIPTION_SHORT}
+								{% ELSEIF goods.DESCRIPTION_LARGE %}
+									{goods.DESCRIPTION_LARGE}
+								{% ELSE %}
+									Описание товара "{goods.NAME}"
+								{% ENDIF %}
+							</div>
 							<!-- Цена для поисковиков -->
 							<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
 								<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -559,6 +579,16 @@
 						</a>
 						<!-- Артикул товара -->
 						<meta itemprop="sku" content="{goods.ART_NUMBER}" />
+						<!-- Краткое описание -->
+						<div itemprop="description" class="product__desc" style="display: none;">
+							{% IF goods.DESCRIPTION_SHORT %}
+								{goods.DESCRIPTION_SHORT}
+							{% ELSEIF goods.DESCRIPTION_LARGE %}
+								{goods.DESCRIPTION_LARGE}
+							{% ELSE %}
+								Описание товара "{goods.NAME}"
+							{% ENDIF %}
+						</div>
 						<!-- Цена для поисковиков -->
 						<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
 							<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -771,6 +801,16 @@
 						</a>
 						<!-- Артикул товара -->
 						<meta itemprop="sku" content="{goods.ART_NUMBER}" />
+						<!-- Краткое описание -->
+						<div itemprop="description" class="product__desc" style="display: none;">
+							{% IF goods.DESCRIPTION_SHORT %}
+								{goods.DESCRIPTION_SHORT}
+							{% ELSEIF goods.DESCRIPTION_LARGE %}
+								{goods.DESCRIPTION_LARGE}
+							{% ELSE %}
+								Описание товара "{goods.NAME}"
+							{% ENDIF %}
+						</div>
 						<!-- Цена для поисковиков -->
 						<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
 							<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />

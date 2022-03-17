@@ -46,7 +46,7 @@
 	{% ELSE %}
 	<div class="products__promo">
 		<div class="block__title block__nav flex">
-			<h3 class="title"><span>Лучшее предложение</span></h3>
+			<h3 class="title"><span>Хиты продаж</span></h3>
 			<div class="owl-nav"></div>
 		</div>
 		<div class="products__listSmall products__listSmall-bg owl-carousel">
@@ -98,6 +98,16 @@
 						</a>
 						<!-- Артикул товара -->
 						<meta itemprop="sku" content="{goods.ART_NUMBER}" />
+						<!-- Краткое описание -->
+						<div itemprop="description" class="product__desc" style="display: none;">
+							{% IF goods.DESCRIPTION_SHORT %}
+								{goods.DESCRIPTION_SHORT}
+							{% ELSEIF goods.DESCRIPTION_LARGE %}
+								{goods.DESCRIPTION_LARGE}
+							{% ELSE %}
+								Описание товара "{goods.NAME}"
+							{% ENDIF %}
+						</div>
 						<!-- Цена для поисковиков -->
 						<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
 							<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -411,6 +421,16 @@
 							</a>
 							<!-- Артикул товара -->
 							<meta itemprop="sku" content="{goods.ART_NUMBER}" />
+							<!-- Краткое описание -->
+							<div itemprop="description" class="product__desc" style="display: none;">
+								{% IF goods.DESCRIPTION_SHORT %}
+									{goods.DESCRIPTION_SHORT}
+								{% ELSEIF goods.DESCRIPTION_LARGE %}
+									{goods.DESCRIPTION_LARGE}
+								{% ELSE %}
+									Описание товара "{goods.NAME}"
+								{% ENDIF %}
+							</div>
 							<!-- Цена для поисковиков -->
 							<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
 								<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -705,6 +725,16 @@
 							</a>
 							<!-- Артикул товара -->
 							<meta itemprop="sku" content="{goods.ART_NUMBER}" />
+							<!-- Краткое описание -->
+							<div itemprop="description" class="product__desc" style="display: none;">
+								{% IF goods.DESCRIPTION_SHORT %}
+									{goods.DESCRIPTION_SHORT}
+								{% ELSEIF goods.DESCRIPTION_LARGE %}
+									{goods.DESCRIPTION_LARGE}
+								{% ELSE %}
+									Описание товара "{goods.NAME}"
+								{% ENDIF %}
+							</div>
 							<!-- Цена для поисковиков -->
 							<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
 								<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -819,6 +849,16 @@
 						</a>
 						<!-- Артикул товара -->
 						<meta itemprop="sku" content="{goods.ART_NUMBER}" />
+						<!-- Краткое описание -->
+						<div itemprop="description" class="product__desc" style="display: none;">
+							{% IF goods.DESCRIPTION_SHORT %}
+								{goods.DESCRIPTION_SHORT}
+							{% ELSEIF goods.DESCRIPTION_LARGE %}
+								{goods.DESCRIPTION_LARGE}
+							{% ELSE %}
+								Описание товара "{goods.NAME}"
+							{% ENDIF %}
+						</div>
 						<!-- Цена для поисковиков -->
 						<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
 							<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -1031,6 +1071,16 @@
 						</a>
 						<!-- Артикул товара -->
 						<meta itemprop="sku" content="{goods.ART_NUMBER}" />
+						<!-- Краткое описание -->
+						<div itemprop="description" class="product__desc" style="display: none;">
+							{% IF goods.DESCRIPTION_SHORT %}
+								{goods.DESCRIPTION_SHORT}
+							{% ELSEIF goods.DESCRIPTION_LARGE %}
+								{goods.DESCRIPTION_LARGE}
+							{% ELSE %}
+								Описание товара "{goods.NAME}"
+							{% ENDIF %}
+						</div>
 						<!-- Цена для поисковиков -->
 						<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
 							<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
