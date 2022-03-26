@@ -44,14 +44,14 @@
 			.products__promo {display: none;}
 		</style>
 	{% ELSE %}
-	<div class="products__promo">
+	<div class="products__promo {% FOR goods %}{% IF goods.IS_NEW || goods.IS_TOP || goods.IS_PLACE_ON_INDEX_PAGE %}has-items {% ENDIF %}{% ENDFOR %}">
 		<div class="block__title block__nav flex">
-			<h3 class="title"><span>Хиты продаж</span></h3>
+			<h3 class="title"><span>Хиты продаж в этой категории</span></h3>
 			<div class="owl-nav"></div>
 		</div>
 		<div class="products__listSmall products__listSmall-bg owl-carousel">
 			{% FOR goods %}
-			{% IF goods.IS_NEW || goods.IS_TOP || goods.IS_PLACE_ON_INDEX_PAGE %}
+			{% IF goods.IS_TOP %}
 			<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{goods.ID}" itemscope itemtype="https://schema.org/Product">
 				<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{goods.MIN_PRICE_NOW_ID} goodsListForm flex">
 					<input type="hidden" name="hash" value="{HASH}" />

@@ -1,8 +1,8 @@
 <div class="products__container">
-	<div class="row">
 	{% IF favorites_goods_empty %}
 		<div class="attention">Ваш список избранных товаров пуст. Вы можете выбрать товары из <a href="{CATALOG_URL}" title="Перейти в каталог">Каталога</a>.</div>
 	{% ELSE %}
+	<div class="row">
 		<!-- Избранные товары -->
 		<div class="products__grid flex-stretch">
 			{% FOR favorites_goods %}
@@ -177,8 +177,8 @@
 			{% ENDFOR %}
 		</div>
 		<!-- END Избранные товары -->
-	{% ENDIF %}
 	</div>
+	{% ENDIF %}
 </div>
 
 <script type="text/javascript">

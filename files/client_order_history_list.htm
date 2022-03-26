@@ -17,7 +17,7 @@
 	    </thead>
 	    <tbody>
 	    {% FOR order_list %}
-	      <tr class="{order_list.index | is_divided("2","second","first")}">
+	      <tr class="{order_list.index | is_divided('2','second','first')}">
 	        <td><a href="{USER_HISTORY_INFO_URL}/{order_list.NUM}">{order_list.NUM}</a></td>
 	        <td>{%IF order_list.TIME%}{order_list.TIME | date("d.m.Y")}{%ELSE%}<span title="Внутренняя ошибка сервера. Для этого заказа не указано время создания">Не известно</span>{%ENDIF%}</td>
 	        <td>{order_list.PERSON}</td>

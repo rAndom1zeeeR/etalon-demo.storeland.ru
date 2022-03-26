@@ -357,7 +357,7 @@
 
 	<!-- Сопутствующие товары -->
 	{% IFNOT related_goods_empty %}
-	<section id="related-goods" class="related {% IF GOODS_MOD_REST_VALUE=0 %}empty{% ENDIF %}">
+	<section id="related-goods" class="related loading {% IF GOODS_MOD_REST_VALUE=0 %}empty{% ENDIF %}">
 		<div class="block__title block__nav flex">
 			<h2 class="title"><span>Эти товары часто покупают вместе</span></h2>
 			<div class="owl-nav"></div>

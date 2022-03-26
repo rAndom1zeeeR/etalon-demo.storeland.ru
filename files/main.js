@@ -2169,15 +2169,15 @@ function catalog() {
 	// });
 
 	// Боковое меню сохранение открытой вложенности
-	$('.collapsible:not(".active")').find('.collapsible__content').css('display', 'none');
-	$('.collapsible.active').find('.collapsible__content').css('display', 'block');
+	// $('.collapsible:not(".active")').find('.collapsible__content').css('display', 'none');
+	// $('.collapsible.active').find('.collapsible__content').css('display', 'block');
 	$('.collapsible__click').on('click', function(event){
 		event.preventDefault();
 		if ($(this).closest('.collapsible').hasClass('active')) {
-			$(this).parent().find('.collapsible__content').slideUp(600);
+			$(this).parent().find('.collapsible__content').slideDown(600);
 			$(this).closest('.collapsible').removeClass('active');
 		} else {
-			$(this).parent().find('.collapsible__content').slideDown(600);
+			$(this).parent().find('.collapsible__content').slideUp(600);
 			$(this).closest('.collapsible').addClass('active');
 		}
 	});
@@ -2438,7 +2438,7 @@ function pageGoods() {
 			navText: [ , ],
 			dots: true,
 			dotsContainer: dots,
-			autoHeight: true,
+			autoHeight: false,
 			autoHeightClass: 'owl-height',
 			autoplay: false,
 			autoplayHoverPause: true,
