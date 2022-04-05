@@ -1314,24 +1314,26 @@ function addCart() {
 							w = 200;
 						}
 
-						img.clone()
-								.css({
-									'width' : w,
-									'position' : 'absolute',
-									'z-index' : '9999',
-									'display' : 'block',
-									bottom: img.offset().top,
-									left: img.offset().left
-								})
-								.appendTo("body")
-								.animate({
-									opacity: 0.1,
-									left: bascket.offset()['left'],
-									top: bascket.offset()['top'],
-									width: 20
-								}, 1000, function() {	
-									$(this).remove();
-								});
+						if(img.length){
+							img.clone()
+							.css({
+								'width' : w,
+								'position' : 'absolute',
+								'z-index' : '9999',
+								'display' : 'block',
+								bottom: img.offset().top,
+								left: img.offset().left
+							})
+							.appendTo("body")
+							.animate({
+								opacity: 0.1,
+								left: bascket.offset()['left'],
+								top: bascket.offset()['top'],
+								width: 20
+							}, 1000, function() {	
+								$(this).remove();
+							});						
+						}
 					}
 
 					// Запуск Анимации
@@ -2061,13 +2063,22 @@ function coupons() {
 				// Получаем блок скидки
 				var discountBlock = $(data).closest('#myform').find('.discount');
 				var discountName = discountBlock.find('.name').text();
-				var discountPrice = discountBlock.find('.percent .num').text();
-				var discountPercent = discountBlock.find('.percent').text();
-				if (discountPrice.length) {
+				var discountPrice = discountBlock.find('.value').html();
+				var discountPercent = discountBlock.find('.percent').html();
+				console.log('discountPercent', discountPercent)
+				if (discountPrice) {
 					discountPrice = discountPrice
-				}else{
+					console.log('discountPrice 1', discountPrice)
+				}else if (discountPercent){
 					discountPrice = discountPercent
+					console.log('discountPrice 2', discountPrice)
+				}else {
+					$('.total__coupons').hide();
+					console.log('discountPrice 4', discountPrice)
 				}
+				
+				console.log('discountPrice', discountPrice)
+				console.log('discountBlock', discountBlock)
 				// Получаем новую итоговую стоимость заказа
 				var totalBlock = $(data).closest('#myform').find('.total');
 				var totalSum = totalBlock.find('.total-sum').data('total-sum');
@@ -2079,6 +2090,8 @@ function coupons() {
 				$('.cartSumCouponsDiscount').html(discountPrice);
 				$('.total__discount').hide();
 				$('.total__coupons').show();
+				console.log('newTotalSum', newTotalSum)
+				console.log('cartSumTotal', cartSumTotal)
 				if (newTotalSum > cartSumTotal) {
 					couponInput.parent().addClass('error');
 					couponInput.parent().removeClass('active');

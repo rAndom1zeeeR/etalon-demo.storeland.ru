@@ -136,7 +136,8 @@
       {% FOR order_lines %}
         <tr id="order-item-row-{order_lines.ID}">
           <td width="60%">{% IF order_lines.GOODS_URL %}<a href="{order_lines.GOODS_URL}">{order_lines.NAME}</a>{% ELSE %}{order_lines.NAME}{% ENDIF %}</td>
-          <td><span class="price-excl-tax"><span class="cart-price"><span>
+          <td>
+            <span class="cart-price">
               <!-- Товарная позиция -->
               {% IF order_lines.TYPE_ID=1 %}
                 {order_lines.LINE_PRICE | money}
@@ -147,7 +148,7 @@
               {% ELSEIF order_lines.TYPE_ID = 3%}
                 {order_lines.LINE_PRICE}
               {%ENDIF%}
-            </span></span></span>
+            </span>
           </td>
           <td>
             <!-- Товарная позиция -->
@@ -163,7 +164,7 @@
           </td>
           <td>
             <span class="price-excl-tax">
-              <span class="cart-price"><span>{order_lines.LINE_SUM | money}</span></span>
+              <span class="cart-price">{order_lines.LINE_SUM | money}</span>
             </span>
           </td>
         </tr>
