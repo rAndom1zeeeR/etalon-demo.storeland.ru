@@ -2712,6 +2712,7 @@ function prodQty(){
 			}).show();
 		}
 		// Обновление кол-ва для функций "Добавить"
+		var goodsModView = $(this).parents().find('.productView');
 		goodsModView.find('.goodsDataMainModificationId').val($(this).val());
 		// Цена товара без изменений
 		var price = parseInt($('.productView__price .price__now').attr('content'));
