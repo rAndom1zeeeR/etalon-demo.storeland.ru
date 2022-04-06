@@ -1134,7 +1134,7 @@ function quickViewShowMod(href, atempt) {
 			goodsModification($('.fancybox-content.productViewBlock'));
 			newModification($('.fancybox-content.productViewBlock'));
 			quantity();
-			prodQty();
+			prodQty($('.fancybox-content.productViewBlock'));
 		}
 	} else {
 		$.get(href, function(content) {
@@ -1155,7 +1155,7 @@ function quickViewShowMod(href, atempt) {
 			goodsModification($('.fancybox-content.productViewBlock'));
 			newModification($('.fancybox-content.productViewBlock'));
 			quantity();
-			prodQty();
+			prodQty($('.fancybox-content.productViewBlock'));
 		});
 	}
 }
@@ -2681,8 +2681,9 @@ function checkTabHash() {
 }
 
 // Изменение кол-ва в карточке
-function prodQty(){
-	$('.productView__qty .quantity').change(function(){
+function prodQty($container){
+	var goodsModView = $container || $('#main .productViewBlock')
+	goodsModView.find('.productView__qty .quantity').change(function(){
 		var t = $(this);
 		// Количество
 		var val = parseInt(t.val());
@@ -2712,10 +2713,9 @@ function prodQty(){
 			}).show();
 		}
 		// Обновление кол-ва для функций "Добавить"
-		var goodsModView = $(this).parents().find('.productView');
 		goodsModView.find('.goodsDataMainModificationId').val($(this).val());
 		// Цена товара без изменений
-		var price = parseInt($('.productView__price .price__now').attr('content'));
+		var price = parseInt(goodsModView.find('.productView__price .price__now').attr('content'));
 		var newPrice = 0;
 		// Проверяем наличие добавленных товаров вместе с основным
 		if (goodsModView.find('.productView__form [class^="goodsID-"]').length) {
@@ -2764,7 +2764,6 @@ function monthNames() {
 		});
 	}
 }
-
 
 // Радио кнопки для модификаций
 function newModification($container) {
