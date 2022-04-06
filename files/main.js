@@ -721,9 +721,9 @@ function notyStart(text, type) {
 /* Скрипты для главной */
 ///////////////////////////////////////
 // Отсчет даты до окончания акции
-function counterDate() {
+function counterDate(id) {
 	// Устанавливаем дату обратного отсчета ММ-ДД-ГГ
-	var end = $('.counter').attr('end');
+	var end = $(id).attr('end');
 	var countDownDate = new Date(end).getTime();
 	// Обновление счетчика каждую секунду
 	var x = setInterval(function() {
@@ -734,22 +734,29 @@ function counterDate() {
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		// Вывод
-		$('.counter .days span').text(days);
-		$('.counter .hours span').text(hours);
-		$('.counter .minutes span').text(minutes);
-		$('.counter .seconds span').text(seconds);
+		$(id).find('.days span').text(days);
+		$(id).find('.hours span').text(hours);
+		$(id).find('.minutes span').text(minutes);
+		$(id).find('.seconds span').text(seconds);
 		// Счетчик завершен
 		if (distance < 0) {
 			clearInterval(x);
-			$('.counter').hide();
+			$(id).hide();
+			if (id == '.banner__counter') {
+				$('.banner__label span').text('Акция завершилась')
+			}
 		}
 		// Запуск Функции анимации
-		counterAnimate('.banner__counter > div')
-		counterAnimate('.product__counter > div')
+		counterAnimate($(id).find('div'))
 	}, 1000);
+
 	// Добавляем контент анимации
-	$('.banner__counter > div').append('<svg width="52" height="52"><circle class="svg-figure" stroke-dasharray="151" cx="26" cy="26" r="24" transform="rotate(-90, 26, 26)"/></svg>');
-	$('.product__counter > div').append('<svg width="100%" height="100%"><rect class="svg-figure" stroke-dasharray="255" x="0" y="0" width="100%" height="100%" transform="rotate(0, 32, 32)"/></svg>');
+	if (id == '.banner__counter') {
+		$(id).find('div').append('<svg width="52" height="52"><circle class="svg-figure" stroke-dasharray="151" cx="26" cy="26" r="24" transform="rotate(-90, 26, 26)"/></svg>');
+	}else{
+		$(id).find('div').append('<svg width="100%" height="100%"><rect class="svg-figure" stroke-dasharray="255" x="0" y="0" width="100%" height="100%" transform="rotate(0, 32, 32)"/></svg>');
+	}
+		
 	// Функция анимации счетчика
 	function counterAnimate(obj){		
 		$(obj).each(function(){
@@ -3342,7 +3349,8 @@ $(document).ready(function(){
   toTop();
 	viewed();
 	mobile();
-	counterDate();
+	counterDate('.banner__counter');
+	counterDate('.product__counter');
 	newsCarousel();
 	openCatalog();
   // Ленивая загрузка

@@ -495,7 +495,6 @@ h6 {font-size: 0.875rem;}
 .CompareGoodsTableTbody .actions {width: 100%;padding: 3px;display: flex;align-items: center;flex-wrap: wrap;justify-content: space-between;}
 .CompareGoodsTableTbody .actions a {padding: 0 2rem;}
 .CompareGoodsTableTbody .actions a i {display: none;vertical-align: middle;}
-.CompareGoodsTableTbody .actions a span {}
 .CompareGoodsTableTbody .actions [class^="add-"] {font-size: 1.5rem;}
 .CompareGoodsTableTbody .actions [class^="add-"] span {display: none;}
 .CompareGoodsTableTbody .product__price {border: 0;}
@@ -516,6 +515,7 @@ h6 {font-size: 0.875rem;}
 .CompareGoodsTableTbody .actions .add-notify:before {display: none;}
 .compare-image {height: 130px;}
 .compare-image img {max-height: 130px;}
+.CompareGoodsTableTbody .actions .add-notify {padding: 0 1.5rem;}
 }
 
 /**************************************/
@@ -1846,15 +1846,16 @@ h6 {font-size: 0.875rem;}
 
 /** Эти товары часто покупают вместе **/
 #related-goods.loading {height: 444px;}
+#related-goods {max-height: 444px;}
 #related-goods {padding: 1rem;background-color: #f5f5f5;}
-#related-goods .products__grid {width: calc(75% + 1rem);flex-grow: 1;}
+#related-goods .products__grid {width: calc(75% - 1rem);flex-grow: 1;}
 #related-goods .product__item {background-color: #ffffff;}
 #related-goods .product__checkbox {position: absolute;top: .5rem;right: .5rem;}
 #related-goods.empty .product__checkbox {display: none;}
 #related-goods.empty .button-primary {display: none;}
 #related-goods.empty .products__total {display: none;}
 #related-goods .product__img {height: 191px;}
-.products__total {width: calc(25% - 2rem);margin-right: 1rem;padding: 1.5rem;background-color: #ececec;flex-direction: column;align-items: flex-start;}
+.products__total {width: calc(25% - 1rem);margin-right: 1rem;padding: 1.5rem;background-color: #ececec;flex-direction: column;align-items: flex-start;}
 .products__total-label {font-size: 1rem;margin-bottom: 1rem;}
 .products__total-price {display: block;margin-bottom: 2rem;}
 .products__total a {padding: 0 2rem;width: 100%;max-width: 200px;}
@@ -2064,7 +2065,7 @@ h6 {font-size: 0.875rem;}
 .fastOrderForm .form__registration {padding: 0 1rem;margin-bottom: 0;}
 .fastOrderForm .form__registration label {margin: 0 0 0 1rem;display: inline-block;}
 .fastOrderForm .form__pass {margin: 1rem 1rem 0 1rem;}
-.fastOrder__form {padding: 1rem;border: 2px solid #ececec;}
+.fastOrder__form {padding: 1rem;border: 2px solid #ececec;width: 100%;}
 .delivery__zoneSelect {margin-top: 1rem;}
 .delivery__descriptionBlock {margin-top: 1rem;}
 .delivery__descriptionBlock .delivery__price {font-weight: bold;}
