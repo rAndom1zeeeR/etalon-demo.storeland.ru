@@ -769,7 +769,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 /*** Меню ***/
 /**************************************/
-#menu {background-color: #3babeb;border-bottom: .25rem solid #0a84c9;position: sticky;top: 0;z-index: 4;}
+#menu {background-color: #3babeb;border-bottom: .25rem solid #0a84c9;position: sticky;top: 0;z-index: 5;}
 #menu .mobile {display: none;padding: .625rem 0;}
 #menu .menu__inner {position: relative;}
 /** Меню. Каталог **/
