@@ -3006,6 +3006,7 @@ function goodsModification($container) {
     }
   });
 
+	// Функция изменения цены для итогового блока сопутствующих товаров
 	function changePrice(currentCheckbox, checkboxActive){
 		var $checkbox = currentCheckbox;
 		var checkboxPrice = $checkbox.data('mod-price');
@@ -3016,15 +3017,15 @@ function goodsModification($container) {
 		var newPrice = 0;
 		var newPriceTotal = 0;
 		if (checkboxActive) {
-			newPrice = String(parseInt(nowPrice) + parseInt(checkboxPrice));
-			priceNowBlock.attr('data-price', parseInt(nowPrice) + parseInt(checkboxPrice))
-			newPriceTotal = String(parseInt(nowPriceTotal) + parseInt(checkboxPrice));
-			priceNowTotal.attr('data-price', parseInt(nowPriceTotal) + parseInt(checkboxPrice))
+			newPrice = Math.floor(parseInt(nowPrice) + parseInt(checkboxPrice));
+			priceNowBlock.attr('data-price', newPrice)
+			newPriceTotal = Math.floor(parseInt(nowPriceTotal) + parseInt(checkboxPrice));
+			priceNowTotal.attr('data-price', newPriceTotal)
 		} else {
-			newPrice = String(nowPrice - checkboxPrice);
-			priceNowBlock.attr('data-price', parseInt(nowPrice) - parseInt(checkboxPrice))
-			newPriceTotal = String(nowPriceTotal - checkboxPrice);
-			priceNowTotal.attr('data-price', parseInt(nowPriceTotal) - parseInt(checkboxPrice))
+			newPrice = Math.floor(parseInt(nowPrice) - parseInt(checkboxPrice));
+			priceNowBlock.attr('data-price', newPrice)
+			newPriceTotal = Math.floor(parseInt(nowPriceTotal) - parseInt(checkboxPrice));
+			priceNowTotal.attr('data-price', newPriceTotal)
 		}
 		priceNowBlock.find('.num').text(addSpaces(newPrice))
 		priceNowTotal.find('.num').text(addSpaces(newPriceTotal))
