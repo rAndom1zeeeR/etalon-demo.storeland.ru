@@ -318,11 +318,14 @@
 			<div class="productView__text" itemprop="description">{GOODS_DESCRIPTION_SHORT}</div>
 			{% ENDIF %}
 
+			<!-- Перейти к полному описанию -->
+			{% IF GOODS_DESCRIPTION_LARGE %}
 			<div class="productView__goto">
 				<a href="javascript:;" title="Перейти к полному описанию">
 					<span>Перейти к полному описанию</span>
 				</a>
 			</div>
+			{% ENDIF %}
 
 			<!-- Преимущества -->
 			<div class="productView__offers flex justify-between">
@@ -359,7 +362,7 @@
 	{% IFNOT related_goods_empty %}
 	<section id="related-goods" class="related loading {% IF GOODS_MOD_REST_VALUE=0 %}empty{% ENDIF %}">
 		<div class="block__title block__nav flex">
-			<h2 class="title"><span>Эти товары часто покупают вместе</span></h2>
+			<h2 class="title"><span>Добавьте к заказу</span></h2>
 			<div class="owl-nav"></div>
 		</div>
 		<div class="flex-stretch">
@@ -404,7 +407,7 @@
 								<span class="ico__best"></span>
 								{% ENDIF %}
 							</div>
-							{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && related_goods.MAX_REST_VALUE > 0 %}
+							{% IF related_goods.MAX_REST_VALUE > 0 %}
 							<div class="product__checkbox">
 								<input class="checkbox__input square" id="{related_goods.MIN_PRICE_NOW_ID}" type="checkbox" data-mod-id="{related_goods.MIN_PRICE_NOW_ID}" data-mod-price="{related_goods.MIN_PRICE_NOW}">
 							</div>

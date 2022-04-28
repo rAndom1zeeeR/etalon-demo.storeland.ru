@@ -1680,6 +1680,7 @@ h6 {font-size: 0.875rem;}
 .productView__campaign i {margin-right: .25rem;filter: invert(100%) sepia(15%) saturate(0%) hue-rotate(352deg) brightness(101%) contrast(103%);}
 .productView__text {margin: 1.5rem 0;font-size: 13px;}
 .goodsModDescription {margin-top: 1rem;font-size: 13px;}
+.productView__goto {margin-top: 1.5rem;}
 .productView__goto a {text-decoration: underline;}
 @media (min-width: 992px) {
 	.thumblist__item:nth-child(n+5) {display: none;}
