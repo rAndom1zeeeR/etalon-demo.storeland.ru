@@ -2492,7 +2492,7 @@ function pageGoods() {
 		if($(this).hasClass('active')){
 			$(this).removeClass('active').find('span').text("Показать все");
 			opinionContent.find('.opinion__item').removeClass('show');
-			$('html, body').animate({scrollTop : jQuery('.productView__opinion').offset().top - 60}, 600);
+			$('html, body').animate({scrollTop : $('.productView__opinion').offset().top - 60}, 600);
 		}else{
 			$(this).addClass('active').find('span').text("Скрыть все");
 			opinionContent.find('.opinion__item').addClass('show');
@@ -2542,7 +2542,7 @@ function pageGoods() {
 		}else{
 			// $(this).addClass('active');
 			$('.opinion__addForm').slideDown(600);
-			$('html, body').animate({scrollTop : jQuery('.opinion__addForm').offset().top}, 500);
+			$('html, body').animate({scrollTop : $('.opinion__addForm').offset().top}, 500);
 		}
 	});
 
@@ -2612,7 +2612,13 @@ function pageGoods() {
 	// Перейти к описанию
 	$('.productView__goto').on('click', function(event){
 		event.preventDefault();
-		$('html, body').animate({scrollTop : jQuery('.productView__tabs').offset().top - 60}, 500);
+		$('html, body').animate({scrollTop : $('.productView__tabs').offset().top - 60}, 500);
+	})
+
+	// Перейти к отзывам
+	$('.productView__ratings').on('click', function(event){
+		event.preventDefault();
+		$('html, body').animate({scrollTop : $('.productView__opinion').offset().top - 60}, 500);
 	})
 
 	// Счетчик доп товаров
@@ -2648,7 +2654,7 @@ function initTabs() {
 	// Если текущий адрес страницы предполагает добавление отзыва
 	if('#goodsDataOpinionAdd' == document.location.hash) {
 		$('#goodsDataOpinionAddBlock').show();
-		$('html, body').animate({scrollTop : jQuery('.goodsDataOpinion').offset().top - 160}, 400);
+		$('html, body').animate({scrollTop : $('.goodsDataOpinion').offset().top - 160}, 400);
 	}
 	// Биндим изменение хэша - проверка какой таб нужно открыть.
 	$(window).bind('hashchange', function() { checkTabHash(); });
@@ -3197,7 +3203,7 @@ function startOrder(){
 		success: function(data) {
 			OrderAjaxBlock.html($(data).find('.fastOrderContent').wrap('<div></div>').html());
 			OrderAjaxBlock.show('slow');
-			$('html, body').delay(400).animate({scrollTop : jQuery('#globalOrder').offset().top}, 800);
+			$('html, body').delay(400).animate({scrollTop : $('#globalOrder').offset().top}, 800);
 			showPass();
 			orderScripts();
 			orderScriptsSelect();
@@ -3211,7 +3217,7 @@ function startOrder(){
 				closeOrder.removeClass('show');
 				startOrder.show();
 				$('.cart__clear').show();
-				$('html, body').delay(400).animate({scrollTop : jQuery('#globalOrder').offset().top}, 800);
+				$('html, body').delay(400).animate({scrollTop : $('#globalOrder').offset().top}, 800);
 				return false;
 			});
 			// Валидация формы на странице оформления заказа

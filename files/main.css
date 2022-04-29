@@ -1664,7 +1664,7 @@ h6 {font-size: 0.875rem;}
 /* Товар. Основная информация */
 .productView__shop {width: calc(100% - 28rem);padding-left: 2rem;}
 .productView__name {display: none;}
-.productView__ratings {margin-right: 3rem;}
+.productView__ratings {margin-right: 3rem;cursor: pointer;}
 .productView .ratings__label {margin-left: 1rem;}
 .productView .ratings:before {font-size: 1.5rem;}
 .productView .ratings .rating:before {font-size: 1.5rem;}
