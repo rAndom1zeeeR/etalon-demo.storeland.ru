@@ -1191,7 +1191,7 @@ h6 {font-size: 0.875rem;}
 #pdt__sales .row {margin: 0 -.5rem;}
 #pdt__sales .product__items {width: 50%;}
 #pdt__sales .product__items-mono {padding: 0 .5rem;}
-#pdt__sales .product__items-duo .product__item {width: calc(50% - 1rem);}
+#pdt__sales .product__items-duo .product__item {width: calc(50% - 1rem);max-height: calc(50% - 1rem);}
 #pdt__sales .product__items-duo .product__item:nth-child(-n+2) {margin-top: 0;}
 #pdt__sales .product__item:nth-child(n+5) {display: none;}
 #pdt__sales .product__item.show {display: block !important;}
