@@ -332,8 +332,8 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 .fancybox-close-small {line-height: 1;}
 .fancybox-close-small:hover {color: #ffffff;}
+.fancybox-content {max-width: 50rem;padding: 2.75rem 2rem 2rem 2rem;background-color: #ffffff;}
 .fancybox-content.modal {max-width: 30rem;}
-.fancybox-content {max-width: 50rem;padding: 2.75rem 2rem 2rem 2rem;background-color: #ffffff;transition: all 0.3s ease;}
 .fancybox-content .block__title {margin-bottom: 2rem;}
 .fancybox-content input, .fancybox-content textarea {background-color: transparent;}
 .fancybox-content .form__buttons {text-align: center;}
