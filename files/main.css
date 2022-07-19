@@ -2014,6 +2014,7 @@ h6 {font-size: 0.875rem;}
 .cartTotal__min {background-color: #0a84c9;color: #ffffff;padding: 1rem;margin-bottom: 1rem;}
 .cartTotal__min-content {width: calc(100% - 3rem);padding-left: 1rem;}
 .cartTotal__min-price {margin-top: .5rem;font-size: 1rem;}
+.cartTotal__min-title-check {display: none;}
 .cartTotal__min-icon {width: 3rem;height: 3rem;line-height: 3.5rem;border: 4px solid rgba(255, 255, 255, 0.3);border-radius: 100%;text-align: center;position: relative;}
 .cartTotal__min-icon svg {position: absolute;top: -4px;left: -4px;}
 .cartTotal__min-icon .svg-figure {fill: transparent;stroke: #ffffff;stroke-width: 4;}

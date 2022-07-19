@@ -3267,8 +3267,12 @@ function cartMinSum(){
 		var diff = minPrice - totalSum
 		$('.cartTotal__min-price').find('.num').text(addSpaces(diff))
 		$('.cartTotal__min-price').show();
+		$('.cartTotal__min-title').show();
+		$('.cartTotal__min-title-check').hide();
 	}else{
 		$('.cartTotal__min-price').hide();
+		$('.cartTotal__min-title').hide();
+		$('.cartTotal__min-title-check').show();
 	}
 
 	

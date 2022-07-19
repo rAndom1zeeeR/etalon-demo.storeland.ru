@@ -75,7 +75,11 @@
 					<i class="material-icons-two-tone">local_shipping</i>
 				</div>
 				<div class="cartTotal__min-content">
-					<div class="cartTotal__min-title">{% IF SETTINGS_STORE_ORDER_MIN_ORDER_PRICE > CART_SUM_NOW_WITH_DISCOUNT %}До мин. суммы заказа осталось{% ELSE %}Минимальная сумма заказа достигнута!{% ENDIF %}</div>
+					{% IF SETTINGS_STORE_ORDER_MIN_ORDER_PRICE > CART_SUM_NOW_WITH_DISCOUNT %}
+					<div class="cartTotal__min-title">До мин. суммы заказа осталось</div>
+					{% ELSE %}
+					<div class="cartTotal__min-title-check">Минимальная сумма заказа достигнута!</div>
+					{% ENDIF %}
 					<div class="cartTotal__min-price price__now" data-price="{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE}">{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE | money_format}</div>
 				</div>
 			</div>
